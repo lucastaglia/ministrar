@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /theme/stylesheets/
+Disallow: /404/
+Disallow: /s/
+Disallow: /theme/javascripts/
+Allow: /
+
