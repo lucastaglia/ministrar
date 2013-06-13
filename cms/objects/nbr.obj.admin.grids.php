@@ -304,7 +304,9 @@ class nbrAdminGrid{
       $sql .= $wheres;
     
     //Adiciona Ordenadores..
-    $sql .= $orders;
+    
+    if(!empty($orders))
+      $sql .= $orders;
 
     //Adiciona Limitadores (pra trazer só registro da página atual
     $regI = ($this->recordsPage - 1) * $this->recordsLimitFromPage;
