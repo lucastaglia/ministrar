@@ -1,0 +1,36 @@
+#formulario{
+	
+}
+
+#formulario .campo{
+	display: block;
+	height: 32px;
+}
+#formulario label{
+	background-color: #0C6888;
+	padding: 5px 10px;
+	width: 100px;
+	display: block;
+	min-width: 100px;
+	 float: left;
+	 margin-right: 10px;
+	 color: #FFF;
+	 text-align:right;
+	 height: 18px;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;	 
+}
+#formulario input[type="text"]{
+	width: 200px;
+	height: 18px;
+}
+#formulario textarea{
+	width: 200px;
+	height: 100px;
+}
+#formulario input[type="submit"]{
+	margin-top: 90px;
+	margin-left: 129px;
+}

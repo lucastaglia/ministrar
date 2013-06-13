@@ -2,6 +2,7 @@
 $params = $router->getParamsArray();
 $titulo = 'Atenção';
 $msg = $params[1];
+
 $msg = base64_decode($msg);
 $msg = urldecode($msg);
 
@@ -10,9 +11,6 @@ $page->title  = 'Mensagem';
 $page->keywords = 'Mensagem';
 $page->description = 'Mensagem';
 $page->index = false;
-
-$page->addFileStylesheet('404.css');
-$page->addFileStylesheet('html.css');
 
 $page->PrintPage();
 ?>
