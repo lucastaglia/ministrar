@@ -197,6 +197,8 @@ $sql = explode(';', $prepara);
 
 //executa comandos SQL...
 foreach($sql as $v) {
+  
+  $v = utf8_decode($v);
   mysql_query($v, $con);
 }
 

@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `sysAdminUsers` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Usuários do Administrator' AUTO_INCREMENT=2 ;
 
 INSERT INTO `sysAdminUsers` (`ID`, `Name`, `Mail`, `Password`, `Group`, `LastAccess`, `LastUpdate`, `LastUserName`, `Developer`, `Actived`) VALUES
-(1, 'Admin', 'teste@teste.com.br', '21232f297a57a5a743894a0e4a801fc3', 1, '2013-06-13 10:19:05', '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Y', 'Y');
+(1, 'Admin', 'teste@teste.com.br', '698dc19d489c4e4db73e28a713eab07b', 1, '2013-06-13 10:19:05', '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Y', 'Y');
 
 -- ------------------------------------------------------------
 

@@ -20,7 +20,7 @@ date_default_timezone_set('America/Sao_Paulo');
 header('Content-type: text/html; charset=utf-8');
 
 //Verifica se o CMS já foi instalado...
-if(file_exists('./config.php'))
+if(file_exists('../../config.php'))
   include('../../config.php');
 else {
   header('LOCATION: ../../install/index.php');

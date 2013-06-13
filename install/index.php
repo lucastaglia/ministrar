@@ -44,7 +44,7 @@ if(!isset($_SESSION['installStatus'])){
 ?>
   
   
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras neque ipsum, sodales a accumsan eget, sodales non libero. Integer quis nisl et lectus scelerisque elementum ut ac libero. Integer mollis justo ligula, non mattis erat venenatis quis. Cras lorem velit, consequat a urna quis, posuere rutrum ante. Cras tellus lectus, lacinia in quam non, cursus rhoncus augue. Ut consequat luctus justo id blandit. Morbi ut congue est.</p>
+	<p>Olá. O CMS já está quase pronto pra você usar. Somente preencha algumas informações abaixo para que possamos fazer as instalações necessárias para o funcionamento do CMS. É bem simples e intuitivo, mas caso necessite de alguma ajuda entra em contato com nossa equipe de suporte.</p>
   
 	<?
 	if(isset($_SESSION['installERRO'])){
@@ -85,7 +85,7 @@ if(!isset($_SESSION['installStatus'])){
     <label>Chave de Codificação</label>
     <input type="text" name="sitekey" class="texto" value="<?= getValue('sitekey', createKey()); ?>" required/>
   </div> 
-  <p>Obs.:Esta Chave de Codificação será usada para registrar sessões e cockies.</p>
+  <p style="text-align: center;">Obs.:Esta Chave de Codificação será usada para registrar sessões e cockies.</p>
 
 
   <h2>Informações do Site</h2>
@@ -202,7 +202,14 @@ if(!isset($_SESSION['installStatus'])){
 ?>
 
 <h2>Parabéns! Instalação concluída.</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras neque ipsum, sodales a accumsan eget, sodales non libero.</p>
+<p>Wow! O CMS Ministrar já está instalado pronto para você utilizá-lo e fazer seu site.</p>
+<p>Visite o painel de Administração pela senha de teste abaixo. Não esqueça de alterar esta senha.</p>
+<ul>
+  <li><b>E-mail:</b> teste@teste.com.br</li>
+  <li><b>Senha</b>: teste</li>
+</ul>
+
+<p>Para onde você deseja ir agora?</p>
 <ul>
 <li><a href="<?= $_SESSION['installPOST']["siteurl"]; ?>">Ir para o site.</a></li>
 <li><a href="<?= $_SESSION['installPOST']["adminurl"]; ?>">Ir para o Painel Administrativo.</a></li>
