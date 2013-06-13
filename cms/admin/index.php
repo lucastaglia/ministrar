@@ -19,8 +19,13 @@ date_default_timezone_set('America/Sao_Paulo');
 //Seta no Cabeçalho codificação do fonte..
 header('Content-type: text/html; charset=utf-8');
 
-//Faz inclue no Arquivo de Configuração
-include('../../config.php');
+//Verifica se o CMS já foi instalado...
+if(file_exists('./config.php'))
+  include('../../config.php');
+else {
+  header('LOCATION: ../../install/index.php');
+  exit;
+}
 
 //Carrega framework
 include($ROOT_PATH . 'cms/nbr.loader.php');
