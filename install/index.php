@@ -180,9 +180,10 @@ if(!isset($_SESSION['installStatus'])){
           <input type="radio" name="emailsmtpseguranca" value="TLS" <?= (getValue('emailsmtpseguranca') == 'TLS')?'checked':null; ?>>TLS<br />
           <input type="radio" name="emailsmtpseguranca" value="SSL" <?= (getValue('emailsmtpseguranca') == 'SSL')?'checked':null; ?>>SSL<br>
   			</div>      
-    </div>    
+    </div>  
+
   </div>
-	<div style="clear: both"></div>   
+<div style="clear: both"></div>   
 
 <h2>Diretórios de uso do CMS</h2>
 <p>O instalador verificará e caso ainda não exista, estará criando os seguintes diretórios com as seguintes permissões:  </p>

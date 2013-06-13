@@ -116,6 +116,8 @@ $code .= '  $GLOBALS["FRONT_THEMEMOBILE_PATH"] = $ROOT_PATH   . "site/theme/";' 
 $code .= '  $GLOBALS["FRONT_THEMEMOBILE_URL"]  = $ROOT_URL    . "site/theme/";' . "\r\n";
 $code .= '  $GLOBALS["FRONT_PAGES_PATH"]       = $ROOT_PATH   . "site/pages/";' . "\r\n";
 $code .= '  $GLOBALS["FRONT_PAGES_URL"]        = $ROOT_URL    . "site/pages/";' . "\r\n";
+$code .= '  $GLOBALS["FRONT_SCRIPTS_PATH"]     = $ROOT_PATH   . "site/scripts/";' . "\r\n";
+$code .= '  $GLOBALS["FRONT_SCRIPTS_URL"]      = $ROOT_URL    . "site/scripts/";' . "\r\n";
 
 $code .= "\r\n";
 $code .= "\r\n";
@@ -160,7 +162,7 @@ $code .= '  /** Configurações de e-mail **/' . "\r\n";
 $code .= '  $email                             = array();' . "\r\n";
 $code .= '  $email["FROMNAME"]                 = "' . $_POST["emailnomeremetente"] . '";' . "\r\n";
 $code .= '  $email["FROM"]                     = "' . $_POST["emailremetente"] . '";' . "\r\n";
-$code .= '  $email["emailenvio"]               = "' . $_POST["emailsmtphost"] . '";' . "\r\n";
+$code .= '  $email["SENDTYPE"]               = "' . $_POST["emailenvio"] . '";' . "\r\n";
 $code .= '  $email["CC"]                       = "";' . "\r\n";
 $code .= '  $email["CCO"]                      = "";' . "\r\n";
 $code .= '  $email["SMTPHOST"]                 = "' . $_POST["emailsmtphost"] . '";' . "\r\n";
@@ -168,7 +170,10 @@ $code .= '  $email["SMTPUSER"]                 = "' . $_POST["emailsmtpusuario"]
 $code .= '  $email["SMTPPASS"]                 = "' . $_POST["emailsmtpsenha"] . '";' . "\r\n";
 $code .= '  $email["SMTPSECURE"]               = "' . $_POST["emailsmtpseguranca"] . '";    //ssl tls (ou deixe em branco)' . "\r\n";
 $code .= '  $email["SMTPPORT"]                 = "' . $_POST["emailsmtpporta"] . '";' . "\r\n";
-$code .= '  $EMAIL_CONFIG                      = $email;' . "\r\n";
+$code .= '  $GLOBALS["EMAIL_CONFIG"]             = $email;' . "\r\n";
+
+$code .= "\r\n";
+$code .= "\r\n";
 
 $code .= '?>' . "\r\n";
 
