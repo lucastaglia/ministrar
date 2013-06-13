@@ -1,0 +1,137 @@
+body{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+#logo{
+	margin: 25px auto;
+	display: block;
+}
+
+p{
+	width: 700px;
+	margin: auto!important;
+	display: block;
+	line-height: 22px;
+}
+
+h2{
+	font-size: 18px;
+	font-weight: bold;
+	display: block;
+	margin: auto;
+	width: 700px;	
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+
+.linha{
+	width: 600px;
+	height: 31px;
+	margin: 10px auto;
+}
+
+.linha label{
+		line-height: 31px;
+		color: #FFF;
+		background-color: #000;
+		width: 215px;
+		height: 31px;
+		display: block;
+		text-align: right;
+		padding-right: 10px;
+		float: left;
+		margin-right: 10px;
+	
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;	
+		
+}
+
+input.texto{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #CCCCCC;
+	color: #000;
+	padding: 0 5px;
+	height: 31px;
+	line-height: 31px;
+	display: block;
+	border: 0;
+	width: 352px;
+	
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;		
+}
+
+.box{
+	background-color: #CCCCCC;
+	padding: 0 5px;
+	height: 31px;
+	line-height: 31px;
+	display: block;
+	border: 0;
+	width: 352px;
+	float: left;
+	
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;		
+}
+
+.box input{
+	float: left;
+	margin: 8px;
+	margin-right: 4px;
+}
+
+ul{
+	width: 700px;
+	margin: 15px auto;
+	list-style: disc;
+	list-style-position: outside;
+}
+ul li{
+	margin-left: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#submit{
+	display: block;
+	margin: 25px auto;
+
+
+	background-color: #000;
+	color: #FFF;
+	height: 31px;
+	line-height: 31px;
+	border: 0;
+	width: 252px;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-weight: bold;
+
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;		
+}
+
+#erro{
+	background-color: #D70000;
+	color:#FFF;
+	width: 700px;
+	padding: 5px 10px;
+	margin: auto;
+	margin-top: 20px;
+	text-align: center;
+
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;			
+}
