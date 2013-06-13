@@ -17,8 +17,13 @@ ini_set("upload_max_filesize","1024M");
 ini_set("post_max_size","1024M");
 ini_set('memory_limit', '1024M'); //ilimitado
 
-//Faz inclue no Arquivo de Configuração
-include('./config.php');
+//Verifica se o CMS já foi instalado...
+if(file_exists('./config.php'))
+  include('./config.php');
+else {
+  header('LOCATION: ./install/index.php');
+  exit;
+}
 
 //Carrega framework
 include('./cms/nbr.loader.php');
