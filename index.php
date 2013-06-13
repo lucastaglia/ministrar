@@ -36,7 +36,7 @@ $site = new nbrSite();
 
 if($router->getPage() == 's'){
   $script = $router->params[1];
-  include($ROOT_PATH . 'scripts/' . $script . '.php');
+  include($FRONT_SCRIPTS_PATH . $script . '.php');
 }else
   include($FRONT_PAGES_PATH . $router->pageFile);
 ?>
