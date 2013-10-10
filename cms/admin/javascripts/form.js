@@ -415,22 +415,145 @@ function backEnabled(){
   formStatus = true;
 }
 
+function formURLSubmit(url){
+  $('#formulario').attr('action', url);
+  $('#formulario').submit();
+}
 
+// Salvar e Voltar...
+$(document).ready(function(){
+    
+   $( "div#boxForm button#save")
+      .button()
+      .click(function() {
+        //alert( "Running the last action" );
+      })
+      .next()
+        .button({
+          text: false,
+          icons: {
+            primary: "ui-icon-triangle-1-s"
+          }
+        })
+        .click(function() {
+          var menu = $( this ).parent().next().show().position({
+            my: "left top",
+            at: "left bottom",
+            of: this
+          });
+          $(document).one( "click", function() {
+            menu.hide();
+          });
+          return false;
+        })
+        .parent()
+          .buttonset()
+          .next()
+            .hide()
+            .menu();
+
+
+  //click back..
+  $('div#boxForm button#back').click(function(){
+    document.location.href = $(this).attr('link');
+  });
+  
+});
+
+
+// Calendario...
+$(document).ready(function(){
+  
+  $('div.date input').datepicker({
+    dateFormat: 'dd/mm/yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+  });
+  
+});
+
+
+/**
+* TECLAS DE ATALHOS
+**/
+$(document).ready(function(){
+  
+  //adiciona class em todos os campos..
+  $('#formulario input').addClass('mousetrap');
+  $('#formulario textarea').addClass('mousetrap');
+  $('#formulario select').addClass('mousetrap');
+  
+  //Ctrl + S - Salvar..
+  if ($('.btnSave').length > 0) {
+  
+    Mousetrap.bind(["ctrl+s","command+s"], function() {
+      $('.btnSave').click();
+      return false;
+    });
+    
+  }
+
+  //Ctrl + S - Salvar e Volta..
+  if ($('.btnSaveBack').length > 0) {
+  
+    Mousetrap.bind("ctrl+shift+left", function() {
+      $('.btnSaveBack').click();
+      return false;
+    });
+    
+  }
+
+  //Ctrl + S - Salvar e Novo..
+  if ($('.btnSaveNew').length > 0) {
+  
+    Mousetrap.bind("ctrl+shift+up", function() {
+      $('.btnSaveNew').click();
+      return false;
+    });
+    
+  }  
+  
+  //Ctrl + left - Voltar..
+  if ($('button.back').length > 0) {
+  
+    Mousetrap.bind("ctrl+left", function() {
+      $('button.back').click();
+      return false;
+    });
+    
+  }
+
+  //Ctrl + N - Novo..
+  if ($('button.new').length > 0) {
+  
+    Mousetrap.bind("ctrl+up", function() {
+      $('.new').click();
+      return false;
+    });
+    
+  }
+  
+    Mousetrap.bind("b r u n o", function() {
+      alert('Há! Tudo bom Bruno Gonçalves? :)');
+      return false;
+    });
+
+  
+})
+
+//Seleciona (focus) primeiro campo do formulário
 $(document).ready(function(){
 
-  //click save..
-  $('div#boxForm ul#toolbar li.save a').click(function(){
-    
-    if(formStatus)
-      $('form#formulario').submit();
-  });
-  
-  
-  //click back..
-  $('div#boxForm ul#toolbar li.back a').click(function(){
-    
-    if(formStatus)
-      document.location.href = $(this).attr('link');
-  });
+  $('form#formulario input:first, form#formulario textarea:first, form#formulario select:first').each(function() {
+      if($(this).is(':visible') && !$(this).attr('disabled') && !$(this).attr('readonly')) {
+          $(this).focus();
+          return false;
+      }
+  });  
   
 });

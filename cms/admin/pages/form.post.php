@@ -4,6 +4,7 @@
  */
 $tableName  = $hub->GetParam('tableName');
 $id         = $hub->GetParam('ID');
+$action     = $hub->GetParam('action');
 
 /** Campos.. **/
 $fields = $hub->GetParam('fields');
@@ -75,6 +76,7 @@ foreach ($fieldsDate as $fieldName) {
     }
   }	
 }
+
 //Corrige formato de campos de Numero Decimal
 $fieldsNumber = $hub->GetParam('fieldsNumber');
 $fieldsNumber = explode(',', $fieldsNumber);
@@ -90,7 +92,7 @@ foreach ($fieldsNumber as $fieldName) {
 }
 
 /**
- * Verifica se Existe arquuivo de Macro
+ * Verifica se Existe arquivo de Macro
  */
 if($hub->ExistParam('fileMacro')){
   $macroPath = $MODULES_PATH . $hub->GetParam('fileMacro');
@@ -134,11 +136,31 @@ if(intval($hub->GetParam('ID')) > 0){
   //Atualiza Log..
   nbrLogs::AddAction('EDT', 'Atualizou o registro ' . $id . ' da tabela ' . $tableName);     
   
-  $hub->BackLevel(2);
-  $link = $hub->GetUrl();
+  //URL de retorno...
+  if($action == 'S'){
+    
+    $hub->BackLevel(2);
+    $link = $hub->GetUrl();
+    
+  } elseif ($action == 'SN'){
+
+    $hub->BackLevel(2);
+    
+    $hub->SetParam('_title', 'Novo Registro');
+    $hub->SetParam('ID', -1);
+    $hub->SetParam('_description', 'Novo Registro');    
+
+    $link = $hub->GetUrl();    
+    
+  } elseif ($action == 'SV'){
+
+    $hub->BackLevel(3);
+    $link = $hub->GetUrl();
+    
+  }
   
   if($status){
-    $dataSet->SetParam('msgSucess', 'Seu registro foi atualizado com sucesso.');
+    $dataSet->SetParam('msgSucess', '<b>Show!</b> Seu registro foi atualizado com sucesso.');
     
     //Executa campos imagem..
     executeImages();
@@ -191,13 +213,33 @@ if(intval($hub->GetParam('ID')) > 0){
   
   try {
     $db->Execute($sql);  
-
     $id = $db->GetLastIdInsert();
+  //URL de retorno...
+  if($action == 'S'){
+
     $hub->BackLevel(2);
     $hub->SetParam('ID', $id);
     $hub->SetParam('_title', 'Editando...');
     $hub->SetParam('_description', 'Editando registro recém criado');
     $link = $hub->GetUrl();
+    
+  } elseif ($action == 'SN'){
+
+    $hub->BackLevel(2);
+    
+    $hub->SetParam('_title', 'Novo Registro');
+    $hub->SetParam('ID', -1);
+    $hub->SetParam('_description', 'Novo Registro');    
+
+    $link = $hub->GetUrl();    
+    
+  } elseif ($action == 'SV'){
+
+    $hub->BackLevel(3);
+    $link = $hub->GetUrl();
+    
+  }
+
      
     $dataSet->SetParam('msgSucess', 'Seu registro foi inserido com sucesso.');
       
@@ -457,6 +499,10 @@ function executeLkpMultselects(){
   }
 }
 
+//Seta cookie do "Salvar"...
+$cookie_name = $SITEKEY . '_nbrSave';
+setcookie($cookie_name, $action);  
 
+//Chama link...
 header('location:' . $link);
 ?>

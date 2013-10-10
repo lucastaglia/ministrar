@@ -25,7 +25,9 @@
   include($OBJECTS_PATH . 'nbr.obj.report.pdf.php');  
   include($OBJECTS_PATH . 'nbr.obj.msg.php');  
   include($OBJECTS_PATH . 'nbr.obj.linkThumb.php'); 
-  include($OBJECTS_PATH . 'nbr.obj.cache.php');   
+  include($OBJECTS_PATH . 'nbr.obj.cache.php'); 
+  include($OBJECTS_PATH . 'nbr.obj.events.php'); 
+  include($OBJECTS_PATH . 'nbr.obj.params.php'); 
 
   /** Faz includes das Funções **/
   include($FUNCTIONS_PATH . 'nbr.application.php');
@@ -42,4 +44,6 @@
   $security = new nbrAdminSecurity();
   $msg      = new nbrMSG();
   $cache    = new nbrCache();  
+  $events   = new nbrEvents();
+  $params   = new nbrParams();
 ?>

@@ -183,11 +183,14 @@ class nbrAdminGrid{
     if(function_exists('macroGridValues')){
       $nValue = macroGridValues($field['fieldName'] , $value, $record);
 
-      if(!empty($nValue))
-      $value = $nValue;
+      if((!empty($nValue)) || is_int($nValue))
+        $value = $nValue;
     }
 
-    return $value;
+    if((!empty($value)) || is_int($value))
+      return $value;
+    else 
+      return null;
 
   }
   private function LoadRecords(){
@@ -258,8 +261,8 @@ class nbrAdminGrid{
     //verifica se tem condição da página
     if($hub->ExistParam('_where')){
 
-      if(empty($wheres))
-      $wheres .= ' WHERE (' . $hub->GetParam('_where') . ')';
+      if(!isset($wheres))
+      $wheres = ' WHERE (' . $hub->GetParam('_where') . ')';
       else
       $wheres .= ' AND (' . $hub->GetParam('_where') . ')';
     }
@@ -498,9 +501,9 @@ class nbrAdminGrid{
     $html .= '<form action="' . $hub->GetUrl() .'" method="post" name="pesquisa" id="pesquisa">' . "\r\n";
     $html .= '<label>Pesquisa</label>' . "\r\n";
     
-    $html .= '<div id="search">' . "\r\n";
+    //$html .= '<div id="search">' . "\r\n";
     $html .= '<input type="text" name="search" id="search" value="' . $hub->GetParam('filterSearch') . '">' . "\r\n";
-    $html .= '</div>' . "\r\n";
+    //$html .= '</div>' . "\r\n";
 
     if(count($this->filters) > 0){
       $html .= '<div id="filter">' . "\r\n";
@@ -516,7 +519,8 @@ class nbrAdminGrid{
       $html .= '</div>' . "\r\n";
     }
         
-    $html .= '<a href="#" id="submit"><span></span></a>' . "\r\n";
+    //$html .= '<a href="#" id="submit"><span></span></a>' . "\r\n";
+    $html .= '<button class="btn btn-warning btn-mini" icon="ui-icon-search" text="false">Pesquisar</button>' . "\r\n";
     
     if($hub->ExistParam('filterWhere') || $hub->ExistParam('filterSearch'))
       $html .= '<a href="javascript: void(0);" id="limpar" title="Clique aqui para Limpar os filtros desta pesquisa"><img src="' . $cms->GetAdminImageUrl() . 'cancel.png"></a>' . "\r\n";
@@ -529,7 +533,7 @@ class nbrAdminGrid{
     
     //Imprime Botão Novo (do topo)
     if($this->securityNew)
-      $toolbar .= '<li class="new"><a href="javascript:void(0);" onclick="document.location.href=\'' . $linkNew . '\'"></a></li>' . "\r\n";
+      $toolbar .= '<li class="new"><button class="btn green new" icon="ui-icon-document" onclick="document.location.href=\'' . $linkNew . '\'" title="Novo registro (ctrl + seta acima)" text="false">Novo</button></li>' . "\r\n";
       
     //Comandos..
     //if(count($this->commands) > 0)
@@ -539,7 +543,7 @@ class nbrAdminGrid{
     
     $html .= $toolbar;
 
-    $html .= '</div>' . "\r\n";
+   
     
     //Comandos..
     if(count($this->commands) > 0){
@@ -552,7 +556,9 @@ class nbrAdminGrid{
       
       $html .= '</ul>' . "\r\n";
     }
-
+    
+    
+    $html .= '</div>' . "\r\n";
 
     $html .= '<div class="grid">';
 

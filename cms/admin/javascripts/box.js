@@ -14,3 +14,17 @@
 
 Tiago - Não achei onde isso é usado, mas desabilitei o fancybox.
 */
+
+
+
+//Confirma link...
+
+function confirmLink(titulo, msg, link){
+  jConfirm(titulo, msg, function(r){
+    
+    if(r){
+      document.location.href = link;
+    }
+    
+  });
+}

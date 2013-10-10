@@ -26,29 +26,51 @@ h6 {
 	color:#666;
 }
 div#msg_erro{
-  background-image:url(../images/msg_erro_fundo.jpg);
-  background-repeat:repeat-x;
-  background-position:center;
-  height: 36px;
-  text-align: center;
+	background-color: #F2DEDE;
+	border-color: #EED3D7;
+	color: #B94A48;
+	margin-bottom: 5px;
+	padding: 8px 35px 8px 14px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;	
+		
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  line-height: 36px; 
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px; 
+}
+div#msg_erro b,
+div#msg_erro strong{
+	color: #B94A48;
+	font-weight: bold;
 }
 div#msg_sucesso{
-  background-image: url(../images/msg_sucesso_fundo.jpg);
-  background-repeat:repeat-x;
-  background-position:center;
-  height: 36px;
-  text-align: center;
+	background-color: #DFF0D8;
+	border-color: #D6E9C6;
+	color: #468847;
+	margin-bottom: 5px;
+	padding: 8px 35px 8px 14px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;	
+		
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
-  line-height: 36px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
 }
+div#msg_sucesso strong,
+div#msg_sucesso b{
+	color: #468847;
+	font-weight: bold;
+}
+
+
 div#msg_erro img#detail{
   float: right;
   margin-right: 7px;
@@ -482,6 +504,11 @@ div#content div.main {
   background-repeat: no-repeat;
 	padding: 0 18px;
 }
+
+div#content div.mainFull {
+	padding: 3px 18px;
+}
+
 div#content div.fluid{
   margin: 0;
 }
@@ -787,4 +814,23 @@ div#content div#left ul.reports li {
 }
 div#content div#left ul.reports li a {
     text-decoration: none;
+}
+.ui-datepicker *,
+.ui-datepicker span,
+.ui-datepicker a{
+	font-size: 10px!important
+}
+.ui-datepicker a{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px!important;
+	color: auto!important;
+}
+
+.ui-datepicker .ui-datepicker-title span{
+	color: #FFF;
+}
+.ui-state-default, 
+.ui-widget-content .ui-state-default, 
+.ui-widget-header .ui-state-default{
+	color: #333333!important;
 }

@@ -1,4 +1,9 @@
 <?
+/**
+ * Objeto que controla o CMS.
+ * @version 1.0.0
+ *
+ */
 class nbrCMS
 {
   
@@ -6,7 +11,7 @@ class nbrCMS
   private $themePath;
   private $themeURL;    
   public $isMobile = false;
-  private $vension = '1.2.0';
+  private $version = '2.0.0.b5';
 
   
   function __construct($lang = 'pt-br'){
@@ -61,7 +66,7 @@ class nbrCMS
   }
   
   /**
-   * Retorna caminho físico da pasta de Tema
+   * Retorna caminho físico do diretório de Tema
    *
    * @return string
    */
@@ -70,7 +75,7 @@ class nbrCMS
   }
   
   /**
-   * Retorna URL da pasta de Thema
+   * Retorna URL do diretório de Tema
    *
    * @return string
    */
@@ -88,16 +93,34 @@ class nbrCMS
   }
   
   /**
-   * retorna URL dos Scripts de JavaScript do Front
+   * Retorna URL dos Scripts de JavaScript do Front
    *
    * @return string
    */
   public function GetFrontJavaScriptUrl(){
     return $this->themeURL . 'javascripts/';
   }
+
+  /**
+   * Retorna Caminho físico dos StyleSheets (arquivos de css) do Front
+   *
+   * @return string
+   */
+  public function GetFrontStyleSheetPath(){
+    return $this->themePath . 'stylesheets/';
+  }
   
   /**
-   * Retorna URL da pasta de Imagens do Front
+   * Retorna Caminho físico dos Scripts de JavaScript do Front
+   *
+   * @return string
+   */
+  public function GetFrontJavaScriptPath(){
+    return $this->themePath . 'javascripts/';
+  }  
+  
+  /**
+   * Retorna URL do diretório de Imagens do Front
    *
    * @return string
    */
@@ -121,7 +144,7 @@ class nbrCMS
   }
   
   /**
-   * retorna URL dos Scripts de JavaScript do Admin
+   * Retorna URL dos Scripts de JavaScript do Admin
    *
    * @return string
    */
@@ -136,7 +159,7 @@ class nbrCMS
   }  
   
   /**
-   * Retorna URL da pasta de Imagens do Admin
+   * Retorna URL do diretório de Imagens do Admin
    *
    * @return string
    */
@@ -151,7 +174,7 @@ class nbrCMS
   }
   
   /**
-   * Retorna caminho físico da pasta onde contém os arquivos de imagem do Admin
+   * Retorna caminho físico do diretório onde contém os arquivos de imagem do Admin
    *
    * @return string
    */
@@ -165,12 +188,22 @@ class nbrCMS
     return $ADMIN_IMAGES_PATH;
   }
   
+  /**
+   * Retorna URL do diretório onde contém os arquivos de upload do CMS.
+   *
+   * @return string
+   */  
   public function GetImageUploadUrl(){
     global $ADMIN_UPLOAD_URL;
     
     return $ADMIN_UPLOAD_URL;
   }
 
+  /**
+   * Retorna caminho físico do diretório onde contém os arquivos de upload do CMS.
+   *
+   * @return string
+   */    
   public function GetImageUploadPath(){
     global $ADMIN_UPLOAD_PATH;
     
@@ -203,7 +236,7 @@ class nbrCMS
    * @return string
    */
   public function GetVersion(){
-    return $this->vension;
+    return $this->version;
   }
   
     

@@ -421,45 +421,37 @@ class nbrDB
         $this->connection = false;
     }
 
-    
-    # FUNÇÕES ESTÁTICAS
-    
     /**
-     * Faz consulta no banco de dados e retorna o um Array de objetos com o resultado
+     * Carrega aquivo .sql e executa no banco de dados.
      *
-     * @param string $sql
-     * @return aray
+     * @param string $sqlFile
      */
-    public static function LoadResultArrays($sql){
-        $db = new nbrDB();
-        $db->Read($sql);
-        return $db->GetResultArrays();
-    }
-        
-    /**
-     * Faz consulta no banco de dados e retorna o um Array com o resultado
-     *
-     * @param string $sql
-     * @return array
-     */
-    public static function LoadResultObjects($sql){
-        $db = new nbrDB();
-        $db->Read($sql);
-        return $db->GetResultObjects();
-    }
-    
-    /**
-     * Carrega registro da tabela filtrando pelo ID
-     *
-     * @param string $tableName
-     * @param integer $id
-     * @return array
-     */
-    public static function LoadTableObjects($tableName, $id){
-      $sql = 'SELECT * FROM ' . $tableName . ' WHERE ID=' . $id;
+    public function LoadSqlFile($sqlFile){
+
+      if(!file_exists($sqlFile)){
+        throw new Exception('Arquivo SQL não foi encontrado.');
+      }
+            
+      //Carrega arquivo...
+      $arquivo = Array();
+      $arquivo = file($sqlFile);
+      $prepara = '';  // Cria a Variavel $prepara
       
-      $db = new nbrDB();
-      return $db->LoadObjects($sql);
+      foreach($arquivo as $v){
+          $prepara .= $v;
+      }
+      
+      $sql = explode(';', $prepara); 
+      
+      //executa comandos SQL...
+      foreach($sql as $v) {
+        
+        $v = utf8_decode($v);
+        $v = trim($v);
+        
+        if(!empty($v))
+          $this->Execute($v);
+      }
     }
 }
 

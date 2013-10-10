@@ -136,7 +136,7 @@ class nbrImages
           switch ($vAlign)
           {
             case 'middle':
-              $top = (($n_height - $height) / 2) * (-1);
+              $top = (($height - $n_height) / 2);
               break;
               
             case 'top':
@@ -144,7 +144,7 @@ class nbrImages
               break;
               
             case 'bottom':
-              $top = ($n_height - $height) * (-1);
+              $top = ($height - $n_height);
               break;
           }
         
@@ -153,8 +153,8 @@ class nbrImages
           $img_final = ImageCreateTrueColor($width, $height);
          } else {
         
-          $left = 0;
-          $top = 0;
+          //$left = 0;
+          //$top = 0;
            
           if($bgForced == false){
             $img_final = ImageCreateTrueColor($n_width, $n_height);

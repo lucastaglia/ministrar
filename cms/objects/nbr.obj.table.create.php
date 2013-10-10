@@ -1,230 +1,133 @@
 <?
-
 class nbrTableCreate {
   
-  private $table;
-  private $tableID;
+  private $fields;
+  private $tableName;
+  private $comments;
+  private $isSystem;
+  private $order = 10;
   
-  function __construct($table){
-    
-    //verifica se parâmetro é branco ou nulo...
-    if(empty($table))  
-      throw new Exception('nbrTableCreate:: O parâmetro $table não pode ser branco ou nulo.');
-      
-    $this->table = $table;    
+  
+  function __construct($tablename){
+    $this->tableName = $tablename;
   }
   
-  /**
-   * Adiciona Campo ao sistema (e fisicamente no banco)
-   *
-   * @param string $name
-   * @param string $type
-   * @param integer $length
-   * @param integer $tableLink
-   * @param string $listValues
-   */
-  private function _CreateField($name, $type, $length = 0, $tableName = null, $tableLink = null, $listValues = null){
+  private function addField($name, $type, $length = 0, $tableLink = null, $listValues = null){
+    $field = array( 'name'        => $name,
+                    'type'        => $type,
+                    'length'      => $length,
+                    'tablelink'   => $tableLink,
+                    'listValues'  => $listValues
+                  );
+    $this->fields[] = $field;
+  }
+
+  public function AddFieldString($name, $length){
+    $this->addField($name, 'STR', $length);
+  }
+  
+  public function AddFieldInteger($name){
+    $this->addField($name, 'INT');
+  }
+  
+  public function AddFieldText($name){
+    $this->addField($name, 'TXT');
+  }
+
+  public function Execute($comments = null, $isSystem = false){
     global $db;
+
+    //SQL...
+    $sql  = 'CREATE TABLE `' . $this->tableName . '` (';
+    $sql .= '  `ID` int(11) NOT NULL AUTO_INCREMENT,';
     
-    //Codificação...
-    $name       = utf8_decode($name);
-    $listValues = utf8_decode($listValues);
+    foreach ($this->fields as $field) {
+      
+      switch ($field['type']) {
+      	case 'STR':
+      		$sql .= ' `' . $field['name'] . '` varchar(' . $field['length'] . ') DEFAULT NULL,';
+      		break;
+
+        case 'INT':
+      		$sql .= ' `' . $field['name'] . '` int(11) DEFAULT NULL,';
+      		break;
+      		
+      	case 'TXT':
+      	  $sql .= ' `' . $field['name'] . '` TEXT NULL,';
+      	  break;
+      }
+    }
     
+    $sql .= '  `LastUpdate` datetime DEFAULT NULL,';
+    $sql .= '  `LastUserName` varchar(50) DEFAULT NULL,';
+    $sql .= '  PRIMARY KEY (`ID`)';
+    $sql .= ") ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='" . $comments . "';";
     
-    //Verifica se tabela já está criada..
-    if(!$this->_verifyTableExist())
-      throw new Exception('nbrTableCreate:: Não existe no sistema uma tabela criada com o nome especificado: ' . $this->table);
-          
-    //Adiciona campo no framework...
-    $tableLink = ($tableLink == null)?'NULL':$tableLink;
-    $listValues = ($listValues == null)?'NULL':("'" . $listValues . "'");
-    
-    $sql  = "INSERT INTO `sysTableFields` (`Table`, `Name`, `Type`, `Length`, `TableLink`, `ListValues`)";
-    $sql .= " VALUES (" . $this->tableID . ", '$name', '$type', $length, $tableLink, $listValues)";
     $db->Execute($sql);
     
-    $fieldID = $db->GetLastIdInsert();
+    //Registra tabelas no CMS...
     
-    //Cria campo fisicamente...
-    switch($type){
-      case 'STR':
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '` varchar(' . $length . ') NULL';
-        $db->Execute($sql);
-        break;
+    //Tabela...
+    $table = new nbrTablePost();
+    $table->table = 'sysTables';
+    $table->AddFieldString('Name', $this->tableName);
+    $table->AddFieldString('Comment', $comments);
+    $table->AddFieldBoolean('IsSystem', (($isSystem)?true:false));
+    $table->Execute();
+    
+    $tableID = $table->id;
+    
+    //Campos...
+    foreach ($this->fields as $f) {
       
-      case 'TAB':
-        $constrainName = 'fk_' .strtolower($this->table) . '_' . strtolower($name);
-        //Cria campo..
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '`int(' . $length . ') NULL';
-        $db->Execute($sql);
-        //Adiciona constrain no sistema.. 
-        $sql = "INSERT INTO `sysTableConstrains` (`Name`, `FromTable`, `FromField`, `ToTable`) VALUES ('$constrainName', $this->tableID, $fieldID, $tableLink)";
-        $db->Execute($sql);
-        //Adiciona fisicamente constrain
+      switch ($f['type']) {
         
-        $sql = "ALTER TABLE `$this->table` ADD CONSTRAINT `$constrainName` FOREIGN KEY (`$name`) REFERENCES `$tableName`(`ID`);";
+      	case 'STR':
+      		$field = new nbrTablePost();
+      		$field->table = 'sysTableFields';
+      		$field->AddFieldInteger('Table', $tableID);
+      		$field->AddFieldString('Type', 'STR');
+      		$field->AddFieldString('Name', $f['name']);
+      		$field->AddFieldString('Length', $f['length']);
+      		$field->Execute();
+      		break;
 
-        $db->Execute($sql);
-        break;
-        
-      case 'INT':
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '` int(11) NULL';
-        $db->Execute($sql);
-        break;   
-             
-      case 'BOL':
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '` char(1) NULL';
-        $db->Execute($sql);
-        break;
+      	case 'TXT':
+      		$field = new nbrTablePost();
+      		$field->table = 'sysTableFields';
+      		$field->AddFieldInteger('Table', $tableID);
+      		$field->AddFieldString('Name', $f['name']);      		
+      		$field->AddFieldString('Type', 'TXT');
+      		$field->Execute();
+      		break;      		
 
-      case 'LST':
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '` char(1) NULL';
-        $db->Execute($sql);
-        break;
-        
-      case 'DTA':
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '` datetime NULL';
-        $db->Execute($sql);
-        break;        
-      
-      case 'DTT':
-        $sql = 'ALTER TABLE `' . $this->table . '` ADD `' . $name . '` datetime NULL';
-        $db->Execute($sql);
-        break;
+      	case 'INT':
+      		$field = new nbrTablePost();
+      		$field->table = 'sysTableFields';
+      		$field->AddFieldInteger('Table', $tableID);
+      		$field->AddFieldString('Name', $f['name']);      		
+      		$field->AddFieldString('Type', 'INT');
+      		$field->Execute();
+      		break;      		
+      }
     }
   }
   
-  /**
-   * Verifica se Tabela já está criada no sistema
-   *
-   * @return boolean
-   */
-  private function _verifyTableExist(){
+  public static function DeleteTable($tablename){
     global $db;
     
-    //verifica se esta tabela já existe no frameworl
-    $sql = "SELECT ID FROM sysTables WHERE Name = '$this->table'";
-    $res = $db->LoadObjects($sql);
+    $sql = "SELECT * FROM  sysTables WHERE Name = '$tablename'";
+    $tables = $db->LoadObjects($sql);
+    $table = $tables[0];
     
-    return (count($res) > 0);
-  }
-
-  /**
-   * Retorna o ID da tabela especificada
-   *
-   * @param string $tableName
-   * @return integer
-   */
-  private function _getTableID($tableName){
-    global $db;
-    
-    $sql = "SELECT ID FROM sysTables WHERE Name = '$tableName'";
-    $res = $db->LoadObjects($sql);
-    
-    if(count($res) > 0)
-      return $res[0]->ID;
-    else 
-      throw new Exception('nbrTableCreate:: Não foi entrado nenhuma tabela no sistema com este nome:' . $tableName);
-  }
-
-  public function CreateTable($comments, $isSystem = false){
-    global $db;
-    
-    //Codificação...
-    $comments2 = utf8_encode($comments);
-    $comments = utf8_decode($comments);
-
-    //Verifica se tabela já está criada..
-    if($this->_verifyTableExist())
-      throw new Exception('nbrTableCreate:: Já existe uma tabela com esse  mesmo nome no sistema.');
-       
-    //verifica se parâmetro é branco ou nulo...
-    if(empty($comments))  
-      throw new Exception('nbrTableCreate:: O parâmetro $comments não pode ser branco ou nulo.');
-
-    //Cria tabela Fisicamente..
-    $sql  = 'CREATE TABLE `' . $this->table . '` (' . "\r\n";
-    $sql .= '  `ID` int(11) NOT NULL AUTO_INCREMENT,' . "\r\n";
-    $sql .= '  PRIMARY KEY (`ID`)' . "\r\n";
-    $sql .= ") ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='" . $comments . "';" . "\r\n";
+    $sql = "DELETE FROM  sysTableFields WHERE `Table` = " . $table->ID;
     $db->Execute($sql);
-      
-    //Adiciona tabela no framework..
-    $sql = "INSERT INTO `sysTables` (`Name`, `IsSystem`, `Comment`) VALUES ('" . $this->table . "', '" . ($isSystem?'Y':'N') . "', '" . $comments . "')";
+    
+    $sql = "DELETE FROM  sysTables WHERE ID = " . $table->ID;
     $db->Execute($sql);
-    $this->tableID = $db->GetLastIdInsert();
-  }
-  
-  /**
-   * Adiciona novo campo do tipo String para ser criado.
-   *
-   * @param string $fieldName
-   * @param string $lenght
-   */
-  public function CreateFieldString($fieldName, $lenght){
-    $this->_CreateField($fieldName, 'STR', $lenght);
-  }
-  /**
-   * Adiciona novo campo do tipo Integer para ser criado.
-   *
-   * @param string $fieldName
-   * @param string $lenght
-   */
-  public function CreateFieldInteger($fieldName){
-    $this->_CreateField($fieldName, 'INT');
-  }
-  
-  /**
-   * Adiciona novo Campo do Tipo Table (Link com Tabela) para ser criado.
-   *
-   * @param string $fieldName
-   * @param string $toTableName
-   */
-  public function CreateFieldTable($fieldName, $toTableName) {
     
-    $toTableID = $this->_getTableID($toTableName);
-    
-    $this->_CreateField($fieldName, 'TAB', 11, $toTableName, $toTableID);
-  }
-  
-  /**
-   * Adiciona novo Campo do Tipo Lista para ser criado.
-   *
-   * Ex.: $options = 'SC=Santa Catarina|SP=São Paulo|RJ=Rio de Janeiro'
-   * 
-   * @param string $fieldName
-   * @param string $options
-   */
-  public function CreateFieldList($fieldName, $options){
-    $this->_CreateField($fieldName, 'LST', 3, null, null, $options);
-  }
-  
-  /**
-   * Adiciona novo Campo do Tipo Lógico (boolean) para ser criado.
-   *
-   * @param string $fielName
-   */
-  public function CreateFieldBoolean($fielName){
-    $this->_CreateField($fielName, 'BOL', 1);
-  }
-  
-  /**
-   * Adiciona novo Campo do tipo Data (01/01/2009) para ser criado.
-   *
-   * @param string $fieldName
-   */
-  public function CreateFieldDate($fieldName){
-    $this->_CreateField($fieldName, 'DTA');
-  }
-
-  /**
-   * Adiciona novo Campo do tipo DataHora (01/01/2009 08:00:00) para ser criado.
-   *
-   * @param string $fieldName
-   */
-function macroBeforeDelete($tableName, $id){
-    $this->_CreateField($fieldName, 'DTT');
+    $sql = "DROP TABLE `" . $tablename . "`";
+    $db->Execute($sql);
   }
 }
-
 ?>

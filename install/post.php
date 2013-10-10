@@ -86,8 +86,10 @@ $code .= "\r\n";
 $code .= "\r\n";
 
 $code .= '  /** Configurações de Administração **/' . "\r\n";
-$code .= '  $GLOBALS["MODULES_PATH"]           = $ROOT_PATH . "site/admin/modules/";' . "\r\n";
-$code .= '  $GLOBALS["MODULES_URL"]            = $ROOT_URL  . "site/admin/modules/";' . "\r\n";
+$code .= '  $GLOBALS["MODULES_PATH"]           = $ROOT_PATH . "cms/modules/";' . "\r\n";
+$code .= '  $GLOBALS["MODULES_URL"]            = $ROOT_URL  . "cms/modules/";' . "\r\n";
+$code .= '  $GLOBALS["PLUGINS_PATH"]           = $ROOT_PATH . "cms/plugins/";' . "\r\n";
+$code .= '  $GLOBALS["PLUGINS_URL"]            = $ROOT_URL  . "cms/plugins/";' . "\r\n";
 $code .= '  $GLOBALS["OBJECTS_PATH"]           = $ROOT_PATH . "cms/objects/";' . "\r\n";
 $code .= '  $GLOBALS["FUNCTIONS_PATH"]         = $ROOT_PATH . "cms/functions/";' . "\r\n";
 $code .= '  $GLOBALS["TEMP_PATH"]              = $ROOT_PATH . "cms/temp/";' . "\r\n";
@@ -208,6 +210,7 @@ foreach($sql as $v) {
 }
 
 //cria diretórios...
+mkdir('../cms/plugins/', 0777, true);
 mkdir('../cms/cache/', 0777, true);
 mkdir('../cms/temp', 0777, true);
 mkdir('../site/uploads', 0777, true);

@@ -19,7 +19,7 @@ if($hub->ExistParam('fileMacro')){
 
 //Verifica se existe evento macroBeforeBoolean na macro...
 if(function_exists('macroBeforeBoolean')){
-	macroBeforeBoolean($field, $id);
+	macroBeforeBoolean($field, $id, $value);
 }
 
 //Altera no banco valor do boolean..
@@ -31,7 +31,7 @@ $post->Execute();
 
 //Verifica se existe evento macroAfterBoolean na macro...
 if(function_exists('macroAfterBoolean')){
-	macroAfterBoolean($field, $id);
+	macroAfterBoolean($field, $id, $value);
 }
 
 $hub->BackLevel(2);

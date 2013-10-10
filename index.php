@@ -28,6 +28,9 @@ else {
 //Carrega framework
 include('./cms/nbr.loader.php');
 
+//Carrega Eventos de Plugins...
+$events->includeFilesEventsPlugins();
+
 //Carrega Roteador...
 $router   = new nbrRouter();
 

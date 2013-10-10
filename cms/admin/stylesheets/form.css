@@ -1,15 +1,15 @@
 @charset "utf-8";
 
 /** Ferramentas **/
-div#boxForm ul#toolbar{
+div#boxForm ul#toolbarXXX{
   height: 22px;
   margin-top: 15px;
 }
-div#boxForm ul#toolbar li{
+div#boxForm ul#toolbarXXX li{
   float: right;
   margin-left: 10px;
 }
-div#boxForm ul#toolbar li.save a{
+div#boxForm ul#toolbarXXX li.save a{
   display: block;
   width: 72px;
   height:22px;
@@ -17,16 +17,16 @@ div#boxForm ul#toolbar li.save a{
   background-repeat:no-repeat;
   background-position: left -22px;
 }
-div#boxForm ul#toolbar li.save a:hover{
+div#boxForm ul#toolbarXXX li.save a:hover{
   background-position: left top;
 }
-div#boxForm ul#toolbar li.save.disabled a,
-div#boxForm ul#toolbar li.save.disabled a:hover{
+div#boxForm ul#toolbarXXX li.save.disabled a,
+div#boxForm ul#toolbarXXX li.save.disabled a:hover{
   background-position: left -44px;
   cursor: no-drop;
 }
 
-div#boxForm ul#toolbar li.back a{
+div#boxForm ul#toolbarXXX li.back a{
   display: block;
   width: 72px;
   height:22px;
@@ -34,11 +34,11 @@ div#boxForm ul#toolbar li.back a{
   background-repeat:no-repeat;
   background-position: left -22px;
 }
-div#boxForm ul#toolbar li.back a:hover{
+div#boxForm ul#toolbarXXX li.back a:hover{
   background-position: left top;
 }
-div#boxForm ul#toolbar li.back.disabled a,
-div#boxForm ul#toolbar li.back.disabled a:hover{
+div#boxForm ul#toolbarXXX li.back.disabled a,
+div#boxForm ul#toolbarXXX li.back.disabled a:hover{
   background-position: left -44px;
   cursor: no-drop;
 }
@@ -578,3 +578,39 @@ div#boxForm div.field div.boxFileStreaming .fileUploadProgressBar {
    background-color: #890E0E;
 }
 
+
+
+.btnGreen{
+	background-color: #8EB435;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-transform:uppercase;
+	text-align: center;
+	padding: 0 15px;
+	color: #FFF;
+	line-height: 27px;
+	height: 27px;
+	border: 0;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+div#formToolbar{
+	min-height: 30px;
+	clear: both;
+	padding-top: 10px;
+
+}
+div#formToolbar ul{
+	display: block;
+	float: right;
+}
+div#formToolbar ul>li{
+	float: left;
+}
+
+#saveMenu{
+	position: absolute!important;
+}

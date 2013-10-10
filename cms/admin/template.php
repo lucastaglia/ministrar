@@ -1,8 +1,9 @@
 <?
 //Módulo e Pasta aberta..
-$moduleObj = nbrModule::LoadModule($hub->GetParam('_moduleID'));
-$folderObj = LoadRecord('sysModuleFolders', $hub->GetParam('_folderID'));
-
+if($hub->ExistParam('_moduleID')){
+  $moduleObj = nbrModule::LoadModule($hub->GetParam('_moduleID'));
+  $folderObj = LoadRecord('sysModuleFolders', $hub->GetParam('_folderID'));
+}
 //Verifica segurança..
 $security->SecurityCheck();
 
@@ -20,14 +21,15 @@ $security->SecurityCheck();
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.multiselect/common.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.multiselect/ui.multiselect.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminStyleSheetUrl(); ?>master.css" rel="stylesheet" type="text/css" />
-<link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/nbrazil-cms/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
+<link href="<?= $cms->GetAdminStyleSheetUrl(); ?>ui.css" rel="stylesheet" type="text/css" />
+<link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.alert/nbr.jquery.alerts.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery-tooltip/jquery.tooltip.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
 
 <!-- Plugins Jquery -->
-<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/jquery-1.4.2.min.js" type="text/javascript"></script>
-<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.multiselect/ui.multiselect.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.validate/jquery.validate.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.alert/jquery.alerts.js" type="text/javascript"></script>
@@ -43,8 +45,12 @@ $security->SecurityCheck();
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>toolbar.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>grid.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>form.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>site.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ckeditor/ckeditor.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ckeditor/adapters/jquery.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>mousetrap.js" type="text/javascript"></script>
+
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ui.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -119,78 +125,83 @@ foreach ($modules as $module) {
   <div id="left">
   
 <?
-//Seleciona Pastas..
-$obj_folders = new nbrModuleFolders($hub->GetParam('_moduleID'));
-$folders = $obj_folders->GetFolders();
+
+//se não tiver Módulo selecionado, não mostra pasta nem relatórios..
+
+if($hub->ExistParam('_moduleID')){
+
+  //Seleciona Pastas..
+  $obj_folders = new nbrModuleFolders($hub->GetParam('_moduleID'));
+  $folders = $obj_folders->GetFolders();
 ?>
 <ul class="menu">
 <?
-$grouper = null;
-foreach ($folders as $folder) {
+  $grouper = null;
+  foreach ($folders as $folder) {
+    
+    if($grouper != utf8_encode($folder->Grouper)){
+      $grouper =  utf8_encode($folder->Grouper);
+      echo('</ul>');
+      echo('<h1>' . $grouper . '</h1>');
+      echo('<ul class="menu">');
+    }
   
-  if($grouper != utf8_encode($folder->Grouper)){
-    $grouper =  utf8_encode($folder->Grouper);
-    echo('</ul>');
-    echo('<h1>' . $grouper . '</h1>');
-    echo('<ul class="menu">');
+    $hub->ClearHistory(1);
+  
+    $file = $moduleObj->path . $folder->File;
+    $hub->SetParam('_page', $file);
+    $hub->SetParam('_title', utf8_encode($folder->Name));
+    $hub->SetParam('_description', 'Pasta ' . utf8_encode($folder->Name));
+    $hub->SetParam('_moduleID', $moduleObj->ID);
+    $hub->SetParam('_folderID', $folder->ID);
+    $link = $hub->GetUrl();
+    
+    echo('<li ' . (($hub->GetParam('_folderID') == $folder->ID)?'class="selected"':null) . '>');
+    echo('<a href="' . $link . '"><span>' . utf8_encode($folder->Name) . '</span></a>');
+    echo('</li>');
+    
   }
-
-  $hub->ClearHistory(1);
-
-  $file = $moduleObj->path . $folder->File;
-  $hub->SetParam('_page', $file);
-  $hub->SetParam('_title', utf8_encode($folder->Name));
-  $hub->SetParam('_description', 'Pasta ' . utf8_encode($folder->Name));
-  $hub->SetParam('_moduleID', $moduleObj->ID);
-  $hub->SetParam('_folderID', $folder->ID);
-  $link = $hub->GetUrl();
-  
-  echo('<li ' . (($hub->GetParam('_folderID') == $folder->ID)?'class="selected"':null) . '>');
-  echo('<a href="' . $link . '"><span>' . utf8_encode($folder->Name) . '</span></a>');
-  echo('</li>');
-  
-}
 ?>  
 </ul>
 
 <?
-$sql = 'SELECT * FROM sysModuleReports';
-$sql .= " WHERE Published = 'Y' AND Module = $moduleObj->ID";
-$sql .= ' ORDER BY Title ASC';
-$relatorios = $db->LoadObjects($sql);
-
-if(count($relatorios) > 0){
+  $sql = 'SELECT * FROM sysModuleReports';
+  $sql .= " WHERE Published = 'Y' AND Module = $moduleObj->ID";
+  $sql .= ' ORDER BY Title ASC';
+  $relatorios = $db->LoadObjects($sql);
+  
+  if(count($relatorios) > 0){
 ?>
 
 <h1 style="margin-top: 20px;">Relatórios</h1>
 <ul class="reports">
 
 <?
-foreach ($relatorios as $relatorio) {
-  
-  $hub->SetParam('_page', $ADMIN_PAGES_PATH . 'reports.php');
-  $hub->SetParam('_title', utf8_encode($relatorio->Title));
-  $hub->SetParam('_description', 'Emitindo relatório ' . utf8_encode($relatorio->Title));
-  $hub->SetParam('_moduleID', $hub->GetParam('_moduleID'));
-  $hub->SetParam('_folderID', $hub->GetParam('_folderID'));
-  
-  $hub->SetParam('reportID', $relatorio->ID);
-  $hub->SetParam('reportFile', $moduleObj->path . $relatorio->File);
-  $hub->SetParam('reportTitle', utf8_encode($relatorio->Title));
-  
+    foreach ($relatorios as $relatorio) {
+      
+      $hub->SetParam('_page', $ADMIN_PAGES_PATH . 'reports.php');
+      $hub->SetParam('_title', utf8_encode($relatorio->Title));
+      $hub->SetParam('_description', 'Emitindo relatório ' . utf8_encode($relatorio->Title));
+      $hub->SetParam('_moduleID', $hub->GetParam('_moduleID'));
+      $hub->SetParam('_folderID', $hub->GetParam('_folderID'));
+      
+      $hub->SetParam('reportID', $relatorio->ID);
+      $hub->SetParam('reportFile', $moduleObj->path . $relatorio->File);
+      $hub->SetParam('reportTitle', utf8_encode($relatorio->Title));
 ?>
 <li><a href="<?= $hub->GetUrl();?>"><?= utf8_encode($relatorio->Title); ?></a></li>
 <?
-}
+    }
 ?>
 </ul>
 <?
+  }
 }
 ?>
 
 
 </div>
-  <div class="main">
+  <div class="<?= (($hub->ExistParam('_moduleID'))?'main':'mainFull'); ?>">
     <? include($page); ?>
     <div class="clearcontent"></div>
     </div>

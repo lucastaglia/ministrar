@@ -121,7 +121,7 @@ if(!isset($_SESSION['installStatus'])){
   
   <div class="linha">
     <label>Senha</label>
-    <input type="password" name="dbpass" class="texto" value="<?= getValue('dbpass'); ?>" required/>
+    <input type="password" name="dbpass" class="texto" value="<?= getValue('dbpass'); ?>"/>
   </div>   
 
 
@@ -189,6 +189,7 @@ if(!isset($_SESSION['installStatus'])){
 <p>O instalador verificará e caso ainda não exista, estará criando os seguintes diretórios com as seguintes permissões:  </p>
   <ul>
   	<li>./cms/<strong>cache</strong> (permissão 777)</li>
+  	<li>./cms/<strong>plugins</strong> (permissão 777)</li>
   	<li>./cms/<strong>temp</strong> (permissão 777)</li>  
   	<li>./site/<strong>uploads</strong> (permissão 777)</li>      
   	<li>./site/uploads/<strong>ckeditor</strong> (permissão 777)</li>          

@@ -13,10 +13,22 @@ class nbrPage{
   function __construct(){
     global $router, $cms;
     $this->pageName = $router->getPage();
+    
+    //verifica se existe CSS com o nome da página e adiciona automaticamente
+    $fileCSS = $router->getPage() . '.css';
+    if(file_exists($cms->GetFrontStyleSheetPath() . $fileCSS)){
+      $this->addFileStylesheet($fileCSS);
+    }
+
+    //verifica se existe JS com o nome da página e adiciona automaticamente
+    $fileJS = $router->getPage() . '.js';
+    if(file_exists($cms->GetFrontJavaScriptPath() . $fileJS)){
+      $this->addFileJavascript($fileJS);
+    }    
   }
   
   public function PrintPage($useTemplate = true){
-    global $router, $FRONT_PAGES_PATH, $cms, $page, $site, $db; //Globals usados nas páginas
+    global $router, $FRONT_PAGES_PATH, $cms, $page, $site, $db, $params; //Globals usados nas páginas
     
     $fileHtml = $this->pageName . '.html.php';
     
@@ -28,10 +40,14 @@ class nbrPage{
   }
   
   public function addFileStylesheet($file){
-    $this->a_css[] = $file;
+    
+    if(array_search($file, $this->a_css) === false)
+      $this->a_css[] = $file;
+    
   }
   public function addFileJavascript($file){
-    $this->a_js[] = $file;
+    if(array_search($file, $this->a_js) === false)
+      $this->a_js[] = $file;
   }
 
 
@@ -67,11 +83,13 @@ class nbrPage{
   }
   
   public function printHeader(){
+    global $cms, $events;
 
   echo('<!-- Meta Tags -->'. "\r\n");
   echo('<meta name="author" content="Nova Brazil Agência Interativa">'. "\r\n");
   echo('<meta name="description" content="' . $this->description . '">'. "\r\n");
   echo('<meta name="keywords" content="' . $this->keywords . '">'. "\r\n");
+  echo('<meta name="CMS" content="Nova Brazil Ministrar' . $cms->GetVersion() . '">'. "\r\n");
   
   if(!$this->index)
     echo('<meta Name=”robots” content=”noindex,nofollow”>'. "\r\n");
@@ -82,7 +100,25 @@ class nbrPage{
   $this->printJS();
   echo('<!-- Imagens para Facebook e outros Shared -->'. "\r\n");
   $this->printImageSrc();
-    
+  
+  //Dispara evento 'front_head_include'
+  $evs = $events->getEventsArray('front_head_include');
+  $returns = null;
+  foreach ($evs as $e) {
+
+  	$returns .= $e();
+  	$returns .= "\n\r";
   }
+  
+  if(!empty($returns)){
+    echo('<!-- Impresso por Eventos -->' . "\r\n");
+    echo($returns);  
+  }
+  
+  
+    echo('<!-- -->');  
+  }
+  
+  
 }
 ?>

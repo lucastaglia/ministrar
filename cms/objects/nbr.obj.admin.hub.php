@@ -122,7 +122,10 @@ class nbrAdminHub{
     if(count($this->levels) > 1){
       $penultimateLevel =  count($this->levels) - 2;
       
-      $value = @$this->levels[$penultimateLevel][$name];
+      if(!isset($this->levels[$penultimateLevel][$name]))
+        return  null;
+        
+      $value = $this->levels[$penultimateLevel][$name];
       //Traduz caracters conflitantes no Valor..
       $value = str_replace('[vg]', ',', $value);
       $value = str_replace('[pi]', '|', $value);
@@ -148,7 +151,7 @@ class nbrAdminHub{
     return false;    
   }
   
-  public function GetUrl(){
+  public function GetUrl($clearLevel = true){
     global $ADMIN_URL;
 
     $str = $this->arrayToStr($this->levels);
@@ -161,7 +164,10 @@ class nbrAdminHub{
     fwrite($file, $str);
     fclose($file); 
     
-    $this->starts();
+    if($clearLevel){
+      //Carrega HUB inicial...
+      $this->starts();      
+    }
     
     return $ADMIN_URL . 'index.php?hub=' . $key;
   }
@@ -237,7 +243,20 @@ class nbrAdminHub{
       
       if(isset($lastLevel['_title']) && !empty($lastLevel['_title'])){
         $title = $lastLevel['_title'];
-        $description = $lastLevel['_description'];
+        
+        if(isset($lastLevel['_title'])){
+          $title = $lastLevel['_title'];
+        } else {
+          $title = null;
+        }
+        
+        if(isset($lastLevel['_description']))
+          $description = $lastLevel['_description'];
+        else 
+          $description = null;
+          
+         
+          
         $link = $this->GetUrl();
         
         //se for ultimo (penultimo, pq o ultimo está em branco) nivel..

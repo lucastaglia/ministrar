@@ -3,6 +3,8 @@
 //Inicia sessão..
 session_start();
 
+error_reporting( E_ALL ^E_NOTICE ); //Mostra todos os erros menos os NOTICE..
+
 //Tira bug do linux de barra invertidas no input..
 foreach ($_POST as $x=>$post) {
   
@@ -33,6 +35,9 @@ include($ROOT_PATH . 'cms/nbr.loader.php');
 //Carrega framework Admin
 include($ADMIN_PATH . 'nbr.admin.loader.php');
 
+//Chame administrador de Cookies
+include($ADMIN_PAGES_PATH . 'cookies.php');
+
 //Joga parâmetro (do GRID) "Registros por Página" no Cookie do Usuário
 if($hub->ExistParam('grid_limitPage')){
   $recordsLimitFromPage = $hub->GetParam('grid_limitPage');
@@ -45,12 +50,12 @@ if($hub->CountLevels() == 0){
   
   if($security->checkLogin()){
   
-    $module = nbrModules::GetFirstModule();
-    $hub->SetParam('_page',  $module->file);
-    $hub->SetParam('_title', $module->name);
-    $hub->SetParam('_description', 'Módulo ' . $module->name);
-    $hub->SetParam('_moduleID', $module->ID);
-    $hub->SetParam('_folderID', $module->folderID);
+    //$module = nbrModules::GetFirstModule();
+    $hub->SetParam('_page',  $ADMIN_PAGES_PATH . 'admin.index.php');
+    $hub->SetParam('_title', 'Bem vindo');
+    //$hub->SetParam('_description', 'Módulo ' . $module->name);
+    //$hub->SetParam('_moduleID', $module->ID);
+    //$hub->SetParam('_folderID', $module->folderID);
     header('Location:' . $hub->GetUrl());
     exit;
   } else {

@@ -52,13 +52,15 @@ class nbrAdminSecurity{
     }    
 
     //Verifica se tem permissão pra módulo
-    $sql  = 'SELECT sysAdminUsersGroups.ID FROM sysAdminUsersGroups';
-    $sql .= ' LEFT JOIN sysModuleSecurityGroups ON(sysModuleSecurityGroups.`Group` = sysAdminUsersGroups.`Group`)';
-    $sql .= ' WHERE sysAdminUsersGroups.`User` = ' . $this->GetUserID() . ' AND sysModuleSecurityGroups.Module = ' . $moduleObj->ID;
-    $res = $db->LoadObjects($sql);
-    
-    if(count($res) == 0)
-      die('Seu usuário ou o(s) Grupo(s) de Segurança a qual ele pertence não têm permissão de acessar este Módulo e suas Pastas.');
+    if($hub->ExistParam('_moduleID')){
+      $sql  = 'SELECT sysAdminUsersGroups.ID FROM sysAdminUsersGroups';
+      $sql .= ' LEFT JOIN sysModuleSecurityGroups ON(sysModuleSecurityGroups.`Group` = sysAdminUsersGroups.`Group`)';
+      $sql .= ' WHERE sysAdminUsersGroups.`User` = ' . $this->GetUserID() . ' AND sysModuleSecurityGroups.Module = ' . $moduleObj->ID;
+      $res = $db->LoadObjects($sql);
+      
+      if(count($res) == 0)
+        die('Seu usuário ou o(s) Grupo(s) de Segurança a qual ele pertence não têm permissão de acessar este Módulo e suas Pastas.');
+    }
   }
   
   /**

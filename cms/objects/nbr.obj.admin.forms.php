@@ -579,9 +579,14 @@ class nbrAdminForms {
       $sql .= " JOIN `$tableSecondary` ON(`$tableSecondary`.ID = `$tableName`.`$fieldSecondary`)";
       $sql .= " WHERE `$tableName`.`$fieldPrimary` = " . $this->record->ID;
 
+      //where do parametro
+      if(!empty($wheres))
+        $sql .= " AND (" . $wheres . ")";      
+
+      //order
       if(!empty($fieldOrder))
         $sql .= " ORDER BY `$tableName`.`$fieldOrder` ASC";
-    
+        
       $res = $db->LoadObjects($sql);
     
       $selectedsIds = array();
@@ -601,8 +606,19 @@ class nbrAdminForms {
     //Traz demais itens..
     $sql  = "SELECT * FROM `$tableSecondary`";
     
+    
     if(count($selectedsIds) > 0)
-      $sql .= " WHERE ID NOT IN(" . implode(',', $selectedsIds) . ")";
+      $a_wheres[] = "ID NOT IN(" . implode(',', $selectedsIds) . ")";
+
+
+    //where do parametro
+    if(!empty($wheres))
+      $a_wheres[] = "(" . $wheres . ")";      
+      
+    if(count($a_wheres) > 0){
+      $sql .= ' WHERE ';
+      $sql .= implode($a_wheres, ' AND ');
+    }
       
     $sql .= " ORDER BY `$fieldSecondatyLegend` ASC";
     $res = $db->LoadObjects($sql);
@@ -636,7 +652,7 @@ class nbrAdminForms {
   }  
   
   public function PrintHTML(){
-    global $hub, $dataSet, $cms, $ADMIN_IMAGES_URL, $ADMIN_PAGES_PATH;
+    global $hub, $dataSet, $cms, $ADMIN_IMAGES_URL, $ADMIN_PAGES_PATH, $SITEKEY, $cookie_save_name;
     
     $html  = null;
     
@@ -664,9 +680,10 @@ class nbrAdminForms {
     }
     
     //Variáveis para Usar no form.js
-    $html .= '<script>' . "\r\n";
-    $html .= 'var imgSending = "' . $ADMIN_IMAGES_URL  . 'form_image_sending.jvpg";' . "\r\n";
+    $html .= '<script type="text/javascript">' . "\r\n";
+    $html .= 'var imgSending = "' . $ADMIN_IMAGES_URL  . 'form_image_sending.jpg";' . "\r\n";
     $html .= 'var imgNo = "' . $ADMIN_IMAGES_URL . 'form_image_noimage.jpg";' . "\r\n";
+    
     $html .= '</script>' . "\r\n";
     
     $html .= '<h1>' . $this->title . '</h1>' . "\r\n";
@@ -686,7 +703,32 @@ class nbrAdminForms {
     $hub->SetParam('fileMacro', $hub->GetParam('fileMacro'));
     $hub->SetParam('LkpMultselects', implode(',', $this->LkpMultselects));
     
-    $html .= '<form method="post" enctype="multipart/form-data" name="formulario" id="formulario" action="' . $hub->GetUrl(false) . '">' . "\r\n";
+    //urls de submissão de fomrulário...
+    $html .= '<script type="text/javascript">' . "\r\n";
+    
+    $hub->SetParam('action', 'S'); //salvar
+    $urlFormS = $hub->GetUrl(false);
+    $html .= 'var submitS = "' . $urlFormS . '";' . "\r\n";
+
+    $hub->SetParam('action', 'SN'); //salvar e novo
+    $urlFormSN = $hub->GetUrl(false);
+    $html .= 'var submitSN = "' . $urlFormSN . '";' . "\r\n";
+
+    $hub->SetParam('action', 'SV'); //salvar e voltar
+    $urlFormSV = $hub->GetUrl(false);
+    $html .= 'var submitSV = "' . $urlFormSV . '";' . "\r\n";
+
+    $html .= '</script>' . "\r\n";
+    
+    //verifica qual o padrão..
+    switch ($_COOKIE[$cookie_save_name]) {
+      case 'S':  $formURL =  $urlFormS;  break;
+      case 'SN': $formURL =  $urlFormSN; break;
+      case 'SV': $formURL =  $urlFormSV; break;
+    }
+    
+    
+    $html .= '<form method="post" enctype="multipart/form-data" name="formulario" id="formulario" action="' . $formURL . '">' . "\r\n";
     
     /** Lista Campos **/
     $html .= implode("\r\n", $this->html_fields);
@@ -703,14 +745,72 @@ class nbrAdminForms {
     }
     
     //Fecha Formulário...
-    $html .= '<div class="clearBoth"></div>';
         
     //Barra de Tarefas..
-    $html .= '<ul id="toolbar">' . "\r\n";
-    $html .= '<li class="save"><a href="javascript:void(0);"></a></li>' . "\r\n";
+    $html .= '<div id="formToolbar">' . "\r\n";
+    $html .= '<ul>' . "\r\n";
+
+    /** Botão VOLTAR **/
     $hub->BackLevel(2);
-    $html .= '<li class="back"><a href="javascript:void(0);" link="' . $hub->GetUrl() . '"></a></li>' . "\r\n";
+    $html .= '<li><button class="btn red back" id="back" type="button" icon="ui-icon-arrowreturnthick-1-w" link="' . $hub->GetUrl() . '" title="Ctrl + Seta Esquerda">Voltar</button></li>' . "\r\n";    
+    
+    /** Botão SALVAR **/
+   
+   
+    switch ($_COOKIE[$cookie_save_name]) {
+      case 'S':  
+        $save_btn_1_title = 'Salvar';
+        $save_btn_1_name  = 'btnSave';
+        $save_btn_1_alt   = '(ctrl + s)';
+        $save_btn_2_title = 'Salvar e Voltar';
+        $save_btn_2_url   = 'submitSV';
+        $save_btn_2_name  = 'btnSaveBack';        
+        $save_btn_2_alt   = '(ctrl + shift + seta esquerda)';        
+        $save_btn_3_title = 'Salvar e Novo';
+        $save_btn_3_url   = 'submitSN';
+        $save_btn_3_name  = 'btnSaveNew';      
+        $save_btn_3_alt   = '(ctrl + shift + seta acima)';        
+        break;
+
+      case 'SV':  
+        $save_btn_1_title = 'Salvar e Voltar';
+        $save_btn_1_name  = 'btnSaveBack';
+        $save_btn_1_alt   = '(ctrl + shift + seta esquerda)';        
+        $save_btn_2_title = 'Salvar';
+        $save_btn_2_url   = 'submitS';
+        $save_btn_2_name  = 'btnSave';
+        $save_btn_2_alt   = '(ctrl + s)';
+        $save_btn_3_title = 'Salvar e Novo';
+        $save_btn_3_url   = 'submitSN';
+        $save_btn_3_name  = 'btnSaveNew';
+        $save_btn_3_alt   = '(ctrl + shift + seta acima)';
+        break;
+                
+      case 'SN':  
+        $save_btn_1_title = 'Salvar e Novo';
+        $save_btn_1_name  = 'btnSaveNew';
+        $save_btn_1_alt   = '(ctrl + shift + seta acima)';
+        $save_btn_2_title = 'Salvar';
+        $save_btn_2_url   = 'submitS';
+        $save_btn_2_name  = 'btnSave';
+        $save_btn_2_alt   = '(ctrl + s)';
+        $save_btn_3_title = 'Salvar e Voltar';
+        $save_btn_3_url   = 'submitSV';
+        $save_btn_3_name  = 'btnSaveBack';
+        $save_btn_3_alt   = '(ctrl + shift + seta esquerda)';
+        break;        
+    }
+    
+    $html .= '<li><div><button type="submit" id="save" class="btn green ' . $save_btn_1_name . '" title="' . $save_btn_1_alt . '">' . $save_btn_1_title . '</button>' . "\r\n";    
+    $html .= '  <button id="save2" class="btn green">.</button></div>' . "\r\n";
+    $html .= '  <ul id="saveMenu">' . "\r\n";
+    $html .= '    <li><a onclick="formURLSubmit(' . $save_btn_2_url . ');" href="javascript:void(0)" class="' . $save_btn_2_name . '" title="' . $save_btn_2_alt . '">' . $save_btn_2_title . '</a></li>' . "\r\n";
+    $html .= '    <li><a onclick="formURLSubmit(' . $save_btn_3_url . ');" href="javascript:void(0)" class="' . $save_btn_3_name . '" title="' . $save_btn_3_alt . '">' . $save_btn_3_title . '</a></li>' . "\r\n";
+    $html .= '  </ul>' . "\r\n";
+    $html .= '</li>' . "\r\n";
+    
     $html .= '</ul>' . "\r\n";
+    $html .= '</div>' . "\r\n";
 
     $html .= '</form>' . "\r\n";
     $html .= '</div>' . "\r\n"; //Fecha boxForm

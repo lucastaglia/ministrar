@@ -2,7 +2,7 @@
 -- ------------------------------------------------------------
 -- Estrutura de Instalação do CMS MINISTRAR
 -- Versão do sistema:
--- 2.0.0
+-- 2.0.0.b2
 -- ------------------------------------------------------------
 -- ------------------------------------------------------------
 
@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS `sysAdminGroups` (
 
 INSERT INTO `sysAdminGroups` (`ID`, `Name`, `LastUpdate`, `LastUserName`) VALUES
 (1, 'Administradores', '2011-10-06 15:28:51', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(2, 'Redatores', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)');
+(2, 'Redatores', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
+(3, 'Gerentes', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)');
 
 -- ------------------------------------------------------------
 
@@ -44,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `sysAdminUsers` (
   `Actived` char(1) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `fk_sysadminusers_group` (`Group`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Usuários do Administrator' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Usuários do Administrator' AUTO_INCREMENT=1 ;
 
 INSERT INTO `sysAdminUsers` (`ID`, `Name`, `Mail`, `Password`, `Group`, `LastAccess`, `LastUpdate`, `LastUserName`, `Developer`, `Actived`) VALUES
 (1, 'Admin', 'teste@teste.com.br', '698dc19d489c4e4db73e28a713eab07b', 1, '2013-06-13 10:19:05', '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Y', 'Y');
@@ -64,11 +65,12 @@ CREATE TABLE IF NOT EXISTS `sysAdminUsersGroups` (
   PRIMARY KEY (`ID`),
   KEY `fk_sysadminusersgroups_user` (`User`),
   KEY `fk_sysadminusersgroups_group` (`Group`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela de Ligação de sysAdminUsers e sysAdminGroups' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela de Ligação de sysAdminUsers e sysAdminGroups' AUTO_INCREMENT=3;
 
 INSERT INTO `sysAdminUsersGroups` (`ID`, `LastUpdate`, `LastUserName`, `User`, `Group`) VALUES
-(5, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1),
-(6, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 2);
+(1, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1),
+(2, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 2),
+(3, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 3);
 
 -- ------------------------------------------------------------
 
@@ -109,14 +111,20 @@ CREATE TABLE IF NOT EXISTS `sysModuleFolders` (
   `LastUserName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `fk_sysmodulefolders_module` (`Module`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Pastas de determinado Módulo do Sistema' AUTO_INCREMENT=6;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Pastas de determinado Módulo do Sistema' AUTO_INCREMENT=11;
 
 INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Grouper`, `Actived`, `LastUpdate`, `LastUserName`) VALUES
 (1, 1, 'Tabelas', 10, 'admin.tables.grid.php', 'Banco de Dados', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
 (2, 1, 'Módulos', 20, 'admin.modules.grid.php', 'Organização', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
 (3, 1, 'Usuários', 30, 'admin.security.users.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
 (4, 1, 'Grupos', 40, 'admin.security.groups.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
-(5, 1, 'Ações de Usuários', 50, 'admin.security.logs.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)');
+(5, 1, 'Ações de Usuários', 50, 'admin.security.logs.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
+(6, 1, 'Plugins', 30, 'admin.plugins.grid.php', 'Organização', 'Y', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
+(7, 2, 'Usuários', 10, 'admin.usuarios.grid.php', 'Geral', 'Y', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
+(8, 2, 'Grupos', 20, 'admin.grupos.grid.php', 'Geral', 'Y', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
+(9,1,'Parâmetros',20,'admin.params.grid.php','Banco de Dados','Y','2013-09-24 13:26:08','Tihh Gonçalves (tiago@novabrazil.art.br)'),
+(10,3,'Do CMS',20,'admin.params.cms.grid.php','Geral','Y','2013-09-24 14:26:31','Tihh Gonçalves (tiago@novabrazil.art.br)'),
+(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','2013-09-24 14:26:31','Tihh Gonçalves (tiago@novabrazil.art.br)');
 
 -- ------------------------------------------------------------
 
@@ -154,11 +162,12 @@ CREATE TABLE IF NOT EXISTS `sysModules` (
   `Developer` char(1) DEFAULT NULL,
   `Icon` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Módulos do Sistema' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Módulos do Sistema' AUTO_INCREMENT=3;
 
 INSERT INTO `sysModules` (`ID`, `Name`, `Path`, `Actived`, `LastUpdate`, `LastUserName`, `Description`, `Developer`, `Icon`) VALUES
-(1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela configuração do Sistema', 'Y', 'nbrazil.png');
-
+(1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela configuração do Sistema', 'Y', 'nbrazil.png'),
+(2, 'Usuários', 'usuarios', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela administração de Usuários', 'Y', 'usuarios.png'),
+(3,'Parâmetros','parametros','Y','2013-09-24 13:36:18','Tihh Gonçalves (tiago@novabrazil.art.br)','Cadastro de Parâmetros',NULL,'preference.png');
 -- ------------------------------------------------------------
 
 --
@@ -174,11 +183,15 @@ CREATE TABLE IF NOT EXISTS `sysModuleSecurityGroups` (
   PRIMARY KEY (`ID`),
   KEY `fk_sysmodulesecuritygroups_module` (`Module`),
   KEY `fk_sysmodulesecuritygroups_group` (`Group`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Grupos de Segurança do Módulo' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Grupos de Segurança do Módulo' AUTO_INCREMENT=5;
 
 
 INSERT INTO `sysModuleSecurityGroups` (`ID`, `LastUpdate`, `LastUserName`, `Module`, `Group`) VALUES
-(10, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1);
+(1, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1),
+(2, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 2, 1),
+(3, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 2, 3),
+(4, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 3, 1),
+(5, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 3, 3);
 
 -- ------------------------------------------------------------
 
@@ -311,6 +324,49 @@ INSERT INTO `sysTables` (`ID`, `Name`, `IsSystem`, `Comment`, `LastUpdate`, `Las
 (36, 'sysModuleSecurityGroups', 'Y', 'Grupos de Segurança do Módulo', '2010-11-04 14:51:08', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
 (37, 'sysLogs', 'Y', 'Histórico de Ações no CMS', '2010-11-05 10:35:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
 (41, 'sysModuleReports', 'Y', 'Relatórios dos Módulos', '2010-12-06 18:11:51', 'Tiago Gonçalves (tiago@novabrazil.art.br)');
+
+-- ------------------------------------------------------------
+--
+-- Estrutura da tabela `sysPlugins`
+--
+
+CREATE TABLE IF NOT EXISTS `sysPlugins` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LastUpdate` datetime DEFAULT NULL,
+  `LastUserName` varchar(50) DEFAULT NULL,
+  `Name` varchar(50) DEFAULT NULL,
+  `Actived` char(1) DEFAULT NULL,
+  `Path` varchar(30) DEFAULT NULL,
+  `Description` text,
+  `URL` varchar(100) DEFAULT NULL,
+  `Version` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Cadastro de Plugins' AUTO_INCREMENT=1;
+
+
+-- ------------------------------------------------------------
+--
+-- Estrutura da tabela `sysParams`
+--
+
+CREATE TABLE IF NOT EXISTS `sysParams` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LastUpdate` datetime DEFAULT NULL,
+  `LastUserName` varchar(50) DEFAULT NULL,
+  `Nome` varchar(100) DEFAULT NULL,
+  `Tipo` char(3) DEFAULT NULL,
+  `Valor` text,
+  `Identificador` varchar(15) DEFAULT NULL,
+  `Agrupador` char(3) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Cadastro de Parâmetros' AUTO_INCREMENT=5;
+
+INSERT INTO `sysParams` (`ID`, `LastUpdate`, `LastUserName`, `Nome`, `Tipo`, `Valor`, `Identificador`, `Agrupador`) VALUES
+(1,'2013-09-24 13:49:57','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Título','STR','Título do Site','SITE_TITULO','CMS'),
+(2,'2013-09-24 13:50:20','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Descrição','STR','Descrição do Site','SITE_DESCRICAO','CMS'),
+(3,'2013-09-24 13:50:09','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Tags','STR','tag1, tag2, tag3','SITE_TAGS','CMS'),
+(4,'2013-09-24 14:41:37','Tihh Gonçalves (tiago@novabrazil.art.br)','Endereço (exibido no Rodapé do Site)','TXT','Rua João da Silva, 123\r\nBlumenau - SC - Bairro Velha ','CNT_ENDERECO','SIT'),
+(5,'2013-09-24 15:40:53','Tihh Gonçalves (tiago@novabrazil.art.br)','E-mail de Contato','STR','contato@meusite.com.br','CNT_EMAIL','SIT');
 
 -- ------------------------------------------------------------
 -- ------------------------------------------------------------
