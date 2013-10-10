@@ -451,7 +451,7 @@ class nbrAdminForms {
     global $hub, $db, $moduleObj;
     
     //Só exibe Coleções quando for edição..
-    if($hub->ExistParam('ID')){
+    if($this->Editing()){
       
       if($showCount){
         $sql = 'SELECT COUNT(ID) TOTAL FROM ' . $linkTableName . ' WHERE `' . $linkTableField . '` = ' . $hub->GetParam('ID');
@@ -655,6 +655,18 @@ class nbrAdminForms {
     global $hub, $dataSet, $cms, $ADMIN_IMAGES_URL, $ADMIN_PAGES_PATH, $SITEKEY, $cookie_save_name;
     
     $html  = null;
+    
+    /** Verifica se existe JS ou CSS com o mesmo nome **/
+    
+    /** FALTA TERMINAR ESSA IMPLEMENTAÇÃO. Tihh
+    $url = explode('/', $hub->GetParam('_page'));
+    
+    
+    $file = $hub->GetParam('_page');
+    $css = substr($file, 0, -3) . 'css';
+    if(file_exists($css)){
+    	
+    }**/
     
     if($dataSet->ExistParam('msgSucess')){
       $msg = $dataSet->GetParam('msgSucess');

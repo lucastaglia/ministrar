@@ -209,7 +209,7 @@ if($hub->ExistParam('_moduleID')){
   <div style="clear:left"></div>
 </div>
 <!-- CONTEUDO - FIM -->
-<div id="rodape">Este site é administrado pelo CMS Ministrar2, da <a href="http://www.novabrazil.art.br" target="_blank">Nova Brazil Agência Interativa</a>, na <b>versão <?= $cms->GetVersion(); ?></b></div>  
+<div id="rodape">Este site é administrado pelo CMS <a href="http://www.novabrazil.art.br" target="_blank">Ministrar</a>, na <b>versão <?= $cms->GetVersion(); ?></b></div>  
 <div id="status"></div>
 
 </body>

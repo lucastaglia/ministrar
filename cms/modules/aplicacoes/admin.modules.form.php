@@ -1,8 +1,5 @@
 <?
 $tableName = 'sysModules';
-
-$edition = $hub->ExistParam('ID');
-
 $form = new nbrAdminForms($tableName);
 
 $form->AddFieldString('Name', 'Nome ', 30, 2, null, true);

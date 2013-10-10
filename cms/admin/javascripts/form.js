@@ -549,7 +549,7 @@ $(document).ready(function(){
 //Seleciona (focus) primeiro campo do formulário
 $(document).ready(function(){
 
-  $('form#formulario input:first, form#formulario textarea:first, form#formulario select:first').each(function() {
+  $('form#formulario .field input:first, form#formulario .field textarea:first, form#formulario .field select:first').each(function() {
       if($(this).is(':visible') && !$(this).attr('disabled') && !$(this).attr('readonly')) {
           $(this).focus();
           return false;
