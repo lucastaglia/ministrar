@@ -32,16 +32,19 @@ function mostraCampo($tipo){
     $('.legendaTabela').show();
     $('.descricaoTabela').show();
     $('div#TableLink').show();
+    $('div#TableLink select').focus();
     
   } else if($tipo == 'STR'){
     $('.legendaString').show();
     $('.descricaoString').show();
     $('div#Length').show();
+    $('div#Length input').focus();
     
   } else if($tipo == 'LST'){
     $('.legendaLista').show();
     $('.descricaoLista').show();
     $('div#ListValues').show();  
+    $('div#ListValues input').focus(); 
   }  
   
 }
