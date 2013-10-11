@@ -2,7 +2,7 @@
 $arquivo = $db->database . '_' . date('d-m-Y_H-i') . ".sql";
 $arquivoFull = $cms->GetTempPath() . $arquivo;
 
-$command = "mysqldump --opt --skip-extended-insert --complete-insert --host=".$db->host." --user=".$db->user." ".$db->database." > " . $cms->GetTempPath() . $db->database.".sql";
+$command = "mysqldump --opt --skip-extended-insert --complete-insert --host=".$db->host." --user=".$db->user." --password=".$db->pass." " .$db->database." > " . $cms->GetTempPath() . $db->database.".sql";
 exec($command, $output, $error_code);
 
 
