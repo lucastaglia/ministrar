@@ -39,7 +39,13 @@ function macroFromFields($fieldName, $record, $legend, $length, $columns, $value
       	case 2: $columnsStr = 'twoColumn';break;
       	case 3: $columnsStr = 'threeColumn';break;
       }      
-
+  
+      //Estilo...
+      $html  = '<link href="' . $moduleObj->url . 'admin.modules.form.css" rel="stylesheet" type="text/css" />' . "\r\n";
+      
+      //JS...
+      $html .= '<script src="' . $moduleObj->url . 'admin.modules.form.js"></script>' . "\r\n";
+      
       $html .= '<div id="icones" class="field ' . $columnsStr . '">' . "\r\n";
       $html .= '<input name="Icon" id="Icon" type="hidden" value="' . $record->Icon . '">' . "\r\n";
       
