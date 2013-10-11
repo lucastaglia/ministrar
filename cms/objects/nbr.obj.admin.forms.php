@@ -59,7 +59,7 @@ class nbrAdminForms {
 
       case 'STR':
         $val = $this->getValue($fieldName, $valueDefault);
-        $html  = '<div class="field string ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div id="' . $fieldName . '" class="field string ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";   
@@ -76,7 +76,7 @@ class nbrAdminForms {
     	  } else 
     	    $val = null;
 
-        $html  = '<div class="field password ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="' . $fieldName . '" class="field password ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         
         $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . ' senha1" type="password" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '"></input>' . "\r\n";
@@ -104,7 +104,7 @@ class nbrAdminForms {
           $txt_status = '<b>Tamanho:</b> ' . $bytes . 'mb.';
         }
             	  
-    	  $html  = '<div class="field file ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+    	  $html  = '<div  id="' . $fieldName . '" class="field file ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
 
         $html .= '<div class="esquerda">' . "\r\n";
@@ -184,7 +184,7 @@ class nbrAdminForms {
           $link_zoom .= '</a>';
         }
 
-        $html  = '<div class="field image ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="' . $fieldName . '" class="field image ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<div class="img" style="background-image:url(' . $img . ');">' . "\r\n";
         $html .= $link_zoom;
@@ -206,7 +206,7 @@ class nbrAdminForms {
     		break;
     		
     	case 'INT':
-    	    $html  = '<div class="field ' . $columnsStr . ' integer ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+    	    $html  = '<div  id="' . $fieldName . '" class="field ' . $columnsStr . ' integer ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
           $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
           $html .= '<input ' . ($readOnly?'disabled':null) . ' onkeyup="onlyInteger(this);" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $this->getValue($fieldName, $valueDefault) . '"  maxlength="' . $length. '"></input>' . "\r\n";
           $html .= '</div>' . "\r\n";
@@ -223,7 +223,7 @@ class nbrAdminForms {
     	  break;    	  
     	
     	case 'HTM':
-          $html  = '<div class="field ' . $columnsStr . ' html ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+          $html  = '<div  id="' . $fieldName . '" class="field ' . $columnsStr . ' html ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
           $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
           $html .= '<textarea ' . ($readOnly?'disabled':null) . ' id="' . $fieldName. '" name="' . $fieldName. ($readOnly?'_disabled':null) . '" style="height:' . $height . 'px">' . $this->getValue($fieldName, $valueDefault) . '</textarea>' . "\r\n";
           $html .= '<div class="clearBoth"></div>';
@@ -233,7 +233,7 @@ class nbrAdminForms {
     	  
     	case 'LST':
     	    $value = $this->getValue($fieldName, $valueDefault);
-          $html  = '<div class="field ' . $columnsStr . ' list ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+          $html  = '<div  id="' . $fieldName . '" class="field ' . $columnsStr . ' list ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
           $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
           $html .= '<select ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" name="' . $fieldName . ($readOnly?'_disabled':null) . '">' . "\r\n";
           $html .= '<option value=""></option>' . "\r\n";
@@ -262,7 +262,7 @@ class nbrAdminForms {
     	  } else 
     	    $dateValue = null;
     	    
-        $html  = '<div class="field datetime ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="' . $fieldName . '" class="field datetime ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";   
@@ -281,7 +281,7 @@ class nbrAdminForms {
     	  } else 
     	    $dateValue = '';
     	    
-        $html  = '<div class="field date ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="' . $fieldName . '" class="field date ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";    		
@@ -296,7 +296,7 @@ class nbrAdminForms {
     	  $value = (!is_numeric($value))?0:$value;
     	  $value = number_format($value, 2, ',', '');
     	  
-        $html  = '<div class="field number ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="' . $fieldName . '" class="field number ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="  ' . $fieldName. '" value="' . $value . '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";
@@ -361,18 +361,18 @@ class nbrAdminForms {
    *
    * @param string $title
    */
-  public function AddGroup($title) {
+  public function AddGroup($title, $class = null) {
     
-    $html  = '<div class="separator">' . "\r\n";
+    $html  = '<div class="separator'. (!empty($class)?' ' . $class:null) . '">' . "\r\n";
     $html .= $title . "\r\n";
     $html .= '</div>' . "\r\n";
     
     $this->html_fields[] = $html;
   }
-  
-  public function AddDescriptionText($text){
     
-    $html  = '<div class="description">' . "\r\n";
+  public function AddDescriptionText($text, $class = null){
+    
+    $html  = '<div class="description'. (!empty($class)?' ' . $class:null) . '">' . "\r\n";
     $html .= $text . "\r\n";
     $html .= '</div>' . "\r\n";
     
@@ -652,21 +652,27 @@ class nbrAdminForms {
   }  
   
   public function PrintHTML(){
-    global $hub, $dataSet, $cms, $ADMIN_IMAGES_URL, $ADMIN_PAGES_PATH, $SITEKEY, $cookie_save_name;
+    global $hub, $dataSet, $cms, $ADMIN_IMAGES_URL, $ADMIN_PAGES_PATH, $SITEKEY, $cookie_save_name, $MODULES_URL, $MODULES_PATH;
     
     $html  = null;
     
     /** Verifica se existe JS ou CSS com o mesmo nome **/
+    $url_array = explode('/', $hub->GetParam('_page'));
+    $url_array = array_slice($url_array, -2);
     
-    /** FALTA TERMINAR ESSA IMPLEMENTAÇÃO. Tihh
-    $url = explode('/', $hub->GetParam('_page'));
+    $url_modulo = $MODULES_URL . $url_array[0] . '/'; 
+    $path_modulo = $MODULES_PATH . $url_array[0] . '/';
     
-    
-    $file = $hub->GetParam('_page');
-    $css = substr($file, 0, -3) . 'css';
-    if(file_exists($css)){
-    	
-    }**/
+   
+    $css = substr($url_array[1] , 0, -4) . '.css';
+    if(file_exists($path_modulo . $css)){
+    	echo('<link href="' . $url_modulo . $css . '" rel="stylesheet" type="text/css" />' . "\r\n");
+    }
+
+    $js = substr($url_array[1] , 0, -4) . '.js';
+    if(file_exists($path_modulo . $js)){
+    	echo('<script src="' . $url_modulo . $js . '" type="text/javascript"></script>' . "\r\n");
+    }    
     
     if($dataSet->ExistParam('msgSucess')){
       $msg = $dataSet->GetParam('msgSucess');
