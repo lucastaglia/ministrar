@@ -22,6 +22,7 @@ $grid->macroFile = 'admin.tables.macro.php';
 $grid->AddColumnString('Name', 'Nome', 230);
 $grid->AddColumnString('Comment','Comentário', 500);
 $grid->AddColumnCustom('REGISTROS', 'Qtd Reg.', 100, 'center');
+$grid->AddColumnCustom('CAMPOS', 'Qtd Campos', 100, 'center');
 $grid->AddColumnBoolean('IsSystem','Do Sistema?', 70);
 
 
@@ -35,6 +36,15 @@ function macroGridValues($field , $value, $record){
   if($field == 'REGISTROS'){
     
     $sql  = 'SELECT COUNT(ID) TOTAL FROM `' . $record->Name . '`';
+    $res = $db->LoadObjects($sql);
+    return intval($res[0]->TOTAL);
+    
+  }
+
+  if($field == 'CAMPOS'){
+    
+    $sql  = 'SELECT COUNT(ID) TOTAL FROM systablefields';
+    $sql .= " WHERE  `Table` = " . $record->ID;
     $res = $db->LoadObjects($sql);
     return intval($res[0]->TOTAL);
     
