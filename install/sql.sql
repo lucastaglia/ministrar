@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `sysModules` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Módulos do Sistema' AUTO_INCREMENT=3;
 
 INSERT INTO `sysModules` (`ID`, `Name`, `Path`, `Actived`, `LastUpdate`, `LastUserName`, `Description`, `Developer`, `Icon`) VALUES
-(1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela configuração do Sistema', 'Y', 'nbrazil.png'),
+(1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela configuração do Sistema', 'Y', 'ministrar2.png'),
 (2, 'Usuários', 'usuarios', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela administração de Usuários', 'Y', 'usuarios.png'),
 (3,'Parâmetros','parametros','Y','2013-09-24 13:36:18','Tihh Gonçalves (tiago@novabrazil.art.br)','Cadastro de Parâmetros',NULL,'preference.png');
 -- ------------------------------------------------------------
