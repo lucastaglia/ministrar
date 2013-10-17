@@ -191,6 +191,7 @@ if(!isset($_SESSION['installStatus'])){
   	<li>./cms/<strong>cache</strong> (permissão 777)</li>
   	<li>./cms/<strong>plugins</strong> (permissão 777)</li>
   	<li>./cms/<strong>temp</strong> (permissão 777)</li>  
+  	<li>./site/<strong>langs</strong> (permissão 777)</li>      
   	<li>./site/<strong>uploads</strong> (permissão 777)</li>      
   	<li>./site/uploads/<strong>ckeditor</strong> (permissão 777)</li>          
   </ul>

@@ -57,6 +57,7 @@ class nbrAdminGrid{
     
     //Adiciona primeira coluna o ID..
     $this->AddColumnInteger('ID', 'ID', 20);
+    
   }
 
   private function mark($value){
@@ -253,6 +254,15 @@ class nbrAdminGrid{
      $this->wheres .= ')';
     }
     
+    //Se for uma pasta (folder) multilinguística filtra pelo idioma selecionado.
+	if($hub->GetParam('_languages') == 'Y'){
+
+		if(!empty($this->wheres))
+		  $this->wheres .= ' AND ';
+		
+    	$this->wheres .= '(Lang = "' . $_SESSION['lang_admin'] . '")';
+    }    
+    
 
     //Condições..
     if(!empty($this->wheres))
@@ -434,7 +444,7 @@ class nbrAdminGrid{
     $hub->SetParam('_title', 'Novo Registro');
     $hub->SetParam('_moduleID', $this->module->ID);
     $hub->SetParam('_folderID', $hub->GetParam('_folderID'));
-
+    $hub->SetParam('_languages',$hub->GetParam('_languages'));
 
     //Adiciona Paramêtros adicionais do hub
     foreach ($this->hubParams as $key=>$param) {
@@ -635,6 +645,7 @@ class nbrAdminGrid{
           $hub->SetParam('title', $this->title);
           $hub->SetParam('_moduleID', $this->module->ID);
           $hub->SetParam('_folderID', $hub->GetParam('_folderID'));
+          $hub->SetParam('_languages',$hub->GetParam('_languages'));
 
           if($this->macroFile != null)
           $hub->SetParam('fileMacro', $this->module->folderPath . $this->macroFile);

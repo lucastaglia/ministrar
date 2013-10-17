@@ -6,12 +6,16 @@ class nbrRouter{
   
   function __construct(){
     
-    global $FRONT_PAGES_PATH, $SITE_PAGEINDEX;
+    global $FRONT_PAGES_PATH, $SITE_PAGEINDEX, $langs;
     
     if(!empty($_GET['url'])){
       
       $params = $_GET['url'];
       $params = explode('/', $params);
+      
+      $lang = array_shift($params);
+      $langs->SetLanguage($lang);
+      
       $this->params = $params;
       
       $page = array_shift($params);
@@ -37,9 +41,9 @@ class nbrRouter{
    * @param string $page
    */
    public function GetLink($page){
-    global $LINK_PREFIX, $ROOT_URL;
+    global $LINK_PREFIX, $ROOT_URL, $langs;
     
-    $url = $ROOT_URL . $LINK_PREFIX . $page;
+    $url = $ROOT_URL . $LINK_PREFIX . $langs->language . '/' . $page;
     return $url;
   }
   

@@ -35,6 +35,18 @@ include($ROOT_PATH . 'cms/nbr.loader.php');
 //Carrega framework Admin
 include($ADMIN_PATH . 'nbr.admin.loader.php');
 
+//Carrega objeto de Idioma..
+include($OBJECTS_PATH . 'nbr.obj.langs.php');  
+$langs	= new nbrLangs('ADMIN');
+
+
+//Pega os idiomas do Front
+$langs_front = $LANGS_FRONT;
+
+if(!isset($_SESSION['lang_admin'])){
+	$_SESSION['lang_admin'] = $langs_front['default'];
+}
+
 //Chame administrador de Cookies
 include($ADMIN_PAGES_PATH . 'cookies.php');
 

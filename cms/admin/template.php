@@ -72,7 +72,7 @@ var admin_javascript_url = '<?= $GLOBALS['ADMIN_JAVASCRIPT_URL'] ?>';
   <a href="<?= $hub->GetUrl(); ?>" title="Sair"> <span id="btn_sair"></span> </a> 
   </div>
   
-  <div id="usuario"> <span id="nome">Olá <?= $security->GetUserName()?></span> <a href="#"><span style="display:none;" id="editarperfil"></span></a> </div>
+  <div id="usuario"> <span id="nome"><?= __('Olá'); ?> <?= $security->GetUserName()?></span> <a href="#"><span style="display:none;" id="editarperfil"></span></a> </div>
 </div>
 
 
@@ -151,6 +151,7 @@ if($hub->ExistParam('_moduleID')){
     $file = $moduleObj->path . $folder->File;
     $hub->SetParam('_page', $file);
     $hub->SetParam('_title', utf8_encode($folder->Name));
+    $hub->SetParam('_languages', ($folder->MultiLanguages != 'N'?'Y':'N'));
     $hub->SetParam('_description', 'Pasta ' . utf8_encode($folder->Name));
     $hub->SetParam('_moduleID', $moduleObj->ID);
     $hub->SetParam('_folderID', $folder->ID);
@@ -202,6 +203,38 @@ if($hub->ExistParam('_moduleID')){
 
 </div>
   <div class="<?= (($hub->ExistParam('_moduleID'))?'main':'mainFull'); ?>">
+  
+  <?
+  
+  /**
+   * Bandeiras (idiomas)
+   */
+  
+  if($hub->GetParam('_languages') == 'Y'){
+  ?>
+  <div id="flags">
+  	<span>Seleciona o idioma que deseja salvar os registros:</span>
+  <ul>
+  <?  
+	  foreach ($langs_front['activated'] as $flag) {
+	  	
+	  	$hub->SetParam('_page', $ADMIN_PAGES_PATH . 'langs.php');
+	  	$hub->SetParam('lang', $flag);
+  ?>
+  <li <?= ($flag == $_SESSION['lang_admin'])?'class="selected"':null; ?>>
+  	<a href="<?= $hub->GetUrl(); ?>" title="<?= sprintf(__('Alterar idioma dos cadastros para: %s'), $flag); ?>">
+  		<img src="<?= $ADMIN_URL . 'flags/' . $flag ?>.gif" width="18" height="12">
+  	</a>
+  </li>
+  <?	
+	  }
+  ?>
+  </ul>
+  </div>
+  <?
+  }
+  ?>
+  
     <? include($page); ?>
     <div class="clearcontent"></div>
     </div>

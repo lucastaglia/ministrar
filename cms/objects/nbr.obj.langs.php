@@ -1,0 +1,107 @@
+<?
+class nbrLangs{
+	
+	public $default;
+	public $language;
+	public $languages = array();
+	public $words = array();
+	public $prefixo;
+	
+	private $file_contents;
+	private $file_handle;
+	
+	function __construct($prefixo){
+		
+		$LANGS = $GLOBALS['LANGS_' . $prefixo];
+		
+		//carrega informações do config
+		$this->default = $LANGS['default'];
+		$this->prefixo = $prefixo;
+		
+		$this->languages = $LANGS['activated'];
+		
+		//verifica se já existe um idioma setado na sessão, se não seta a padrão (default)
+		if(!isset($_SESSION['nbr_lang_' . $prefixo])){
+			$this->SetLanguage($this->default);
+		} else {
+			$this->SetLanguage($_SESSION['nbr_lang_' . $prefixo]);
+		}
+		//carrega arquivo...
+		$this->LoadFile();
+			
+	}
+	
+	function __destruct(){
+		fclose($this->file_handle);
+	}
+	
+	public function SetLanguage($lang){
+		$_SESSION['nbr_lang_' . $this->prefixo] = $lang;				
+		$this->language = $lang;
+		
+		$this->LoadFile();
+	}
+	
+	public function LoadFile(){
+		global $ADMIN_LANGS_PATH;
+		
+		
+		//arquivo..
+		$file = $ADMIN_LANGS_PATH . $this->language . '_' . strtolower($this->prefixo) . '.php';
+		
+		//verifica se é novo...
+		$new = (!file_exists($file));
+		
+		
+		$this->file_handle = fopen($file, "a+");
+		
+		// Escreve no arquivo de texto
+		if($new){
+
+			$txt  = '/**' . "\r\n";
+			$txt .= ' * Este arquivo do idioma ' . $this->language . ' foi criado automaticamente.' . "\r\n";
+			$txt .= ' * Data: ' . date('d-m-Y H:i') . '.' . "\r\n";
+			$txt .= ' * ' . "\r\n";
+			$txt .= ' */' . "\r\n";
+			$txt .= "\r\n";
+			$txt .= '$l = array();' . "\r\n";
+
+			fwrite($this->file_handle, $txt);	
+		} else {
+
+			$this->file_contents = null;
+					
+			while (!feof($this->file_handle)) {
+			  $this->file_contents .= fread($this->file_handle, 8192);
+			}
+			
+			//carrega array do idioma...
+			eval($this->file_contents);
+			$this->words = $l;
+		}
+	}
+	
+	public function getText($id){
+		
+		if(!array_key_exists($id, $this->words)){
+			
+			$txt = '$l["'  . $id . '"] = "' . $id .'";' . "\r\n";
+			//excreve no arquivo
+			fwrite($this->file_handle, $txt);	
+			
+			return $id;
+			
+		} else {
+			return $this->words[$id];
+		}
+	}
+	
+}
+
+
+function __($id){
+	global $langs;
+	
+	return $langs->getText($id);
+}
+?>

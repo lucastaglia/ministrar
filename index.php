@@ -28,6 +28,10 @@ else {
 //Carrega framework
 include('./cms/nbr.loader.php');
 
+//Carrega objeto de Idioma..
+include($OBJECTS_PATH . 'nbr.obj.langs.php');  
+$langs	= new nbrLangs('FRONT');
+
 //Carrega Eventos de Plugins...
 $events->includeFilesEventsPlugins();
 

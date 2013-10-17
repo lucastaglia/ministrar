@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS `sysAdminGroups` (
 -- Extraindo dados da tabela `sysAdminGroups`
 --
 
-INSERT INTO `sysAdminGroups` (`ID`, `Name`, `LastUpdate`, `LastUserName`) VALUES
-(1, 'Administradores', '2011-10-06 15:28:51', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(2, 'Redatores', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(3, 'Gerentes', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)');
+INSERT INTO `sysAdminGroups` (`ID`, `Name`, `LastUpdate`, `LastUserName`, `Lang`) VALUES
+(1, 'Administradores', '2011-10-06 15:28:51', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(2, 'Redatores', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(3, 'Gerentes', '2011-10-06 21:29:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br');
 
 -- ------------------------------------------------------------
 
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `sysAdminUsers` (
   KEY `fk_sysadminusers_group` (`Group`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Usuários do Administrator' AUTO_INCREMENT=1 ;
 
-INSERT INTO `sysAdminUsers` (`ID`, `Name`, `Mail`, `Password`, `Group`, `LastAccess`, `LastUpdate`, `LastUserName`, `Developer`, `Actived`) VALUES
-(1, 'Admin', 'teste@teste.com.br', '698dc19d489c4e4db73e28a713eab07b', 1, '2013-06-13 10:19:05', '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Y', 'Y');
+INSERT INTO `sysAdminUsers` (`ID`, `Name`, `Mail`, `Password`, `Group`, `LastAccess`, `LastUpdate`, `LastUserName`, `Developer`, `Actived`, `Lang`) VALUES
+(1, 'Admin', 'teste@teste.com.br', '698dc19d489c4e4db73e28a713eab07b', 1, '2013-06-13 10:19:05', '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Y', 'Y', 'pt-br');
 
 -- ------------------------------------------------------------
 
@@ -70,10 +70,10 @@ CREATE TABLE IF NOT EXISTS `sysAdminUsersGroups` (
   KEY `fk_sysadminusersgroups_group` (`Group`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela de Ligação de sysAdminUsers e sysAdminGroups' AUTO_INCREMENT=3;
 
-INSERT INTO `sysAdminUsersGroups` (`ID`, `LastUpdate`, `LastUserName`, `User`, `Group`) VALUES
-(1, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1),
-(2, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 2),
-(3, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 3);
+INSERT INTO `sysAdminUsersGroups` (`ID`, `LastUpdate`, `LastUserName`, `User`, `Group`, `Lang`) VALUES
+(1, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1, 'pt-br'),
+(2, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 2, 'pt-br'),
+(3, '2012-12-13 08:17:03', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 3, 'pt-br');
 
 -- ------------------------------------------------------------
 
@@ -112,24 +112,25 @@ CREATE TABLE IF NOT EXISTS `sysModuleFolders` (
   `File` varchar(50) DEFAULT NULL,
   `Grouper` varchar(50) DEFAULT NULL,
   `Actived` char(1) DEFAULT NULL,
+  `MultiLanguages` char(1) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `fk_sysmodulefolders_module` (`Module`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Pastas de determinado Módulo do Sistema' AUTO_INCREMENT=11;
 
-INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Grouper`, `Actived`, `LastUpdate`, `LastUserName`) VALUES
-(1, 1, 'Tabelas', 10, 'admin.tables.grid.php', 'Banco de Dados', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
-(2, 1, 'Módulos', 20, 'admin.modules.grid.php', 'Organização', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
-(3, 1, 'Usuários', 30, 'admin.security.users.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
-(4, 1, 'Grupos', 40, 'admin.security.groups.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
-(5, 1, 'Ações de Usuários', 50, 'admin.security.logs.grid.php', 'Segurança', 'Y', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)'),
-(6, 1, 'Plugins', 30, 'admin.plugins.grid.php', 'Organização', 'Y', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(7, 2, 'Usuários', 10, 'admin.usuarios.grid.php', 'Geral', 'Y', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(8, 2, 'Grupos', 20, 'admin.grupos.grid.php', 'Geral', 'Y', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(9,1,'Parâmetros',20,'admin.params.grid.php','Banco de Dados','Y','2013-09-24 13:26:08','Tihh Gonçalves (tiago@novabrazil.art.br)'),
-(10,3,'Do CMS',20,'admin.params.cms.grid.php','Geral','Y','2013-09-24 14:26:31','Tihh Gonçalves (tiago@novabrazil.art.br)'),
-(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','2013-09-24 14:26:31','Tihh Gonçalves (tiago@novabrazil.art.br)');
+INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Grouper`, `Actived`,`MultiLanguages`, `LastUpdate`, `LastUserName`, `Lang`) VALUES
+(1, 1, 'Tabelas', 10, 'admin.tables.grid.php', 'Banco de Dados', 'Y', 'N',  '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)', 'pt-br'),
+(2, 1, 'Módulos', 20, 'admin.modules.grid.php', 'Organização', 'Y', 'N',  '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)', 'pt-br'),
+(3, 1, 'Usuários', 30, 'admin.security.users.grid.php', 'Segurança', 'Y', 'N', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)', 'pt-br'),
+(4, 1, 'Grupos', 40, 'admin.security.groups.grid.php', 'Segurança', 'Y', 'N',  '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)', 'pt-br'),
+(5, 1, 'Ações de Usuários', 50, 'admin.security.logs.grid.php', 'Segurança', 'Y', 'N', '2010-11-05 14:33:43', 'Tiago Gonçalves(tiago@novabrazil.art.br)', 'pt-br'),
+(6, 1, 'Plugins', 30, 'admin.plugins.grid.php', 'Organização', 'Y', 'N', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(7, 2, 'Usuários', 10, 'admin.usuarios.grid.php', 'Geral', 'Y', 'N', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(8, 2, 'Grupos', 20, 'admin.grupos.grid.php', 'Geral', 'Y', 'N', '2013-06-17 17:53:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(9,1,'Parâmetros',20,'admin.params.grid.php','Banco de Dados','Y','N', '2013-09-24 13:26:08','Tihh Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(10,3,'Do CMS',20,'admin.params.cms.grid.php','Geral','Y','Y', '2013-09-24 14:26:31','Tihh Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','Y', '2013-09-24 14:26:31','Tihh Gonçalves (tiago@novabrazil.art.br)', 'pt-br');
 
 -- ------------------------------------------------------------
 
@@ -171,10 +172,10 @@ CREATE TABLE IF NOT EXISTS `sysModules` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Módulos do Sistema' AUTO_INCREMENT=3;
 
-INSERT INTO `sysModules` (`ID`, `Name`, `Path`, `Actived`, `LastUpdate`, `LastUserName`, `Description`, `Developer`, `Icon`) VALUES
-(1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela configuração do Sistema', 'Y', 'ministrar2.png'),
-(2, 'Usuários', 'usuarios', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela administração de Usuários', 'Y', 'usuarios.png'),
-(3,'Parâmetros','parametros','Y','2013-09-24 13:36:18','Tihh Gonçalves (tiago@novabrazil.art.br)','Cadastro de Parâmetros',NULL,'preference.png');
+INSERT INTO `sysModules` (`ID`, `Name`, `Path`, `Actived`, `LastUpdate`, `LastUserName`, `Description`, `Developer`, `Icon`, `Lang`) VALUES
+(1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela configuração do Sistema', 'Y', 'ministrar2.png', 'pt-br'),
+(2, 'Usuários', 'usuarios', 'Y', '2013-06-11 10:15:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'Módulo responsável pela administração de Usuários', 'Y', 'usuarios.png', 'pt-br'),
+(3,'Parâmetros','parametros','Y','2013-09-24 13:36:18','Tihh Gonçalves (tiago@novabrazil.art.br)','Cadastro de Parâmetros',NULL,'preference.png', 'pt-br');
 -- ------------------------------------------------------------
 
 --
@@ -194,12 +195,12 @@ CREATE TABLE IF NOT EXISTS `sysModuleSecurityGroups` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Grupos de Segurança do Módulo' AUTO_INCREMENT=5;
 
 
-INSERT INTO `sysModuleSecurityGroups` (`ID`, `LastUpdate`, `LastUserName`, `Module`, `Group`) VALUES
-(1, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1),
-(2, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 2, 1),
-(3, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 2, 3),
-(4, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 3, 1),
-(5, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 3, 3);
+INSERT INTO `sysModuleSecurityGroups` (`ID`, `LastUpdate`, `LastUserName`, `Module`, `Group`, `Lang`) VALUES
+(1, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 1, 1, 'pt-br'),
+(2, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 2, 1, 'pt-br'),
+(3, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 2, 3, 'pt-br'),
+(4, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 3, 1, 'pt-br'),
+(5, '2013-06-11 10:15:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 3, 3, 'pt-br');
 
 -- ------------------------------------------------------------
 
@@ -222,17 +223,17 @@ CREATE TABLE IF NOT EXISTS `sysTableConstrains` (
   KEY `fk_systablecontrains_totable` (`ToTable`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Grupos de Segurança do Módulo' AUTO_INCREMENT=11 ;
 
-INSERT INTO `sysTableConstrains` (`ID`, `Name`, `FromTable`, `FromField`, `ToTable`, `LastUpdate`, `LastUserName`) VALUES
-(1, 'fk_systablefields_tablelink', 2, 16, 1, NULL, NULL),
-(2, 'fk_systablecontrains_fromtable', 3, 17, 1, NULL, NULL),
-(3, 'fk_systablecontrains_fromfield', 3, 18, 2, NULL, NULL),
-(4, 'fk_systablecontrains_totable', 3, 19, 1, NULL, NULL),
-(5, 'fk_sysmodulefolders_module', 9, 58, 8, NULL, NULL),
-(6, 'fk_sysadminusersgroups_user', 34, 337, 24, NULL, NULL),
-(7, 'fk_sysadminusersgroups_group', 34, 338, 6, NULL, NULL),
-(8, 'fk_sysmodulesecuritygroups_module', 36, 339, 8, NULL, NULL),
-(9, 'fk_sysmodulesecuritygroups_group', 36, 340, 6, NULL, NULL),
-(10, 'fk_sysmodulereports_module', 41, 396, 8, NULL, NULL);
+INSERT INTO `sysTableConstrains` (`ID`, `Name`, `FromTable`, `FromField`, `ToTable`, `LastUpdate`, `LastUserName`, `Lang`) VALUES
+(1, 'fk_systablefields_tablelink', 2, 16, 1, NULL, NULL, 'pt-br'),
+(2, 'fk_systablecontrains_fromtable', 3, 17, 1, NULL, NULL, 'pt-br'),
+(3, 'fk_systablecontrains_fromfield', 3, 18, 2, NULL, NULL, 'pt-br'),
+(4, 'fk_systablecontrains_totable', 3, 19, 1, NULL, NULL, 'pt-br'),
+(5, 'fk_sysmodulefolders_module', 9, 58, 8, NULL, NULL, 'pt-br'),
+(6, 'fk_sysadminusersgroups_user', 34, 337, 24, NULL, NULL, 'pt-br'),
+(7, 'fk_sysadminusersgroups_group', 34, 338, 6, NULL, NULL, 'pt-br'),
+(8, 'fk_sysmodulesecuritygroups_module', 36, 339, 8, NULL, NULL, 'pt-br'),
+(9, 'fk_sysmodulesecuritygroups_group', 36, 340, 6, NULL, NULL, 'pt-br'),
+(10, 'fk_sysmodulereports_module', 41, 396, 8, NULL, NULL, 'pt-br');
 
 -- ------------------------------------------------------------
 
@@ -257,55 +258,55 @@ CREATE TABLE IF NOT EXISTS `sysTableFields` (
   KEY `fk_systablefields_tablelink` (`TableLink`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela que gerencia Campos de determinada tabela' AUTO_INCREMENT=612;
 
-INSERT INTO `sysTableFields` (`ID`, `Table`, `Name`, `Type`, `Length`, `TableLink`, `ListValues`, `LastUpdate`, `LastUserName`, `Order`) VALUES
-(11, 1, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999),
-(12, 1, 'IsSystem', 'BOL', 1, NULL, NULL, NULL, NULL, 9999),
-(13, 2, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999),
-(14, 2, 'Type', 'LST', 3, NULL, 'STR=String|INT=Inteiro|NUM=Numero Decimal|BOL=Lógico|TAB=Tabela|LST=Lista|DTA=Data|DTT=Data e Hora|TXT=Texto|IMG=Imagem|FIL=Arquivo', '2010-09-21 10:55:28', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(15, 2, 'Length', 'INT', 11, NULL, NULL, NULL, NULL, 9999),
-(16, 2, 'TableLink', 'TAB', 11, 1, NULL, NULL, NULL, 9999),
-(17, 3, 'FromTable', 'TAB', 11, 1, NULL, NULL, NULL, 9999),
-(18, 3, 'FromField', 'TAB', 11, 2, NULL, NULL, NULL, 9999),
-(19, 3, 'ToTable', 'TAB', 11, 1, NULL, NULL, NULL, 9999),
-(37, 3, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999),
-(48, 6, 'Name', 'STR', 100, NULL, NULL, NULL, NULL, 9999),
-(55, 8, 'Name', 'STR', 30, NULL, NULL, '2010-07-26 16:13:28', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(56, 8, 'Path', 'STR', 30, NULL, NULL, NULL, NULL, 9999),
-(57, 8, 'Actived', 'BOL', 1, NULL, NULL, NULL, NULL, 9999),
-(58, 9, 'Module', 'TAB', 11, 8, NULL, NULL, NULL, 9999),
-(59, 9, 'Name', 'STR', 100, NULL, NULL, NULL, NULL, 9999),
-(60, 9, 'Order', 'INT', 0, NULL, NULL, NULL, NULL, 9999),
-(61, 9, 'Actived', 'BOL', 1, NULL, NULL, NULL, NULL, 9999),
-(62, 9, 'File', 'STR', 50, NULL, NULL, NULL, NULL, 9999),
-(63, 9, 'Grouper', 'STR', 50, NULL, NULL, NULL, NULL, 9999),
-(64, 1, 'Comment', 'STR', 60, NULL, NULL, '2010-07-26 15:17:36', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(65, 8, 'Description', 'STR', 50, NULL, NULL, '2010-07-22 11:50:42', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(137, 24, 'Name', 'STR', 100, NULL, NULL, NULL, NULL, 9999),
-(138, 24, 'Mail', 'STR', 30, NULL, NULL, NULL, NULL, 9999),
-(139, 24, 'Password', 'PSW', 10, NULL, NULL, NULL, NULL, 9999),
-(140, 24, 'Group', 'TAB', NULL, 6, NULL, NULL, NULL, 9999),
-(142, 24, 'Developer', 'BOL', NULL, NULL, NULL, NULL, NULL, 9999),
-(229, 2, 'ListValues', 'STR', 500, NULL, NULL, '2010-10-06 10:07:00', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(305, 24, 'Actived', 'BOL', NULL, NULL, NULL, '2010-10-25 16:39:58', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(337, 34, 'User', 'TAB', NULL, 24, NULL, '2010-11-03 16:17:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(338, 34, 'Group', 'TAB', NULL, 6, NULL, '2010-11-03 16:17:28', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(339, 36, 'Module', 'TAB', NULL, 8, NULL, '2010-11-04 14:51:23', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(340, 36, 'Group', 'TAB', NULL, 6, NULL, '2010-11-04 14:51:41', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(341, 37, 'UserName', 'STR', 100, NULL, NULL, '2010-11-05 10:43:58', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(342, 37, 'UserMail', 'STR', 50, NULL, NULL, '2010-11-05 10:44:10', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(343, 37, 'Action', 'LST', NULL, NULL, 'LOG=Login|NEW=Inseriu novo Registro|EDT=Editou um Registro|DEL=Excluiu um Registro', '2010-11-05 14:32:45', 'Tiago Gonçalves (Tiago Gonçalves)', 9999),
-(344, 37, 'DateTime', 'DTT', NULL, NULL, NULL, '2010-11-05 10:47:07', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(345, 37, 'Description', 'TXT', NULL, NULL, NULL, '2010-11-05 10:58:49', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(346, 37, 'IP', 'STR', 15, NULL, NULL, '2010-11-05 11:05:00', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(347, 37, 'Browser', 'LST', NULL, NULL, 'IE6=Internet Explorer 6|IE7=Internet Explorer 7|IE8=Internet Explorer 8|CHR=Chrome|FFX=Firefox|OPR=Opera|SAF=Safari|000=Não Identificado', '2010-11-05 11:50:49', 'Tiago Gonçalves (Tiago Gonçalves)', 9999),
-(348, 37, 'OS', 'LST', NULL, NULL, 'ADN=Andróid|BKB=BlackBerry|IPH=iPhone|PLM=Palm|LNX=linux|MCT=Macintosh|WIN=Windows|000=Brower não identificado', '2010-11-05 11:52:24', 'Tiago Gonçalves (Tiago Gonçalves)', 9999),
-(361, 2, 'Order', 'INT', NULL, NULL, NULL, '2010-11-17 14:04:23', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999),
-(395, 41, 'File', 'STR', 50, NULL, NULL, '2010-12-06 18:12:09', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL),
-(396, 41, 'Module', 'TAB', NULL, 8, NULL, '2010-12-06 18:12:22', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL),
-(397, 41, 'Published', 'BOL', NULL, NULL, NULL, '2010-12-06 18:12:33', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL),
-(398, 41, 'Title', 'STR', 50, NULL, NULL, '2010-12-06 18:12:48', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL),
-(399, 41, 'Type', 'LST', NULL, NULL, 'PDF=Documento em PDF|XLS=Planilha Excel', '2010-12-06 18:13:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL),
-(611, 8, 'Icon', 'STR', 50, NULL, NULL, '2013-06-07 00:16:00', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999);
+INSERT INTO `sysTableFields` (`ID`, `Table`, `Name`, `Type`, `Length`, `TableLink`, `ListValues`, `LastUpdate`, `LastUserName`, `Order`, `Lang`) VALUES
+(11, 1, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(12, 1, 'IsSystem', 'BOL', 1, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(13, 2, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(14, 2, 'Type', 'LST', 3, NULL, 'STR=String|INT=Inteiro|NUM=Numero Decimal|BOL=Lógico|TAB=Tabela|LST=Lista|DTA=Data|DTT=Data e Hora|TXT=Texto|IMG=Imagem|FIL=Arquivo', '2010-09-21 10:55:28', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(15, 2, 'Length', 'INT', 11, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(16, 2, 'TableLink', 'TAB', 11, 1, NULL, NULL, NULL, 9999, 'pt-br'),
+(17, 3, 'FromTable', 'TAB', 11, 1, NULL, NULL, NULL, 9999, 'pt-br'),
+(18, 3, 'FromField', 'TAB', 11, 2, NULL, NULL, NULL, 9999, 'pt-br'),
+(19, 3, 'ToTable', 'TAB', 11, 1, NULL, NULL, NULL, 9999, 'pt-br'),
+(37, 3, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(48, 6, 'Name', 'STR', 100, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(55, 8, 'Name', 'STR', 30, NULL, NULL, '2010-07-26 16:13:28', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(56, 8, 'Path', 'STR', 30, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(57, 8, 'Actived', 'BOL', 1, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(58, 9, 'Module', 'TAB', 11, 8, NULL, NULL, NULL, 9999, 'pt-br'),
+(59, 9, 'Name', 'STR', 100, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(60, 9, 'Order', 'INT', 0, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(61, 9, 'Actived', 'BOL', 1, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(62, 9, 'File', 'STR', 50, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(63, 9, 'Grouper', 'STR', 50, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(64, 1, 'Comment', 'STR', 60, NULL, NULL, '2010-07-26 15:17:36', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(65, 8, 'Description', 'STR', 50, NULL, NULL, '2010-07-22 11:50:42', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(137, 24, 'Name', 'STR', 100, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(138, 24, 'Mail', 'STR', 30, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(139, 24, 'Password', 'PSW', 10, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(140, 24, 'Group', 'TAB', NULL, 6, NULL, NULL, NULL, 9999, 'pt-br'),
+(142, 24, 'Developer', 'BOL', NULL, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
+(229, 2, 'ListValues', 'STR', 500, NULL, NULL, '2010-10-06 10:07:00', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(305, 24, 'Actived', 'BOL', NULL, NULL, NULL, '2010-10-25 16:39:58', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(337, 34, 'User', 'TAB', NULL, 24, NULL, '2010-11-03 16:17:14', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(338, 34, 'Group', 'TAB', NULL, 6, NULL, '2010-11-03 16:17:28', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(339, 36, 'Module', 'TAB', NULL, 8, NULL, '2010-11-04 14:51:23', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(340, 36, 'Group', 'TAB', NULL, 6, NULL, '2010-11-04 14:51:41', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(341, 37, 'UserName', 'STR', 100, NULL, NULL, '2010-11-05 10:43:58', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(342, 37, 'UserMail', 'STR', 50, NULL, NULL, '2010-11-05 10:44:10', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(343, 37, 'Action', 'LST', NULL, NULL, 'LOG=Login|NEW=Inseriu novo Registro|EDT=Editou um Registro|DEL=Excluiu um Registro', '2010-11-05 14:32:45', 'Tiago Gonçalves (Tiago Gonçalves)', 9999, 'pt-br'),
+(344, 37, 'DateTime', 'DTT', NULL, NULL, NULL, '2010-11-05 10:47:07', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(345, 37, 'Description', 'TXT', NULL, NULL, NULL, '2010-11-05 10:58:49', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(346, 37, 'IP', 'STR', 15, NULL, NULL, '2010-11-05 11:05:00', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(347, 37, 'Browser', 'LST', NULL, NULL, 'IE6=Internet Explorer 6|IE7=Internet Explorer 7|IE8=Internet Explorer 8|CHR=Chrome|FFX=Firefox|OPR=Opera|SAF=Safari|000=Não Identificado', '2010-11-05 11:50:49', 'Tiago Gonçalves (Tiago Gonçalves)', 9999, 'pt-br'),
+(348, 37, 'OS', 'LST', NULL, NULL, 'ADN=Andróid|BKB=BlackBerry|IPH=iPhone|PLM=Palm|LNX=linux|MCT=Macintosh|WIN=Windows|000=Brower não identificado', '2010-11-05 11:52:24', 'Tiago Gonçalves (Tiago Gonçalves)', 9999, 'pt-br'),
+(361, 2, 'Order', 'INT', NULL, NULL, NULL, '2010-11-17 14:04:23', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br'),
+(395, 41, 'File', 'STR', 50, NULL, NULL, '2010-12-06 18:12:09', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL, 'pt-br'),
+(396, 41, 'Module', 'TAB', NULL, 8, NULL, '2010-12-06 18:12:22', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL, 'pt-br'),
+(397, 41, 'Published', 'BOL', NULL, NULL, NULL, '2010-12-06 18:12:33', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL, 'pt-br'),
+(398, 41, 'Title', 'STR', 50, NULL, NULL, '2010-12-06 18:12:48', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL, 'pt-br'),
+(399, 41, 'Type', 'LST', NULL, NULL, 'PDF=Documento em PDF|XLS=Planilha Excel', '2010-12-06 18:13:15', 'Tiago Gonçalves (tiago@novabrazil.art.br)', NULL, 'pt-br'),
+(611, 8, 'Icon', 'STR', 50, NULL, NULL, '2013-06-07 00:16:00', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 9999, 'pt-br');
 
 -- ------------------------------------------------------------
 --
@@ -323,18 +324,18 @@ CREATE TABLE IF NOT EXISTS `sysTables` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela que gerencia tabelas do Sistema' AUTO_INCREMENT=42 ;
 
-INSERT INTO `sysTables` (`ID`, `Name`, `IsSystem`, `Comment`, `LastUpdate`, `LastUserName`) VALUES
-(1, 'sysTables', 'Y', 'Gerencia Tabelas do Framework', '2010-07-21 09:37:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(2, 'sysTableFields', 'Y', 'Gerencia Campos de Tabela', '2010-07-21 09:36:20', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(3, 'sysTableConstrains', 'Y', 'Gerencia links entre as tabelas (Constrains)', '2010-07-19 18:00:41', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(6, 'sysAdminGroups', 'Y', 'Grupo de Segurança do Administrator', '2010-07-21 14:24:59', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(8, 'sysModules', 'Y', 'Gerencia Módulos do Sistema', '2010-07-21 14:24:59', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(9, 'sysModuleFolders', 'Y', 'Gerencia Pastas de determinado Módulo do Sistema', '2010-07-21 14:24:59', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(24, 'sysAdminUsers', 'Y', 'Gerencia Usuários do Sistema', '2010-07-30 14:53:30', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(34, 'sysAdminUsersGroups', 'Y', 'Tabela de Ligação de sysAdminUsers e sysAdminGroups', '2010-11-03 16:16:53', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(36, 'sysModuleSecurityGroups', 'Y', 'Grupos de Segurança do Módulo', '2010-11-04 14:51:08', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(37, 'sysLogs', 'Y', 'Histórico de Ações no CMS', '2010-11-05 10:35:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)'),
-(41, 'sysModuleReports', 'Y', 'Relatórios dos Módulos', '2010-12-06 18:11:51', 'Tiago Gonçalves (tiago@novabrazil.art.br)');
+INSERT INTO `sysTables` (`ID`, `Name`, `IsSystem`, `Comment`, `LastUpdate`, `LastUserName`, `Lang`) VALUES
+(1, 'sysTables', 'Y', 'Gerencia Tabelas do Framework', '2010-07-21 09:37:37', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(2, 'sysTableFields', 'Y', 'Gerencia Campos de Tabela', '2010-07-21 09:36:20', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(3, 'sysTableConstrains', 'Y', 'Gerencia links entre as tabelas (Constrains)', '2010-07-19 18:00:41', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(6, 'sysAdminGroups', 'Y', 'Grupo de Segurança do Administrator', '2010-07-21 14:24:59', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(8, 'sysModules', 'Y', 'Gerencia Módulos do Sistema', '2010-07-21 14:24:59', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(9, 'sysModuleFolders', 'Y', 'Gerencia Pastas de determinado Módulo do Sistema', '2010-07-21 14:24:59', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(24, 'sysAdminUsers', 'Y', 'Gerencia Usuários do Sistema', '2010-07-30 14:53:30', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(34, 'sysAdminUsersGroups', 'Y', 'Tabela de Ligação de sysAdminUsers e sysAdminGroups', '2010-11-03 16:16:53', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(36, 'sysModuleSecurityGroups', 'Y', 'Grupos de Segurança do Módulo', '2010-11-04 14:51:08', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(37, 'sysLogs', 'Y', 'Histórico de Ações no CMS', '2010-11-05 10:35:18', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br'),
+(41, 'sysModuleReports', 'Y', 'Relatórios dos Módulos', '2010-12-06 18:11:51', 'Tiago Gonçalves (tiago@novabrazil.art.br)', 'pt-br');
 
 -- ------------------------------------------------------------
 --
@@ -374,12 +375,12 @@ CREATE TABLE IF NOT EXISTS `sysParams` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Cadastro de Parâmetros' AUTO_INCREMENT=5;
 
-INSERT INTO `sysParams` (`ID`, `LastUpdate`, `LastUserName`, `Nome`, `Tipo`, `Valor`, `Identificador`, `Agrupador`) VALUES
-(1,'2013-09-24 13:49:57','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Título','STR','Título do Site','SITE_TITULO','CMS'),
-(2,'2013-09-24 13:50:20','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Descrição','STR','Descrição do Site','SITE_DESCRICAO','CMS'),
-(3,'2013-09-24 13:50:09','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Tags','STR','tag1, tag2, tag3','SITE_TAGS','CMS'),
-(4,'2013-09-24 14:41:37','Tihh Gonçalves (tiago@novabrazil.art.br)','Endereço (exibido no Rodapé do Site)','TXT','Rua João da Silva, 123\r\nBlumenau - SC - Bairro Velha ','CNT_ENDERECO','SIT'),
-(5,'2013-09-24 15:40:53','Tihh Gonçalves (tiago@novabrazil.art.br)','E-mail de Contato','STR','contato@meusite.com.br','CNT_EMAIL','SIT');
+INSERT INTO `sysParams` (`ID`, `LastUpdate`, `LastUserName`, `Nome`, `Tipo`, `Valor`, `Identificador`, `Agrupador`, `Lang`) VALUES
+(1,'2013-09-24 13:49:57','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Título','STR','Título do Site','SITE_TITULO','CMS', 'pt-br'),
+(2,'2013-09-24 13:50:20','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Descrição','STR','Descrição do Site','SITE_DESCRICAO','CMS', 'pt-br'),
+(3,'2013-09-24 13:50:09','Tihh Gonçalves (tiago@novabrazil.art.br)','Site - Tags','STR','tag1, tag2, tag3','SITE_TAGS','CMS', 'pt-br'),
+(4,'2013-09-24 14:41:37','Tihh Gonçalves (tiago@novabrazil.art.br)','Endereço (exibido no Rodapé do Site)','TXT','Rua João da Silva, 123\r\nBlumenau - SC - Bairro Velha ','CNT_ENDERECO','SIT', 'pt-br'),
+(5,'2013-09-24 15:40:53','Tihh Gonçalves (tiago@novabrazil.art.br)','E-mail de Contato','STR','contato@meusite.com.br','CNT_EMAIL','SIT', 'pt-br');
 
 -- ------------------------------------------------------------
 -- ------------------------------------------------------------

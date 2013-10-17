@@ -106,7 +106,6 @@ $code .= "\r\n";
 
 $code .= '/** Configurações de Roteador (de links) **/' . "\r\n";
 $code .= '  $GLOBALS["ROUTER_LINKMASK"]        = "index.php?url=";' . "\r\n";
-$code .= '  $GLOBALS["ROUTER_SHOWLANGUAGE"]    = false;' . "\r\n";
 
 $code .= "\r\n";
 $code .= "\r\n";
@@ -135,6 +134,7 @@ $code .= '  $GLOBALS["ADMIN_IMAGES_URL"]       = $ADMIN_URL   . "images/";' . "\
 $code .= '  $GLOBALS["ADMIN_FUNCTIONS_PATH"]   = $ADMIN_PATH  . "functions/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_UPLOAD_PATH"]      = $ROOT_PATH  . "site/uploads/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_UPLOAD_URL"]       = $ROOT_URL   . "site/uploads/";' . "\r\n";
+$code .= '  $GLOBALS["ADMIN_LANGS_PATH"]      = $ROOT_PATH   . "site/langs/";' . "\r\n";
 
 $code .= "\r\n";
 $code .= "\r\n";
@@ -164,7 +164,7 @@ $code .= '  /** Configurações de e-mail **/' . "\r\n";
 $code .= '  $email                             = array();' . "\r\n";
 $code .= '  $email["FROMNAME"]                 = "' . $_POST["emailnomeremetente"] . '";' . "\r\n";
 $code .= '  $email["FROM"]                     = "' . $_POST["emailremetente"] . '";' . "\r\n";
-$code .= '  $email["SENDTYPE"]               = "' . $_POST["emailenvio"] . '";' . "\r\n";
+$code .= '  $email["SENDTYPE"]                 = "' . $_POST["emailenvio"] . '";' . "\r\n";
 $code .= '  $email["CC"]                       = "";' . "\r\n";
 $code .= '  $email["CCO"]                      = "";' . "\r\n";
 $code .= '  $email["SMTPHOST"]                 = "' . $_POST["emailsmtphost"] . '";' . "\r\n";
@@ -172,7 +172,22 @@ $code .= '  $email["SMTPUSER"]                 = "' . $_POST["emailsmtpusuario"]
 $code .= '  $email["SMTPPASS"]                 = "' . $_POST["emailsmtpsenha"] . '";' . "\r\n";
 $code .= '  $email["SMTPSECURE"]               = "' . $_POST["emailsmtpseguranca"] . '";    //ssl tls (ou deixe em branco)' . "\r\n";
 $code .= '  $email["SMTPPORT"]                 = "' . $_POST["emailsmtpporta"] . '";' . "\r\n";
-$code .= '  $GLOBALS["EMAIL_CONFIG"]             = $email;' . "\r\n";
+$code .= '  $GLOBALS["EMAIL_CONFIG"]           = $email;' . "\r\n";
+
+$code .= "\r\n";
+$code .= "\r\n";
+
+$code .= '  /** Configurações de idiomas **/' . "\r\n";
+$code .= '  $idiomas                           = array();' . "\r\n";
+$code .= '  $idiomas["activated"]              = array("pt-br");' . "\r\n";
+$code .= '  $idiomas["default"]                = "pt-br";' . "\r\n";
+$code .= '  $GLOBALS["LANGS_ADMIN"]            = $idiomas;' . "\r\n";
+
+$code .= "\r\n";
+$code .= '  $idiomas                           = array();' . "\r\n";
+$code .= '  $idiomas["activated"]              = array("pt-br");' . "\r\n";
+$code .= '  $idiomas["default"]                = "pt-br";' . "\r\n";
+$code .= '  $GLOBALS["LANGS_FRONT"]            = $idiomas;' . "\r\n";
 
 $code .= "\r\n";
 $code .= "\r\n";
@@ -215,6 +230,7 @@ mkdir('../cms/cache/', 0777, true);
 mkdir('../cms/temp', 0777, true);
 mkdir('../site/uploads', 0777, true);
 mkdir('../site/uploads/ckeditor', 0777, true);
+mkdir('../site/langs', 0777, true);
 
 //Instalação concluida
 $_SESSION['installStatus'] = true;

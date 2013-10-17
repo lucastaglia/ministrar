@@ -720,6 +720,7 @@ class nbrAdminForms {
     $hub->SetParam('_modulePath', $hub->GetParam('_modulePath'));
     $hub->SetParam('fileMacro', $hub->GetParam('fileMacro'));
     $hub->SetParam('LkpMultselects', implode(',', $this->LkpMultselects));
+    $hub->SetParam('_languages',$hub->GetParam('_languages'));
     
     //urls de submissão de fomrulário...
     $html .= '<script type="text/javascript">' . "\r\n";
@@ -838,10 +839,10 @@ class nbrAdminForms {
      */
     if($this->recordOpened){
       $lastUpdate = new nbrDate($this->record->LastUpdate, ENUM_DATE_FORMAT::YYYY_MM_DD_HH_II_SS);
-      $html .= '<span id="devenv">Você está editando o registro <u>' . $this->record->ID . '</u> da tabela <u>' . $this->tableName . '</u>.</span>' . "\r\n";
+      $html .= '<span id="devenv">' . sprintf(__('Você está editando o registro <u>%s</u> da tabela <u>%s</u>.'), $this->record->ID, $this->tableName) . '</span>' . "\r\n";
       $html .= '<span id="devenv">Este registro foi atualizado pela última vez em <u>' . $lastUpdate->GetFullDateForShorten() . '</u> às <u>' . $lastUpdate->GetDate('H:i') . '</u> por <u>' . utf8_encode($this->record->LastUserName) . '</u>.</span>' . "\r\n";
     } else
-      $html .= '<span id="devenv">Você está inserindo um novo registro na tabela ' . $this->tableName . '</span>' . "\r\n";
+      $html .= '<span id="devenv">' . sprintf(__('Você está inserindo um novo registro na tabela %s.'), $this->tableName). '</span>' . "\r\n";
 
     echo($html);
   }

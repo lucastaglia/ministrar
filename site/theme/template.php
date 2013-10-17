@@ -43,7 +43,7 @@ $page->printHeader();
 	<!-- CONTEUDO - FIM -->   
 </div>
 
-<div id="footer">Copyright 2013 - Este site utiliza o CMS Ministrar2</div>
+<div id="footer">Copyright 2013 - <?= __('Este site utiliza o CMS Ministrar2'); ?></div>
 
 </body>
 </html>
