@@ -11,6 +11,7 @@
 
 CREATE TABLE IF NOT EXISTS `sysAdminGroups` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Name` varchar(100) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
@@ -34,6 +35,7 @@ INSERT INTO `sysAdminGroups` (`ID`, `Name`, `LastUpdate`, `LastUserName`) VALUES
 
 CREATE TABLE IF NOT EXISTS `sysAdminUsers` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Name` varchar(100) DEFAULT NULL,
   `Mail` varchar(30) DEFAULT NULL,
   `Password` char(32) DEFAULT NULL,
@@ -58,6 +60,7 @@ INSERT INTO `sysAdminUsers` (`ID`, `Name`, `Mail`, `Password`, `Group`, `LastAcc
 
 CREATE TABLE IF NOT EXISTS `sysAdminUsersGroups` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   `User` int(11) DEFAULT NULL,
@@ -80,6 +83,7 @@ INSERT INTO `sysAdminUsersGroups` (`ID`, `LastUpdate`, `LastUserName`, `User`, `
 
 CREATE TABLE IF NOT EXISTS `sysLogs` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   `UserName` varchar(100) DEFAULT NULL,
@@ -101,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `sysLogs` (
 
 CREATE TABLE IF NOT EXISTS `sysModuleFolders` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Module` int(11) DEFAULT NULL,
   `Name` varchar(100) DEFAULT NULL,
   `Order` int(11) DEFAULT NULL,
@@ -134,6 +139,7 @@ INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Groupe
 
 CREATE TABLE IF NOT EXISTS `sysModuleReports` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   `File` varchar(50) DEFAULT NULL,
@@ -153,6 +159,7 @@ CREATE TABLE IF NOT EXISTS `sysModuleReports` (
 
 CREATE TABLE IF NOT EXISTS `sysModules` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Name` varchar(30) DEFAULT NULL,
   `Path` varchar(30) DEFAULT NULL,
   `Actived` char(1) DEFAULT NULL,
@@ -176,6 +183,7 @@ INSERT INTO `sysModules` (`ID`, `Name`, `Path`, `Actived`, `LastUpdate`, `LastUs
 
 CREATE TABLE IF NOT EXISTS `sysModuleSecurityGroups` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   `Module` int(11) DEFAULT NULL,
@@ -201,6 +209,7 @@ INSERT INTO `sysModuleSecurityGroups` (`ID`, `LastUpdate`, `LastUserName`, `Modu
 
 CREATE TABLE IF NOT EXISTS `sysTableConstrains` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Name` varchar(50) NOT NULL,
   `FromTable` int(11) NOT NULL,
   `FromField` int(11) NOT NULL,
@@ -233,6 +242,7 @@ INSERT INTO `sysTableConstrains` (`ID`, `Name`, `FromTable`, `FromField`, `ToTab
 
 CREATE TABLE IF NOT EXISTS `sysTableFields` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Table` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
   `Type` char(3) NOT NULL,
@@ -304,6 +314,7 @@ INSERT INTO `sysTableFields` (`ID`, `Table`, `Name`, `Type`, `Length`, `TableLin
 
 CREATE TABLE IF NOT EXISTS `sysTables` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `Name` varchar(50) NOT NULL,
   `IsSystem` char(1) NOT NULL,
   `Comment` varchar(60) DEFAULT NULL,
@@ -332,6 +343,7 @@ INSERT INTO `sysTables` (`ID`, `Name`, `IsSystem`, `Comment`, `LastUpdate`, `Las
 
 CREATE TABLE IF NOT EXISTS `sysPlugins` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   `Name` varchar(50) DEFAULT NULL,
@@ -351,6 +363,7 @@ CREATE TABLE IF NOT EXISTS `sysPlugins` (
 
 CREATE TABLE IF NOT EXISTS `sysParams` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Lang` varchar(10) DEFAULT NULL,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   `Nome` varchar(100) DEFAULT NULL,

@@ -37,6 +37,7 @@ function macroBeforePost($tableName, $id){
     //Cria tabela Fisicamente..
     $sql  = 'CREATE TABLE `' . $tableName . '` (' . "\r\n";
     $sql .= '  `ID` int(11) NOT NULL AUTO_INCREMENT,' . "\r\n";
+    $sql .= '  `Lang` varchar(10) DEFAULT NULL,' . "\r\n";
     $sql .= '  `LastUpdate` datetime DEFAULT NULL,' . "\r\n";
     $sql .= '  `LastUserName` varchar(50) DEFAULT NULL,' . "\r\n";
     $sql .= '  PRIMARY KEY (`ID`)' . "\r\n";
