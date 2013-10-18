@@ -96,6 +96,7 @@ foreach ($modules as $module) {
   $hub->SetParam('_page', $module->file);
   $hub->SetParam('_moduleID', $module->ID);
   $hub->SetParam('_folderID', $module->folderID);
+  $hub->SetParam('_languages', ($module->MultiLanguages != 'N'?'Y':'N'));
   $hub->SetParam('_title'   , $module->name);
   $hub->SetParam('_description', 'Módulo ' . $module->name);
   
@@ -213,7 +214,7 @@ if($hub->ExistParam('_moduleID')){
   if($hub->GetParam('_languages') == 'Y'){
   ?>
   <div id="flags">
-  	<span>Seleciona o idioma que deseja salvar os registros:</span>
+  	<span>Selecione o idioma que deseja visualizar/salvar os registros:</span>
   <ul>
   <?  
 	  foreach ($langs_front['activated'] as $flag) {

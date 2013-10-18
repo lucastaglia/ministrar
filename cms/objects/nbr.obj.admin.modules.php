@@ -66,12 +66,13 @@ class nbrModule{
   public $file;
   public $folderID;
   public $folderName;
+  public $MultiLanguages;
 
   function __construct($reg){
     global $MODULES_URL, $MODULES_PATH, $db, $hub, $ROOT_URL;
     
     //Seleciona a Primeira Pasta..
-    $sql  = 'SELECT sysModuleFolders.*, sysModules.Path, sysModuleFolders.ID folderID, sysModuleFolders.Name folderName FROM sysModuleFolders';
+    $sql  = 'SELECT sysModuleFolders.*, sysModules.Path, sysModuleFolders.ID folderID, sysModuleFolders.Name folderName, sysModuleFolders.MultiLanguages MultiLanguages FROM sysModuleFolders';
     $sql .= " LEFT JOIN sysModules ON(sysModules.ID = sysModuleFolders.Module)";
     $sql .= " WHERE sysModuleFolders.Actived = 'Y' AND sysModuleFolders.Module = " . $reg->ID;
     $sql .= ' ORDER BY sysModuleFolders.`Order` ASC';
@@ -83,16 +84,17 @@ class nbrModule{
     $link = $MODULES_PATH . $pasta->Path . '/' . $pasta->File;    
     
     //Carrega propriedades...
-    $this->ID          = utf8_encode($reg->ID);
-    $this->name        = utf8_encode($reg->Name);
-    $this->description = utf8_encode($reg->Description);
-    $this->folderPath  = utf8_encode($reg->Path) . '/';
-    $this->file        = $link;
-    $this->path        = $MODULES_PATH . utf8_encode($reg->Path) . '/';
-    $this->url         = $MODULES_URL . utf8_encode($reg->Path) . '/';
-    $this->iconPath    = $ROOT_URL . 'cms/icons/' . utf8_encode($reg->Icon);
-    $this->folderID    = $pasta->folderID;
-    $this->folderName  = utf8_encode($pasta->folderName);
+    $this->ID          			= utf8_encode($reg->ID);
+    $this->name        			= utf8_encode($reg->Name);
+    $this->description 			= utf8_encode($reg->Description);
+    $this->folderPath  			= utf8_encode($reg->Path) . '/';
+    $this->file        			= $link;
+    $this->path        			= $MODULES_PATH . utf8_encode($reg->Path) . '/';
+    $this->url         			= $MODULES_URL . utf8_encode($reg->Path) . '/';
+    $this->iconPath    			= $ROOT_URL . 'cms/icons/' . utf8_encode($reg->Icon);
+    $this->folderID    			= $pasta->folderID;
+    $this->folderName  			= utf8_encode($pasta->folderName);
+    $this->MultiLanguages  		= utf8_encode($pasta->MultiLanguages);
   }
 
   /**
