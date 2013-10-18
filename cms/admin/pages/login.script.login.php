@@ -10,6 +10,10 @@ if($login === true){
   $hub->SetParam('_page',  $ADMIN_PAGES_PATH . 'admin.index.php');
   $hub->SetParam('_title', 'Bem vindo');
   $link = $hub->GetUrl();
+
+	//seta idioma do Admin...
+	$langs->SetLanguage($_POST['lang']);
+  
 } else {
  $hub->SetParam('_script', $ADMIN_PAGES_PATH . 'login.pg.php');
  $hub->SetParam('mail', $mail);

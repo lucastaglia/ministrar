@@ -109,7 +109,7 @@ foreach ($modules as $module) {
   <li <?= $class; ?>>
     <a title="<?= $module->description; ?>" href="<?= $hub->GetUrl(); ?>">
       <div class="name" style="background-image:url(<?= $module->iconPath; ?>); ">
-        <span><?= $module->name; ?></span>
+        <span><?= __($module->name); ?></span>
       </div>
     </a>
   </li>
@@ -119,7 +119,7 @@ foreach ($modules as $module) {
 </ul>
 </div>
 <div id="escondeToolbar">
-  <div id="painel"><a href="javascript:void(0);">mais módulos</a></div>
+  <div id="painel"><a href="javascript:void(0);"><?= __('mais módulos'); ?></a></div>
 </div>
 <!-- CONTEUDO - INICIO -->
 <div id="content">
@@ -159,7 +159,7 @@ if($hub->ExistParam('_moduleID')){
     $link = $hub->GetUrl();
     
     echo('<li ' . (($hub->GetParam('_folderID') == $folder->ID)?'class="selected"':null) . '>');
-    echo('<a href="' . $link . '"><span>' . utf8_encode($folder->Name) . '</span></a>');
+    echo('<a href="' . $link . '"><span>' . __(utf8_encode($folder->Name)) . '</span></a>');
     echo('</li>');
     
   }
@@ -214,16 +214,22 @@ if($hub->ExistParam('_moduleID')){
   if($hub->GetParam('_languages') == 'Y'){
   ?>
   <div id="flags">
-  	<span>Selecione o idioma que deseja visualizar/salvar os registros:</span>
+  	<span><?= __('Selecione o idioma que deseja visualizar/salvar os registros:'); ?></span>
   <ul>
   <?  
 	  foreach ($langs_front['activated'] as $flag) {
+	  	
+	  	$sql  = 'SELECT * FROM syslanguages';
+	  	$sql .= " WHERE Identificador = '$flag'";
+	  	
+	  	$db_flags = $db->LoadObjects($sql);
+	  	$dv_flag = $db_flags[0];
 	  	
 	  	$hub->SetParam('_page', $ADMIN_PAGES_PATH . 'langs.php');
 	  	$hub->SetParam('lang', $flag);
   ?>
   <li <?= ($flag == $_SESSION['lang_admin'])?'class="selected"':null; ?>>
-  	<a href="<?= $hub->GetUrl(); ?>" title="<?= sprintf(__('Alterar idioma dos cadastros para: %s'), $flag); ?>">
+  	<a href="<?= $hub->GetUrl(); ?>" title="<?= sprintf(__('Alterar idioma dos cadastros para: %s'), utf8_encode($dv_flag->Nome)); ?>">
   		<img src="<?= $ADMIN_URL . 'flags/' . $flag ?>.gif" width="18" height="12">
   	</a>
   </li>

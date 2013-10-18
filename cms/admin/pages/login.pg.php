@@ -9,8 +9,8 @@
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui//nbrazil-cms/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
 
 <!-- Plugins Jquery -->
-<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/jquery-1.4.2.min.js" type="text/javascript"></script>
-<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>login.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -24,6 +24,18 @@
     <form id="login" action="<?= $hub->GetUrl() ?>" enctype="multipart/form-data" method="post">
         <input name="mail" type="text" value="<?= $hub->GetParam('mail'); ?>" />
         <input name="password" maxlength="20" type="password" />
+        
+        <input type="hidden" name="lang" id="lang" value="<?= $langs->default; ?>">
+        <ul id="flags">
+        	<?
+        	foreach ($langs->languages as $flag) {
+        	?>
+        	<li class="<?= ($flag == $langs->language)?'selected':null; ?>" lang="<?= $flag; ?>" ><img src="flags/<?= $flag; ?>_admin.gif" width="29" height="20"></li>
+        	<?
+			}
+        	?>
+        </ul>
+        
       <input name="" id="btn" type="image" src="images/login_btn_entrar.png" />
     </form>
     <?

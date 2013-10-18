@@ -440,12 +440,7 @@ function executeLkpMultselects(){
     $fields = $hub->GetParam('LkpMultselects');
     
     //Se só tiver 1 campo (e não vir em array) joga em um array...
-    if(!is_array($fields)){
-      $ar[0] = $fields;
-      $fields = $ar;
-    } else {
-      $fields = explode(',', $fields);  
-    }
+    $fields = explode(',', $fields);  
     
     foreach ($fields as $field) {
   

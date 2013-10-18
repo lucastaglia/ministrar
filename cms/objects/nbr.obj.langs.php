@@ -88,7 +88,7 @@ class nbrLangs{
 			$txt = '$l["'  . $id . '"] = "' . $id .'";' . "\r\n";
 			//excreve no arquivo
 			fwrite($this->file_handle, $txt);	
-			
+			$this->words[$id] = $id;
 			return $id;
 			
 		} else {
