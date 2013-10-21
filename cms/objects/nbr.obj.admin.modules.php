@@ -27,11 +27,22 @@ class nbrModules{
   }
   
   public function Load(){
-    global $db, $security;
+    global $db, $security, $langs;
+    
+    //Grupos disponíveis neste idioma...
+    $sql  = 'SELECT Modulo FROM sysModulesLanguages';
+    $sql .= " WHERE Idioma = " . $langs->getID();
+    $res = $db->LoadObjects($sql);
+    
+    $modulos = array();
+    foreach ($res as $reg) {
+    	$modulos[] = $reg->Modulo;
+    }
     
     //Grupos de Segurança...
     $sql  = 'SELECT `Group` FROM sysAdminUsersGroups';
     $sql .= ' WHERE `User` = ' . $security->GetUserID();
+    
     $res = $db->LoadObjects($sql);
     
     $groups = array();
@@ -42,9 +53,10 @@ class nbrModules{
     //Módulos..
     $sql  = 'SELECT sysModules.* FROM sysModuleSecurityGroups';
     $sql .= ' JOIN sysModules ON(sysModules.ID = sysModuleSecurityGroups.Module)';
-    $sql .= ' WHERE sysModules.Actived = \'Y\' AND sysModuleSecurityGroups.`Group` IN(' . implode(',', $groups) . ')';
+    $sql .= ' WHERE sysModules.Actived = \'Y\' AND sysModuleSecurityGroups.`Group` IN(' . implode(',', $groups) . ') AND sysModules.ID IN(' . implode(', ', $modulos) . ')';
     $sql .= ' GROUP BY sysModuleSecurityGroups.`Module`';
     $sql .= ' ORDER BY sysModules.Name ASC';
+    
     $modules = $db->LoadObjects($sql);
     
     $a_modules = array();

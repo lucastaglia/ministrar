@@ -9,6 +9,7 @@ class nbrLangs{
 	
 	private $file_contents;
 	private $file_handle;
+	private $language_id = -1;
 	
 	function __construct($prefixo){
 		
@@ -36,6 +37,7 @@ class nbrLangs{
 	}
 	
 	public function SetLanguage($lang){
+		
 		$_SESSION['nbr_lang_' . $this->prefixo] = $lang;				
 		$this->language = $lang;
 		
@@ -93,6 +95,22 @@ class nbrLangs{
 			
 		} else {
 			return $this->words[$id];
+		}
+	}
+	
+	public function getID(){
+		global $db;
+		
+		if($this->language_id > 0)
+			return $this->language_id;
+		else {
+			
+			$sql  = 'SELECT ID FROM syslanguages';
+			$sql .= " WHERE Identificador = '" . $this->language . "'";
+			$ids = $db->LoadObjects($sql);
+			$id = $ids[0]->ID;
+			return $id;
+			
 		}
 	}
 	

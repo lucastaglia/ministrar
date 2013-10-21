@@ -64,6 +64,6 @@ function macroFromFields($fieldName, $record, $legend, $length, $columns, $value
       return $html;
     
   }
-  
+
 }
 ?>

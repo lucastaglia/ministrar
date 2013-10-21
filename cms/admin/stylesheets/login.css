@@ -126,3 +126,22 @@ div#box div#painel span#msg {
 #rodape a:hover{
 	text-decoration: underline;
 }
+#flags{
+	position: absolute;
+}
+#flags li{
+	float: left;
+	margin-right: 6px;
+	cursor: pointer;
+	
+	filter:alpha(opacity=25);
+	opacity: 0.25;
+	-moz-opacity:0.25;
+	-webkit-opacity:0.25;		
+}
+#flags li.selected{
+	filter:alpha(opacity=100);
+	opacity: 1;
+	-moz-opacity:1;
+	-webkit-opacity:1;
+}

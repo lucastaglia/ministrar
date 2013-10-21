@@ -864,4 +864,5 @@ div#flags ul li.selected{
 	filter:alpha(opacity=100);
 	opacity: 1;
 	-moz-opacity:1;
-	-webkit-opacity:1;}
+	-webkit-opacity:1;
+}

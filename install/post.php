@@ -51,7 +51,6 @@ if(!$db){
 ////AQUI RODARÁ SQL DE INSTALAÇÂO...
 mysql_close(); 
 
-
 /**
  * Criar config.php
  */
