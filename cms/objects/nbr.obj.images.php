@@ -151,11 +151,12 @@ class nbrImages
          //Verifica se tem que "cropar" ou manter proporção
          if($crop){
           $img_final = ImageCreateTrueColor($width, $height);
+
+                 
          } else {
-        
-          //$left = 0;
-          //$top = 0;
-           
+
+          $left = 0;
+          $top = 0;    
           if($bgForced == false){
             $img_final = ImageCreateTrueColor($n_width, $n_height);
           } else {
