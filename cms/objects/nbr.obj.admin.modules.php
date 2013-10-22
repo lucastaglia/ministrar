@@ -27,17 +27,9 @@ class nbrModules{
   }
   
   public function Load(){
-    global $db, $security, $langs;
+    global $db, $security;
     
-    //Grupos disponíveis neste idioma...
-    $sql  = 'SELECT Modulo FROM sysModulesLanguages';
-    $sql .= " WHERE Idioma = " . $langs->getID();
-    $res = $db->LoadObjects($sql);
-    
-    $modulos = array();
-    foreach ($res as $reg) {
-    	$modulos[] = $reg->Modulo;
-    }
+ 
     
     //Grupos de Segurança...
     $sql  = 'SELECT `Group` FROM sysAdminUsersGroups';
@@ -53,7 +45,7 @@ class nbrModules{
     //Módulos..
     $sql  = 'SELECT sysModules.* FROM sysModuleSecurityGroups';
     $sql .= ' JOIN sysModules ON(sysModules.ID = sysModuleSecurityGroups.Module)';
-    $sql .= ' WHERE sysModules.Actived = \'Y\' AND sysModuleSecurityGroups.`Group` IN(' . implode(',', $groups) . ') AND sysModules.ID IN(' . implode(', ', $modulos) . ')';
+    $sql .= ' WHERE sysModules.Actived = \'Y\' AND sysModuleSecurityGroups.`Group` IN(' . implode(',', $groups) . ')';
     $sql .= ' GROUP BY sysModuleSecurityGroups.`Module`';
     $sql .= ' ORDER BY sysModules.Name ASC';
     
@@ -125,6 +117,16 @@ class nbrModule{
     
     $module = new nbrModule($modules[0]);
     return $module;
+  }
+  
+  public function CheckLanguage($languadeID){
+    global $db;
+    
+    $sql  = 'SELECT COUNT(ID) TOTAL FROM sysModulesLanguages';
+    $sql .= " WHERE Modulo =" . $this->ID . " AND Idioma =" . $languadeID;
+    $res = $db->LoadObjects($sql);
+    
+    return ($res[0]->TOTAL > 0);
   }
 }
 ?>

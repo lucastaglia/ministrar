@@ -97,8 +97,10 @@ foreach ($modules as $module) {
   $hub->SetParam('_moduleID', $module->ID);
   $hub->SetParam('_folderID', $module->folderID);
   $hub->SetParam('_languages', ($module->MultiLanguages != 'N'?'Y':'N'));
+  $hub->SetParam('_setLanguage', 'Y');  
   $hub->SetParam('_title'   , $module->name);
   $hub->SetParam('_description', 'Módulo ' . $module->name);
+  $hub->SetParam('_languages', ($module->MultiLanguages != 'N'?'Y':'N'));
   
   //Duplica o último nível no Hub para mais um nível para o link da Pasta..
   $hub->levels[] = $hub->levels[count($hub->levels) -1];
@@ -211,22 +213,35 @@ if($hub->ExistParam('_moduleID')){
    * Bandeiras (idiomas)
    */
   
+  //verifica se pasta é controlada por idioma...
   if($hub->GetParam('_languages') == 'Y'){
   ?>
   <div id="flags">
   	<span><?= __('Selecione o idioma que deseja visualizar/salvar os registros:'); ?></span>
   <ul>
   <?  
-	  foreach ($langs_front['activated'] as $flag) {
-	  	
+  $primeiro = true;
+	  foreach ($langs_front['activated'] as $x=>$flag) {
+	    
 	  	$sql  = 'SELECT * FROM syslanguages';
 	  	$sql .= " WHERE Identificador = '$flag'";
 	  	
 	  	$db_flags = $db->LoadObjects($sql);
 	  	$dv_flag = $db_flags[0];
 	  	
-	  	$hub->SetParam('_page', $ADMIN_PAGES_PATH . 'langs.php');
-	  	$hub->SetParam('lang', $flag);
+	  	if($moduleObj->CheckLanguage($dv_flag->ID)){
+	  	  
+	  	  //Se é um click em Modulo seta o primeiro idioma
+  	    if($primeiro){
+  	      if($hub->GetParam('_setLanguage') == 'Y'){
+  	        
+  	        $_SESSION['lang_admin'] = $flag;
+  	        $primeiro = false;
+  	      }
+  	    }	  	  
+	  	
+  	  	$hub->SetParam('_page', $ADMIN_PAGES_PATH . 'langs.php');
+  	  	$hub->SetParam('lang', $flag);
   ?>
   <li <?= ($flag == $_SESSION['lang_admin'])?'class="selected"':null; ?>>
   	<a href="<?= $hub->GetUrl(); ?>" title="<?= sprintf(__('Alterar idioma dos cadastros para: %s'), utf8_encode($dv_flag->Nome)); ?>">
@@ -234,6 +249,7 @@ if($hub->ExistParam('_moduleID')){
   	</a>
   </li>
   <?	
+	  	}
 	  }
   ?>
   </ul>

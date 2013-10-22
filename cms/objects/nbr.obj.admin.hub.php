@@ -136,6 +136,15 @@ class nbrAdminHub{
     return null;
   }
   
+  public function RemoveParam($name){
+
+    if(count($this->levels) > 1){
+      $level =  count($this->levels) - 1;    
+    
+      unset($this->levels[$level][$name]);
+    }
+  }
+  
   /**
    * Verifica se existe parâmetro na Pilha..
    *

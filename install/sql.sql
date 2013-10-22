@@ -209,8 +209,8 @@ INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Groupe
 (7, 2, 'Usuários', 10, 'admin.usuarios.grid.php', 'Geral', 'Y', 'N', '2013-06-17 17:53:18','Instalador CMS', 'pt-br'),
 (8, 2, 'Grupos', 20, 'admin.grupos.grid.php', 'Geral', 'Y', 'N', '2013-06-17 17:53:18','Instalador CMS', 'pt-br'),
 (9,1,'Parâmetros',20,'admin.params.grid.php','Banco de Dados','Y','N', '2013-09-24 13:26:08','Instalador CMS', 'pt-br'),
-(10,3,'Do CMS',20,'admin.params.cms.grid.php','Geral','Y','Y', '2013-09-24 14:26:31','Instalador CMS', 'pt-br'),
-(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','Y', '2013-09-24 14:26:31','Instalador CMS', 'pt-br');
+(10,3,'Do CMS',20,'admin.params.cms.grid.php','Geral','Y','N', '2013-09-24 14:26:31','Instalador CMS', 'pt-br'),
+(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','N', '2013-09-24 14:26:31','Instalador CMS', 'pt-br');
 
 -- ------------------------------------------------------------
 
