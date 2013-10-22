@@ -29,6 +29,8 @@ $security->SecurityCheck();
 
 <!-- Plugins Jquery -->
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ckeditor/adapters/jquery.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.multiselect/ui.multiselect.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.validate/jquery.validate.js" type="text/javascript"></script>
@@ -46,8 +48,6 @@ $security->SecurityCheck();
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>grid.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>form.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>site.js" type="text/javascript"></script>
-<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ckeditor/ckeditor.js" type="text/javascript"></script>
-<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ckeditor/adapters/jquery.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>mousetrap.js" type="text/javascript"></script>
 
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ui.js" type="text/javascript"></script>

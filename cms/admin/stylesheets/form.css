@@ -614,3 +614,7 @@ div#formToolbar ul>li{
 #saveMenu{
 	position: absolute!important;
 }
+
+.cke_inner{
+  margin-left: 114px!important;
+}

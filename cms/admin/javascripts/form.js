@@ -18,27 +18,10 @@ function onlyInteger(dom){
 
 $(document).ready(function(){
 
-	var config = {
-		toolbar:
-		[
-		  ['Source'],
-		  ['Cut','Copy','Paste','PasteText','PasteFromWord'],
-		  
-			//['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
-			['Image'],
-			
-		  ['Bold','Italic','Underline','Strike','-','Styles', '-', 'Subscript','Superscript'],
-			['Print', 'SpellChecker', 'Scayt'],
-		  ['NumberedList','BulletedList','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-			['Link','Unlink','Anchor'],
-			
-			['Maximize', 'ShowBlocks']
-			
-		],
-		skin: 'kama',
-    resize_dir: 'vertical',
+
+var config = {
     filebrowserUploadUrl : 'javascripts/ckeditor/upload.php'
-	};
+    };
 
 	$('div#boxForm div.html textarea').ckeditor(config);
 });

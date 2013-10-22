@@ -1,6 +1,100 @@
-﻿/*
-Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.html or http://ckeditor.com/license
-*/
+﻿/**
+ * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+CKEDITOR.dialog.add( 'button', function( editor ) {
+	function commitAttributes( element ) {
+		var val = this.getValue();
+		if ( val ) {
+			element.attributes[ this.id ] = val;
+			if ( this.id == 'name' )
+				element.attributes[ 'data-cke-saved-name' ] = val;
+		} else {
+			delete element.attributes[ this.id ];
+			if ( this.id == 'name' )
+				delete element.attributes[ 'data-cke-saved-name' ];
+		}
+	}
 
-CKEDITOR.dialog.add('button',function(a){return{title:a.lang.button.title,minWidth:350,minHeight:150,onShow:function(){var d=this;delete d.button;var b=d.getParentEditor().getSelection().getSelectedElement();if(b&&b.getName()=='input'){var c=b.getAttribute('type');if(c=='button'||c=='reset'||c=='submit'){d.button=b;d.setupContent(b);}}},onOk:function(){var b,c=this.button,d=!c;if(d){b=this.getParentEditor();c=b.document.createElement('input');}if(d)b.insertElement(c);this.commitContent({element:c});},contents:[{id:'info',label:a.lang.button.title,title:a.lang.button.title,elements:[{id:'_cke_saved_name',type:'text',label:a.lang.common.name,'default':'',setup:function(b){this.setValue(b.getAttribute('_cke_saved_name')||b.getAttribute('name')||'');},commit:function(b){var c=b.element;if(this.getValue())c.setAttribute('_cke_saved_name',this.getValue());else{c.removeAttribute('_cke_saved_name');c.removeAttribute('name');}}},{id:'value',type:'text',label:a.lang.button.text,accessKey:'V','default':'',setup:function(b){this.setValue(b.getAttribute('value')||'');},commit:function(b){var c=b.element;if(this.getValue())c.setAttribute('value',this.getValue());else c.removeAttribute('value');}},{id:'type',type:'select',label:a.lang.button.type,'default':'button',accessKey:'T',items:[[a.lang.button.typeBtn,'button'],[a.lang.button.typeSbm,'submit'],[a.lang.button.typeRst,'reset']],setup:function(b){this.setValue(b.getAttribute('type')||'');},commit:function(b){var c=b.element;if(CKEDITOR.env.ie){var d=c.getAttribute('type'),e=this.getValue();if(e!=d){var f=CKEDITOR.dom.element.createFromHtml('<input type="'+e+'"></input>',a.document);c.copyAttributes(f,{type:1});f.replace(c);a.getSelection().selectElement(f);b.element=f;}}else c.setAttribute('type',this.getValue());}}]}]};});
+	return {
+		title: editor.lang.forms.button.title,
+		minWidth: 350,
+		minHeight: 150,
+		onShow: function() {
+			delete this.button;
+			var element = this.getParentEditor().getSelection().getSelectedElement();
+			if ( element && element.is( 'input' ) ) {
+				var type = element.getAttribute( 'type' );
+				if ( type in { button:1,reset:1,submit:1 } ) {
+					this.button = element;
+					this.setupContent( element );
+				}
+			}
+		},
+		onOk: function() {
+			var editor = this.getParentEditor(),
+				element = this.button,
+				isInsertMode = !element;
+
+			var fake = element ? CKEDITOR.htmlParser.fragment.fromHtml( element.getOuterHtml() ).children[ 0 ] : new CKEDITOR.htmlParser.element( 'input' );
+			this.commitContent( fake );
+
+			var writer = new CKEDITOR.htmlParser.basicWriter();
+			fake.writeHtml( writer );
+			var newElement = CKEDITOR.dom.element.createFromHtml( writer.getHtml(), editor.document );
+
+			if ( isInsertMode )
+				editor.insertElement( newElement );
+			else {
+				newElement.replace( element );
+				editor.getSelection().selectElement( newElement );
+			}
+		},
+		contents: [
+			{
+			id: 'info',
+			label: editor.lang.forms.button.title,
+			title: editor.lang.forms.button.title,
+			elements: [
+				{
+				id: 'name',
+				type: 'text',
+				label: editor.lang.common.name,
+				'default': '',
+				setup: function( element ) {
+					this.setValue( element.data( 'cke-saved-name' ) || element.getAttribute( 'name' ) || '' );
+				},
+				commit: commitAttributes
+			},
+				{
+				id: 'value',
+				type: 'text',
+				label: editor.lang.forms.button.text,
+				accessKey: 'V',
+				'default': '',
+				setup: function( element ) {
+					this.setValue( element.getAttribute( 'value' ) || '' );
+				},
+				commit: commitAttributes
+			},
+				{
+				id: 'type',
+				type: 'select',
+				label: editor.lang.forms.button.type,
+				'default': 'button',
+				accessKey: 'T',
+				items: [
+					[ editor.lang.forms.button.typeBtn, 'button' ],
+					[ editor.lang.forms.button.typeSbm, 'submit' ],
+					[ editor.lang.forms.button.typeRst, 'reset' ]
+					],
+				setup: function( element ) {
+					this.setValue( element.getAttribute( 'type' ) || '' );
+				},
+				commit: commitAttributes
+			}
+			]
+		}
+		]
+	};
+});
