@@ -43,7 +43,7 @@ function macroGridValues($field , $value, $record){
 
   if($field == 'CAMPOS'){
     
-    $sql  = 'SELECT COUNT(ID) TOTAL FROM systablefields';
+    $sql  = 'SELECT COUNT(ID) TOTAL FROM sysTableFields';
     $sql .= " WHERE  `Table` = " . $record->ID;
     $res = $db->LoadObjects($sql);
     return intval($res[0]->TOTAL);
