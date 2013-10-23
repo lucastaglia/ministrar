@@ -45,7 +45,7 @@ class nbrAdminForms {
           
     return $value;
   }
-  private function addField($type, $fieldName, $legend, $length, $columns, $valueDefault, $required, $readOnly, $height = -1, $options = null, $required_str = 'required', $fileType = null, $fileTypeDescritio = null){
+  private function addField($type, $fieldName, $legend, $length, $columns, $valueDefault, $required, $readOnly, $height = -1, $options = null, $required_str = 'required', $fileType = null, $fileTypeDescritio = null, $mask = null){
     global $ADMIN_IMAGES_URL, $ADMIN_UPLOAD_PATH, $hub,$ADMIN_PAGES_PATH, $ADMIN_UPLOAD_URL;
     
     //Traduz colunas...
@@ -61,7 +61,7 @@ class nbrAdminForms {
         $val = $this->getValue($fieldName, $valueDefault);
         $html  = '<div id="' . $fieldName . '" class="field string ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '"></input>' . "\r\n";
+        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . '></input>' . "\r\n";
         $html .= '</div>' . "\r\n";   
         $this->fieldsName[] = $fieldName; 		
     		break;
@@ -409,8 +409,8 @@ class nbrAdminForms {
    * @param boolean $required
    * @param boolean $readOnly
    */
-  public function AddFieldString($fieldName, $legend, $length, $columns, $valueDefault = null, $required = true, $readOnly = false, $validateType = 'required'){
-    $this->addField('STR', $fieldName, $legend, $length, $columns, $valueDefault, $required, $readOnly, -1, null, $validateType);
+  public function AddFieldString($fieldName, $legend, $length, $columns, $valueDefault = null, $required = true, $readOnly = false, $validateType = 'required', $mask = null){
+    $this->addField('STR', $fieldName, $legend, $length, $columns, $valueDefault, $required, $readOnly, -1, null, $validateType, null, null, $mask);
   }
   
   public function AddFieldPassword($fieldName, $legend, $length, $columns = 2, $required = true, $readOnly = false, $validType = 'required'){

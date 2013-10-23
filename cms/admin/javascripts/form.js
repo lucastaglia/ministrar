@@ -9,6 +9,18 @@ $(document).ready(function(){
 });
 
 
+//String..
+
+$(document).ready(function(){
+
+  $('div#boxForm input[mask]').each(function(){
+    
+    $(this).mask($(this).attr('mask'));
+    
+  });
+  
+});
+
 //Só Números em Input..
 function onlyInteger(dom){
         dom.value=dom.value.replace(/\D/g,'');
