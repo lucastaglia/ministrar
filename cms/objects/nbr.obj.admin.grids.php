@@ -690,7 +690,7 @@ class nbrAdminGrid{
         $html .= '      </tr>' . "\r\n";
       }
     } else {
-      $html .= '<tr><td class="noRegister" colspan="' . (count($this->fields) + 1) . '">Nenhum registro encontrado!</td></tr>';
+      $html .= '<tr><td class="noRegister" colspan="' . (count($this->fields) + 1) . '">Ops! Nenhum registro encontrado!</td></tr>';
     }
 
     $html .= '    </tbody>' . "\r\n";
