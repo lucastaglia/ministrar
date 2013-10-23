@@ -56,8 +56,6 @@ div#content div.main div.grid table tr.tDnD_whileDrag.hover {
   
 }
 div#content div.main div.grid table tr td.noRegister{
-  height: 300px;
-  line-height: 300px;
   text-align: center;
   background-color:#F7F7F7;
   color: #BABABA;
@@ -169,6 +167,8 @@ div#bar div#filters form  input#search{
   border: 1px solid #E2E3EA;
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 11px;  
+  margin-top: 5px;
+  margin-left: 3px;
 }
 div#bar div#filters form div#filter{
   padding-left: 60px;

@@ -159,4 +159,13 @@ $(document).ready(function(){
     
   });
   
+  //Selecionou filtro...
+  $('div#bar div#filters select#filter').change(function(){
+    
+    if($(this).val() != -1){
+      $('div#bar div#filters form input#search').val('');
+      $('form#pesquisa').submit();
+    }
+  });
+  
 });

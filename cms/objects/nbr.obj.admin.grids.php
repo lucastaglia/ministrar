@@ -518,11 +518,24 @@ class nbrAdminGrid{
     if(count($this->filters) > 0){
       $html .= '<div id="filter">' . "\r\n";
       $html .= '<select name="filter" id="filter">' . "\r\n";
-      $html .= '  <option value="">Filtrar por...</option>' . "\r\n";
+      $html .= '  <option value="-1">' . __('Filtrar por...') . '</option>' . "\r\n";
       
       //filtros..
       foreach ($this->filters as $filter) {
-        $html .= '  <option ' . (($hub->GetParam('filterWhere') == $filter[0])?'selected':null) . ' value="' . $filter[0] .'">' . $filter[1] . '</option>' . "\r\n";	
+        
+        //where...
+        if($filter[2])
+          if(empty($this->wheres))
+            $this->wheres = $filter[0];
+          else 
+            $this->wheres .= ' AND (' . $filter[0] . ')';
+        
+        if(!$hub->ExistParam('filterWhere')){
+          $selected = (($filter[2])?'selected':null);
+        } else {
+          $selected = (($hub->GetParam('filterWhere') == $filter[0])?'selected':null);
+        }
+        $html .= '  <option ' . $selected . ' value="' . $filter[0] .'">' . $filter[1] . '</option>' . "\r\n";	
       }
       
       $html .= '</select>' . "\r\n";
@@ -767,8 +780,8 @@ class nbrAdminGrid{
     $this->commands[] = $array;
   }
   
-  public function AddFilter($where, $title){
-    $x = array($where, $title);
+  public function AddFilter($where, $title, $selected = false){
+    $x = array($where, $title, $selected);
     $this->filters[] = $x;
   }
 }
