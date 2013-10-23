@@ -75,6 +75,9 @@ div#content div.main div.grid table tr.legend  td:last-child{
 div#content div.main div.grid table tr  td.icons{
   text-align: center;
 }
+div#content div.main div.grid table tr  td.icons a{
+  text-decoration: none;
+}
 div#content div.main div.grid table tr  td.icons img{
   border: 0;
   margin: 0 1px;

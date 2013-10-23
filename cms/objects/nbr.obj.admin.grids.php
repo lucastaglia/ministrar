@@ -682,8 +682,8 @@ class nbrAdminGrid{
 
           if($this->macroFile != null)
           $hub->SetParam('fileMacro', $this->module->folderPath . $this->macroFile);
-          $html .= '<a title="Clique aqui para excluir este registro" href="javascript:void(0);" onclick="deleteReg(\'' . $this->tableName . '\', \'' . $record->ID . '\', \'' . $hub->GetUrl() . '\');">' . "\r\n";
-          $html .= '<img src="images/ico-delete.png" alt="Delete" />' . "\r\n";
+          $html .= '<a title="Clique aqui para excluir este registro" href="javascript:void(0);" onclick="deleteReg(\'' . $this->tableName . '\', \'' . $record->ID . '\', \'' . $hub->GetUrl() . '\');">';
+          $html .= '<img src="images/ico-delete.png" alt="Delete" />';
           $html .= '</a></td>' . "\r\n";
         }
 
