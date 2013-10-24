@@ -470,36 +470,48 @@ span#devenv u {
   color: #CCCCCC;
 }
 label.error {
-  background-color: #B90000;
+  background-color: #C93438;
   color: #FFFFFF;
-  height: 16px !important;
-  line-height: 16px;
+  height: 20px !important;
+  line-height: 20px;
   position: absolute;
   top: 12px;
   border: 0;
   font-size: 10px;
+	padding: 0 5px;
 }
 div.string label.error {
-  right: 12px;
+  right: 10px;
+	margin-top: -2px;
 }
 div.password label.error {
-  right: 12px;
+  right: 10px;
+	margin-top: -2px;	
 }
 div.number label.error {
-  right: 12px;
+  right: 10px;
+	margin-top: -2px;	
 }
 div.image label.error {
   right: 16px;
   top: 134px;
 }
 div.datetime label.error {
-  right: 12px;
+  right: 10px;
+	margin-top: -2px;	
 }
 div.date label.error {
-  right: 12px;
+  right: 10px;
+	margin-top: -2px;	
 }
 div.textarea label.error {
-  right: 12px;
+  right: 10px;
+	margin-top: -2px;	
+}
+
+div.html label.error {
+  right: 6px;
+	margin-top: 69px;	
 }
 div.list label.error {
   left: 123px;

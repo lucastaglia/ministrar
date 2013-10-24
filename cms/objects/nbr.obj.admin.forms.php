@@ -225,7 +225,7 @@ class nbrAdminForms {
     	case 'HTM':
           $html  = '<div  id="' . $fieldName . '" class="field ' . $columnsStr . ' html ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
           $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-          $html .= '<textarea ' . ($readOnly?'disabled':null) . ' id="' . $fieldName. '" name="' . $fieldName. ($readOnly?'_disabled':null) . '" style="height:' . $height . 'px">' . $this->getValue($fieldName, $valueDefault) . '</textarea>' . "\r\n";
+          $html .= '<textarea class="' . ($required?'required':null) . '" ' . ($readOnly?'disabled':null) . ' id="' . $fieldName. '" name="' . $fieldName. ($readOnly?'_disabled':null) . '" style="height:' . $height . 'px">' . $this->getValue($fieldName, $valueDefault) . '</textarea>' . "\r\n";
           $html .= '<div class="clearBoth"></div>';
           $html .= '</div>' . "\r\n";      
           $this->fieldsName[] = $fieldName;    
