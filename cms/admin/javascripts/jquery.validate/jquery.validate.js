@@ -255,8 +255,8 @@ $.extend($.validator, {
 
 	messages: {
 		required: "Obrigatório",
-		email: "E-mail inválido",
-		url: "URL inválida"
+		email:    "E-mail inválido",
+		url:      "URL inválida"
 	},
 	
 	autoCreateRanges: false,
