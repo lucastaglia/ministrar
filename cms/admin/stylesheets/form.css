@@ -524,7 +524,7 @@ span#stack {
 }
 span#stack a {
   font-size: 9px;
-  color:#9999999;
+  color:#999999;
   text-decoration:underline;
 }
 span#stack span.lastLevel {

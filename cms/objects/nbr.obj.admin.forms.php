@@ -676,7 +676,9 @@ class nbrAdminForms {
     
     if($dataSet->ExistParam('msgSucess')){
       $msg = $dataSet->GetParam('msgSucess');
-      $html .= '<div id="msg_sucesso">' . $msg . '</div>' . "\r\n";
+      $html .= '<div id="msg_sucesso">' . $msg . "\r\n";
+      $html .= '<img src="' . $cms->GetAdminImageUrl() . 'msg_sucesso_close.png" width="12" heigth="12" id="msg_sucesso_close" class="alphaOut">' . "\r\n";
+      $html .= '</div>' . "\r\n";
       $dataSet->DeleteParam('msgSucess');
     }
     
@@ -684,16 +686,16 @@ class nbrAdminForms {
       $msg = $dataSet->GetParam('msgError');
       $html .= '<div id="msg_erro">';
       $html .= $dataSet->GetParam('msgError');
-      
+      $html .= '<img src="' . $cms->GetAdminImageUrl() . 'msg_erro_close.png" width="12" heigth="12" id="msg_erro_close" class="alphaOut">' . "\r\n";
       
       if($dataSet->ExistParam('msgErrorDetail')) {
         $msgDetail = $dataSet->GetParam('msgErrorDetail');
         $dataSet->DeleteParam('msgErrorDetail');
-        $html .= '<img title="' . $msgDetail . '" src="' . $cms->GetAdminImageUrl() . 'icon_msg_interrogation.png" id="detail" width="25" height="22"/>' . "\r\n";
+        $html .= '<img title="' . $msgDetail . '" src="' . $cms->GetAdminImageUrl() . 'msg_erro_info.png" id="detail" width="24" height="24"/>' . "\r\n";
       }
       
+      
       $html .= '</div>' . "\r\n";
-            
       $dataSet->DeleteParam('msgError');
     }
     

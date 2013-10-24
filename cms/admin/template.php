@@ -20,6 +20,7 @@ $security->SecurityCheck();
 <!-- Estilos -->
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.multiselect/common.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.multiselect/ui.multiselect.css" rel="stylesheet" type="text/css" />
+<link href="<?= $cms->GetAdminStyleSheetUrl(); ?>animations.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminStyleSheetUrl(); ?>master.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminStyleSheetUrl(); ?>ui.css" rel="stylesheet" type="text/css" />
 <link href="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.ui/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />

@@ -11,3 +11,18 @@ function autoResizeFrame(id){
     document.getElementById(id).width= (newwidth) + "px";
 }
 //-->
+
+$(document).ready(function(){
+  
+  $('div#msg_erro #msg_erro_close').click(function(){
+    
+    $('div#msg_erro').fadeOut('slow');
+    
+  });  
+  $('div#msg_sucesso #msg_sucesso_close').click(function(){
+    
+    $('div#msg_sucesso').fadeOut('slow');
+    
+  });
+  
+});

@@ -31,7 +31,7 @@ div#msg_erro{
 	border-color: #EED3D7;
 	color: #B94A48;
 	margin-bottom: 5px;
-	padding: 8px 35px 8px 14px;
+	padding: 8px 14px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 
 	-webkit-border-radius: 4px;
@@ -43,6 +43,19 @@ div#msg_erro{
   font-weight: normal;
   line-height: 20px; 
 }
+
+div#msg_erro #msg_erro_close{
+  float: right;
+  margin: 4px;
+  cursor: pointer;
+}
+
+div#msg_erro img#detail{
+  float: right;
+  margin-right: 14px;
+  margin-top: -2px;
+}
+
 div#msg_erro b,
 div#msg_erro strong{
 	color: #B94A48;
@@ -53,7 +66,7 @@ div#msg_sucesso{
 	border-color: #D6E9C6;
 	color: #468847;
 	margin-bottom: 5px;
-	padding: 8px 35px 8px 14px;
+	padding: 8px 14px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 
 	-webkit-border-radius: 4px;
@@ -65,6 +78,13 @@ div#msg_sucesso{
   font-weight: normal;
   line-height: 20px;
 }
+
+div#msg_sucesso #msg_sucesso_close{
+  float: right;
+  margin: 4px;
+  cursor: pointer;
+}
+
 div#msg_sucesso strong,
 div#msg_sucesso b{
 	color: #468847;
@@ -72,11 +92,7 @@ div#msg_sucesso b{
 }
 
 
-div#msg_erro img#detail{
-  float: right;
-  margin-right: 7px;
-  margin-top: 7px;
-}
+
 /*ESTILOS REUTILIZAVEIS*/
 .alignright {
 	text-align: right !important;
