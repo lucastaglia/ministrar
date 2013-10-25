@@ -207,8 +207,10 @@ div#bar div#filters a:hover span{
   background-position: 0 0;  
 }
 div#bar div#filters a#limpar img{
-  padding-top: 10px;
-  padding-left: 11px;
+    padding-left: 11px;
+    padding-right: 10px;
+    position: relative;
+    top: 2px;
 }
 
 /**
