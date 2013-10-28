@@ -39,7 +39,7 @@ $security->SecurityCheck();
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery-tooltip/jquery.tooltip.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.maskedinput/jquery.maskedinput-1.2.2.js" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.autonumeric/autoNumeric-1.5.4.js" type="text/javascript"></script>
-<? /* ?><script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.fileupload/jquery.fileupload.js" type="text/javascript"></script><? */ ?>
+<script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.fileupload/jquery.fileupload (Source)" type="text/javascript"></script>
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>jquery.fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
 
 <!-- Scripts -->
@@ -54,12 +54,15 @@ $security->SecurityCheck();
 <script src="<?= $cms->GetAdminJavaScriptUrl(); ?>ui.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-
-/** Variáries Usadas no Site **/
-var admin_url = '<?= $GLOBALS['ADMIN_URL'] ?>';
-var admin_page_url = '<?= $GLOBALS['ADMIN_PAGES_URL'] ?>';
-var admin_javascript_url = '<?= $GLOBALS['ADMIN_JAVASCRIPT_URL'] ?>';
-
+  /** Variáries JavaScript usadas no Administrador **/
+  var root_url              = '<?= $GLOBALS['ROOT_URL'] ?>';
+  var root_path             = '<?= $GLOBALS['ROOT_PATH'] ?>';
+  var admin_path            = '<?= $GLOBALS['ADMIN_PATH'] ?>';
+  var admin_url             = '<?= $GLOBALS['ADMIN_URL'] ?>';
+  var admin_page_path       = '<?= $GLOBALS['ADMIN_PAGES_PATH'] ?>';
+  var admin_page_url        = '<?= $GLOBALS['ADMIN_PAGES_URL'] ?>';
+  var admin_javascript_path = '<?= $GLOBALS['ADMIN_JAVASCRIPT_PATH'] ?>';
+  var admin_javascript_url  = '<?= $GLOBALS['ADMIN_JAVASCRIPT_URL'] ?>';
 </script>
 </head>
 <body>

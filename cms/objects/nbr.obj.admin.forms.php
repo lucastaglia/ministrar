@@ -45,7 +45,7 @@ class nbrAdminForms {
           
     return $value;
   }
-  private function addField($type, $fieldName, $legend, $length, $columns, $valueDefault, $required, $readOnly, $height = -1, $options = null, $required_str = 'required', $fileType = null, $fileTypeDescritio = null, $mask = null){
+  private function addField($type, $fieldName, $legend, $length, $columns, $valueDefault, $required, $readOnly, $height = -1, $options = null, $required_str = 'required', $fileType = null, $fileTypesDescription = null, $mask = null){
     global $ADMIN_IMAGES_URL, $ADMIN_UPLOAD_PATH, $hub,$ADMIN_PAGES_PATH, $ADMIN_UPLOAD_URL;
     
     //Traduz colunas...
@@ -104,15 +104,16 @@ class nbrAdminForms {
           $txt_status = '<b>Tamanho:</b> ' . $bytes . 'mb.';
         }
             	  
-    	  $html  = '<div  id="' . $fieldName . '" class="field file ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+    	  $html  = '<div  id="campo_' . $fieldName . '" class="field file ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
 
         $html .= '<div class="esquerda">' . "\r\n";
 
     	  //Streaming..
         $html .= '<div class="boxFileStreaming">' . "\r\n";
-        $html .= '<input table="' . $this->tableName . '" fieldName="' . $fieldName . '" fileTypes="' . $fileType . '" fileTypesDescription="' . $fileTypeDescritio . '" class="arquivo" ' . ($readOnly?'disabled':null) . ' type="file" name="' . $fieldName . '" id="' . $fieldName. '"></input>' . "\r\n";
+        $html .= '<input   table="' . $this->tableName . '" fieldName="' . $fieldName . '" fileTypes="' . $fileType . '" fileTypesDescription="' . $fileTypesDescription . '" class="arquivo" ' . ($readOnly?'disabled':null) . ' type="file" name="' . $fieldName . '" id="' . $fieldName. '"  />' . "\r\n";
         $html .= '<input type="hidden" name="' . $fieldName. '_status" id="' . $fieldName. '_status" value="Y">';
+        $html .= '<div id="barra" ' . ((!$isBlank)?'class="file"':null) . '>' . ((!$isBlank)?$file:null) . '</div>';
         $html .= '</div>' . "\r\n";
 
         //Painel Editar...
@@ -328,7 +329,7 @@ class nbrAdminForms {
     //Verifica se existe evento macroFromFields na macro...
     if(function_exists('macroFromFields')){
 
-      $nHTML = macroFromFields($fieldName, $this->record, $legend, $length, $columns, $valueDefault, $required, $readOnly, $height, $options, $required_str, $fileType, $fileTypeDescritio);
+      $nHTML = macroFromFields($fieldName, $this->record, $legend, $length, $columns, $valueDefault, $required, $readOnly, $height, $options, $required_str, $fileType, $fileTypesDescription);
 
       if(!empty($nHTML))
       $html = $nHTML;
@@ -425,11 +426,11 @@ class nbrAdminForms {
     $this->addField('IMG', $fieldName, $legend, -1, 3, null, $required, $readOnly, -1, null, 'required');
   }
   
-  /* DESATIVADO POR ENQUANTO (não está funcionando)
+  
   public function AddFieldFile($fieldName, $legend, $required = true, $readOnly = false, $typesFile = '*.*', $typesFileDescription = 'Todos os Arquivos'){
     $this->addField('FIL', $fieldName, $legend, -1, 3, null, $required, $readOnly, -1, null, 'required', $typesFile, $typesFileDescription);
   }
-  */
+  
   
   public function AddFieldInteger($fieldName, $legend, $columns, $valueDefault = null, $required = true, $readOnly = false, $validateType = 'required'){
     $this->addField('INT', $fieldName, $legend, 11, $columns, $valueDefault, $required, $readOnly, -1, null, $validateType);
@@ -833,6 +834,32 @@ class nbrAdminForms {
     $html .= '</ul>' . "\r\n";
     $html .= '</div>' . "\r\n";
 
+    /*
+    $html .= "<script type='text/javascript'>" . "\r\n";
+    $html .= "$(document).ready(function() {" . "\r\n";
+    $html .= "   $('#arquivo').fileUpload({" . "\r\n";
+    $html .= "      'uploader': 'javascripts/jquery.fileupload/uploader.swf'," . "\r\n";
+    $html .= "      'cancelImg': 'javascripts/jquery.fileupload/cancel.png'," . "\r\n";
+    $html .= "      'folder': 'temp'," . "\r\n";
+    $html .= "      'script': 'upload.php'," . "\r\n";
+    $html .= "      'fileDesc': 'Image Files'," . "\r\n";
+    $html .= "      'fileExt': '*.*'," . "\r\n";
+    $html .= "      'multi': true," . "\r\n";
+    $html .= "      'auto': true," . "\r\n";
+    $html .= "      'scriptData' : {'variavel':'alguma-variavel-de-controle'}" . "\r\n";
+    $html .= "   });" . "\r\n";
+    $html .= "});" . "\r\n";
+    $html .= "</script>" . "\r\n";
+    $html .= "<style>" . "\r\n";
+
+    $html .= "</style>" . "\r\n";
+ 
+ 
+    $html .= "<h1>JQuery FileUpload - Exemplo</h1>" . "\r\n";
+ 
+    $html .= "<h2>Envio multiplo, autostart e apenas imagens</h2>" . "\r\n";
+    $html .= "<p><input name='arquivo' id='arquivo' type='file' /></p>" . "\r\n";
+*/
     $html .= '</form>' . "\r\n";
     $html .= '</div>' . "\r\n"; //Fecha boxForm
     

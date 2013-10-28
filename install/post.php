@@ -126,8 +126,10 @@ $code .= '  /** Arquivos de utilizados para compor o HTML do Admin **/' . "\r\n"
 $code .= '  $GLOBALS["ADMIN_PATH"]             = $ROOT_PATH   . "cms/admin/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_PAGES_PATH"]       = $ADMIN_PATH  . "pages/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_PAGES_URL"]        = $ADMIN_URL   . "pages/";' . "\r\n";
+$code .= '  $GLOBALS["ADMIN_STYLESHEET_PATH"]  = $ADMIN_PATH . "stylesheets/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_STYLESHEET_URL"]   = $ADMIN_URL   . "stylesheets/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_JAVASCRIPT_URL"]   = $ADMIN_URL   . "javascripts/";' . "\r\n";
+$code .= '  $GLOBALS["ADMIN_JAVASCRIPT_PATH"]  = $ADMIN_PATH . "javascripts/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_IMAGES_PATH"]      = $ADMIN_PATH  . "images/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_IMAGES_URL"]       = $ADMIN_URL   . "images/";' . "\r\n";
 $code .= '  $GLOBALS["ADMIN_FUNCTIONS_PATH"]   = $ADMIN_PATH  . "functions/";' . "\r\n";

@@ -211,56 +211,6 @@ $(document).ready(function(){
 	
 
 
-/** Campos Arquivo **/
-/*
-$(document).ready(function(){
-  
-  //Seleciona arquivo...
-  $('div#boxForm div.file div.painel input[type=file]').change(function(){
-    
-    //Atualiza Legenda..
-    $(this).parent().parent().find('span.status span.txt').html($(this).val() + '<span class="warning">(será enviado ao site quando salvar este registro)</span>');
-      
-    //Esconde botão "Download"
-    $(this).parent().parent().find('img.down').hide();
-    
-    //Mostra botão Excluir..
-    $(this).parent().parent().find('img.delete').show();
-    
-    //Atualiza Campo de Status..
-    $(this).parent().parent().find('input._status').val('Y');
-
-  });
-  
-  //Limpa Campo..
-  $('div#boxForm div.file div.painel img.delete').click(function(){
-    
-    var status = $(this).parent().parent().parent().parent().find('span.status span.txt');
-    var _status = $(this).parent().parent().parent().find('input._status');
-    var _btnDown = $(this).parent().parent().parent().find('img.down');
-    var _btnDelete = $(this);
-
-    //Limpa legenda..
-    jConfirm('Você tem certeza de deseja limpar este campo?<br>Se responder sim, quando salvar este registro o arquivo será excluído do sistema.', 'Tem certeza?', function(r){
-      
-      if(r){
-        
-        if(_status.val() != 'Y')
-          status.html('Arquivo exclúdo!' + '<span class="warning">(somente será excluído fisicamente quando salvar este registro)</span>');
-        else
-          status.html('Sem arquivo');
-        
-        _status.val('');
-        _btnDown.hide();
-        _btnDelete.hide();
-      }
-      
-    });
-    
-  });
-});
-*/
-
 /** Campos Numero Decimais **/
 $(document).ready(function(){
   
@@ -335,7 +285,54 @@ $(document).ready(function(){
 
 });
 
+/** Campos Arquivo **/
 
+$(document).ready(function(){
+  
+  //Seleciona arquivo...
+  $('div#boxForm div.file div.painel input[type=file]').change(function(){
+    
+    //Atualiza Legenda..
+    $(this).parent().parent().find('span.status span.txt').html($(this).val() + '<span class="warning">(será enviado ao site quando salvar este registro)</span>');
+      
+    //Esconde botão "Download"
+    $(this).parent().parent().find('img.down').hide();
+    
+    //Mostra botão Excluir..
+    $(this).parent().parent().find('img.delete').show();
+    
+    //Atualiza Campo de Status..
+    $(this).parent().parent().find('input._status').val('Y');
+
+  });
+  
+  //Limpa Campo..
+  $('div#boxForm div.file div.painel img.delete').click(function(){
+    
+    var status = $(this).parent().parent().parent().parent().find('span.status span.txt');
+    var _status = $(this).parent().parent().parent().find('input._status');
+    var _btnDown = $(this).parent().parent().parent().find('img.down');
+    var _btnDelete = $(this);
+
+    //Limpa legenda..
+    jConfirm('Você tem certeza de deseja limpar este campo?<br>Se responder sim, quando salvar este registro o arquivo será excluído do sistema.', 'Tem certeza?', function(r){
+      
+      if(r){
+        
+        if(_status.val() != 'Y')
+          status.html('Arquivo exclúdo!' + '<span class="warning">(somente será excluído fisicamente quando salvar este registro)</span>');
+        else
+          status.html('Sem arquivo');
+        
+        _status.val('');
+        _btnDown.hide();
+        _btnDelete.hide();
+      }
+      
+    });
+    
+  });
+});
 
 /**
 Arquivo
@@ -348,32 +345,45 @@ $(document).ready(function() {
      var status = $('#' + id + '_status');
      var tabela = $(this).attr('table');
      var campo = $(this).attr('fieldName');
+     var barra = $(this).parent().parent().find('#barra');
 
-  
      $(this).fileUpload({
         'uploader'    : 'javascripts/jquery.fileupload/uploader.swf',
         'width'       : 114,
         'height'      : 25,
         'cancelImg'   : 'javascripts/jquery.fileupload/cancel.png',
-        'folder'      : 'temp',
+        'folder'      : root_path + 'cms/temp',
         'script'      : 'javascripts/jquery.fileupload/upload.php',
         'fileDesc'    : $(this).attr('fileTypesDescription'),
         'fileExt'     : $(this).attr('fileTypes'),
         'multi'       : false,
         'auto'        : true,
         'scriptData'  : {'tabela':tabela, 'campo':campo },
+        'onProgress'  : function (event, queueID, fileObj, data){
+                          var x = (data.percentage * 485); //485px é a largura máxima da barra.
+                          x =  (x / 100);
+                           
+                          barra.css('width', x + 'px');
+                          barra.text(data.percentage + '%');
+        },
         'onSelect'    : function(){
+                          barra.removeClass('file');
+                          barra.text('');
                           saveDisabled();
                           backDisabled();
                         },
         'onComplete'  : function(event, ID, fileObj, response, data){
                           saveEnabled();
                           backEnabled();
-                          status.val(fileObj.filePath);
+                          status.val(fileObj.name);
+                          barra.text('Seu arquivo foi enviado com sucesso.');
                         },
         'onCancel'    : function(){
                           saveEnabled();
                           backEnabled();
+                          
+                          barra.css('width', '0px');
+                          barra.text('');                          
                         }
      });       
      
@@ -383,7 +393,6 @@ $(document).ready(function() {
        $(this).parent().parent().find('img.down').hide();
        $(this).parent().parent().find('span.txt').text('Assim que você salvar este registro este campo ficará em branco.')
      })
-     
    });
    
 });

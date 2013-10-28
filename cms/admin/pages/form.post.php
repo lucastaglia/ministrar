@@ -352,7 +352,7 @@ function deleteImage($fileName){
 }
 
 function executeFiles(){
-  global $tableName, $fieldsFile, $id, $_POST, $_FILES, $ADMIN_UPLOAD_PATH, $db, $cms;
+  global $tableName, $fieldsFile, $id, $_POST, $_FILES, $ADMIN_UPLOAD_PATH, $db, $cms, $TEMP_PATH;
 
   //Copia imagens dos Campos Imagem...
   foreach ($fieldsFile as $fieldName) {
@@ -376,8 +376,7 @@ function executeFiles(){
       $post->Execute();
     } elseif($_POST[$fieldName . '_status'] != 'Y') {      
           
-      $file = $_POST[$fieldName . '_status'];
-      $file = $cms->GetRootPath() . substr($file, 1);
+      $file = $TEMP_PATH. $_POST[$fieldName . '_status'];
 
       $tmp = explode('/', $file);
       $fileName = array_pop($tmp);
