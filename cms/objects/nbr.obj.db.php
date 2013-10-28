@@ -341,6 +341,7 @@ class nbrDB
      */
     public function LoadObjects($sql)
     {
+	//echo('[' . $sql . ']');
         $resource = $this->_read($sql);
         
         

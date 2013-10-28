@@ -401,21 +401,24 @@ $(document).ready(function() {
 //Toolbar
 var formStatus = true;
 function saveDisabled(){
-  $('div#boxForm ul#toolbar li.save').addClass('disabled', 'disabled');
+  $('div#boxForm button#save').button({ disabled: true });
+  $('div#boxForm button#save2').button({ disabled: true });
   formStatus = false;
 }
 function saveEnabled(){
-  $('div#boxForm ul#toolbar li.save').removeClass('disabled', 'disabled');
+  $('div#boxForm button#save').button({ disabled: false });
+  $('div#boxForm button#save2').button({ disabled: false });
+
   formStatus = true;
 }
 
 function backDisabled(){
-  $('div#boxForm ul#toolbar li.back').addClass('disabled', 'disabled');
+  $('div#boxForm button#back').button({ disabled: true });
   formStatus = false;
 }
 
 function backEnabled(){
-  $('div#boxForm ul#toolbar li.back').removeClass('disabled', 'disabled');
+  $('div#boxForm button#back').button({ disabled: false });
   formStatus = true;
 }
 
@@ -466,6 +469,7 @@ $(document).ready(function(){
 
 
 // Calendario...
+/* Está com erro!
 $(document).ready(function(){
   
   $('div.date input').datepicker({
@@ -480,7 +484,7 @@ $(document).ready(function(){
   });
   
 });
-
+*/
 
 /**
 * TECLAS DE ATALHOS
