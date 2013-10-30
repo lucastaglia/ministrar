@@ -18,16 +18,51 @@ $zip = zip_open($arquivo_nomeTMP);
 if(is_resource($zip)){
   
   while ($zip_entry = zip_read($zip)) {
-    $fp = fopen($TMPfull . zip_entry_name($zip_entry), "w");
     
-    if (zip_entry_open($zip, $zip_entry, "r")) {
-      $buf = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry)); 
-      fwrite($fp,"$buf");
-
-      zip_entry_close($zip_entry);     
+    $caminho = $TMPfull;
+    
+    $arquivoFull = zip_entry_name($zip_entry);
+    $arquivo = str_replace('\\', '/', $arquivoFull);
+    
+    if(substr($arquivoFull, -1) == '/'){
       
-      fclose($fp); 
-    } 
+      //diretório
+      mkdir($TMPfull . $arquivoFull);
+    } else {
+      
+      //aquivo
+      $fp = fopen($TMPfull . $arquivoFull , "w");
+      
+      
+      if (zip_entry_open($zip, $zip_entry, "r")) {
+        $buf = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry)); 
+        fwrite($fp,"$buf");
+  
+        zip_entry_close($zip_entry);     
+        
+        fclose($fp); 
+      }       
+    }
+    
+   /*  
+    $dirs = explode('/' , $arquivo);
+   
+    //verificase tem diretorios...
+    if(count($dirs) > 1){
+        
+      $arquivo = array_pop($dirs);
+      
+      //cria diretorios...
+      foreach ($dirs as $dir) {
+        
+        $caminho .= $dir . '/';
+        
+        mkdir($caminho);
+      }
+      
+    }
+    */
+
   }
   zip_close($zip); 
 }

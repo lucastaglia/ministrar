@@ -227,7 +227,7 @@ if($hub->ExistParam('_moduleID')){
   $primeiro = true;
 	  foreach ($langs_front['activated'] as $x=>$flag) {
 	    
-	  	$sql  = 'SELECT * FROM syslanguages';
+	  	$sql  = 'SELECT * FROM sysLanguages';
 	  	$sql .= " WHERE Identificador = '$flag'";
 	  	
 	  	$db_flags = $db->LoadObjects($sql);

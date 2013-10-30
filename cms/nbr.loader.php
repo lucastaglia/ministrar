@@ -32,6 +32,7 @@
   /** Faz includes das Funções **/
   include($FUNCTIONS_PATH . 'nbr.application.php');
   include($FUNCTIONS_PATH . 'nbr.draw.php');
+  include($FUNCTIONS_PATH . 'nbr.files.php');
   
   /** Faz includes das Funções do Admin **/
   include($ADMIN_FUNCTIONS_PATH . 'pages.php');

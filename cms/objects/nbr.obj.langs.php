@@ -105,15 +105,14 @@ class nbrLangs{
 			return $this->language_id;
 		else {
 			
-			$sql  = 'SELECT ID FROM syslanguages';
+			$sql  = 'SELECT ID FROM sysLanguages';
 			$sql .= " WHERE Identificador = '" . $this->language . "'";
-			$ids = $db->LoadObjects($sql);
-			$id = $ids[0]->ID;
+			$ids  = $db->LoadObjects($sql);
+			$id   = $ids[0]->ID;
 			return $id;
 			
 		}
 	}
-	
 }
 
 
