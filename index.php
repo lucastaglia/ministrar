@@ -1,4 +1,6 @@
 <?php
+ob_start('ob_gzhandler');
+
 //Inicia sessão..
 session_start();
 

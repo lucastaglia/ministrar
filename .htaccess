@@ -14,3 +14,13 @@ RewriteRule ^(.*) ./index.php?url=$1 [QSA]
 
 #Habilita o fopen no PHP
 php_flag allow_url_fopen on
+
+
+#Comprimir arquivos..
+<Files *.css>
+SetOutputFilter DEFLATE
+</Files>
+
+<Files *.js>
+SetOutputFilter DEFLATE
+</Files>
