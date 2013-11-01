@@ -1,9 +1,10 @@
 <?
 $grid = new nbrAdminGrid('sysPlugins', 'Plugins');
+$grid->macroFile = 'admin.plugins.macro.php';
 
 //Segurança...
 $grid->securityNew = false;
-$grid->securityDelete = false;
+$grid->securityDelete = true;
 
 //Comandos..
 
