@@ -24,3 +24,8 @@ SetOutputFilter DEFLATE
 <Files *.js>
 SetOutputFilter DEFLATE
 </Files>
+
+#cache de aquivos do tema.. (604800 segundos = 1 semana)
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|css)$">
+    Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
