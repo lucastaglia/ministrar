@@ -46,6 +46,15 @@ $site = new nbrSite();
 if($router->getPage() == 's'){
   $script = $router->params[1];
   include($FRONT_SCRIPTS_PATH . $script . '.php');
-}else
+}else{
+  
+  $cache_length = 8600;
+  $cache_expire_date = gmdate("D, d M Y H:i:s", time() + $cache_length);
+  header("Expires: $cache_expire_date");
+  header("Pragma: cache");
+  header("Cache-Control: max-age=$cache_length");
+  header("User-Cache-Control: max-age=$cache_length");
+  
   include($FRONT_PAGES_PATH . $router->pageFile);
+}
 ?>
