@@ -1,6 +1,7 @@
 <?
 $arquivo_nomeTMP = $_FILES['pacote']['tmp_name'];
 $arquivo_nome    = $_FILES['pacote']['name'];
+$diretorio_nome = substr($arquivo_nome, 0, -4);
 
 //nome temp...
 $d = explode('\\', $arquivo_nomeTMP);
@@ -44,31 +45,12 @@ if(is_resource($zip)){
       }       
     }
     
-   /*  
-    $dirs = explode('/' , $arquivo);
-   
-    //verificase tem diretorios...
-    if(count($dirs) > 1){
-        
-      $arquivo = array_pop($dirs);
-      
-      //cria diretorios...
-      foreach ($dirs as $dir) {
-        
-        $caminho .= $dir . '/';
-        
-        mkdir($caminho);
-      }
-      
-    }
-    */
-
   }
   zip_close($zip); 
 }
 
 //carrega configurações do plugin...
-include($TMPfull . 'config.php');
+include($TMPfull . $diretorio_nome . '/' . 'config.php');
 $plugin = new nbrPlugin();
 
 
@@ -84,7 +66,7 @@ if(is_dir($dir)){
 
 
 //Move plugin do diretório Temporario para o Oficial
-rename($TMPfull, $dir);
+rename($TMPfull . $diretorio_nome . '/', $dir);
 
 ///ADICIONA NA TABELA...
 $post = new nbrTablePost();
