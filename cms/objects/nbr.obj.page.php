@@ -7,7 +7,9 @@ class nbrPage{
   public $index = true;
   
   private $a_css = array();
+  private $a_cssTemplate = array();
   private $a_js = array();
+  private $a_jsTemplate = array();
   private $a_image_src = array();
   
   function __construct(){
@@ -39,15 +41,29 @@ class nbrPage{
     include($FRONT_PAGES_PATH . $fileHtml);
   }
   
-  public function addFileStylesheet($file){
+  public function addFileStylesheet($file, $isTemplate = false){
     
-    if(array_search($file, $this->a_css) === false)
-      $this->a_css[] = $file;
-    
+    if(!$isTemplate){
+      if(array_search($file, $this->a_css) === false)
+        $this->a_css[] = $file;
+    } else {
+      if(array_search($file, $this->a_cssTemplate) === false)
+        $this->a_cssTemplate[] = $file;
+
+    }
   }
-  public function addFileJavascript($file){
-    if(array_search($file, $this->a_js) === false)
-      $this->a_js[] = $file;
+  
+  public function addFileJavascript($file, $isTamplate = false){
+    
+    if(!$isTamplate){
+      if(array_search($file, $this->a_js) === false)
+        $this->a_js[] = $file;
+    } else {
+
+      if(array_search($file, $this->a_jsTemplate) === false)
+        $this->a_jsTemplate[] = $file;
+      
+    }
   }
 
 
@@ -56,19 +72,23 @@ class nbrPage{
   }
   
   private function printJS(){
-    global $cms, $LINK_PREFIX;
+    global $cms, $LINK_PREFIX, $router;
+
+    $files = array_merge($this->a_jsTemplate, $this->a_js);
     
-    foreach ($this->a_js as $js) {
-      $html = '<script type="text/javascript" src="' . $cms->GetFrontJavaScriptUrl() . $js . '?v=' . $LINK_PREFIX . '"></script>' . "\r\n";
+    if(count($files) > 0){
+      $html = '<script type="text/javascript" src="' . $router->GetLink('s/js/' . implode('/', $files)) . '"></script>' . "\r\n";
       echo($html);
     }
   }
   
   private function printCSS(){
-    global $cms, $LINK_PREFIX;
+    global $cms, $LINK_PREFIX, $router;
     
-    foreach ($this->a_css as $css) {
-      $html = '<link rel="stylesheet" type="text/css" href="' . $cms->GetFrontStyleSheetUrl() . $css . '?v=' . $LINK_PREFIX . '"/>' . "\r\n";
+    $files = array_merge($this->a_cssTemplate, $this->a_css);
+    
+    if(count($files) > 0){
+      $html = '<link rel="stylesheet" type="text/css" href="' . $router->GetLink('s/css/' . implode('/', $files)) . '"/>' . "\r\n";
       echo($html);
     }
   }
@@ -90,17 +110,17 @@ class nbrPage{
   echo('<meta name="description" content="' . $this->description . '">'. "\r\n");
   echo('<meta name="keywords" content="' . $this->keywords . '">'. "\r\n");
   echo('<meta name="CMS" content="Nova Brazil Ministrar' . $cms->GetVersion() . '">'. "\r\n");
-  
+
   if(!$this->index)
     echo('<meta Name=”robots” content=”noindex,nofollow”>'. "\r\n");
-    
+
   echo('<!-- Estilos Especiais desta Página -->'. "\r\n");
   $this->printCSS();
   echo('<!-- Scripts Especiais desta Página -->'. "\r\n");
   $this->printJS();
   echo('<!-- Imagens para Facebook e outros Shared -->'. "\r\n");
   $this->printImageSrc();
-  
+
   //Dispara evento 'front_head_include'
   $evs = $events->getEventsArray('front_head_include');
   $returns = null;
@@ -114,11 +134,7 @@ class nbrPage{
     echo('<!-- Impresso por Eventos -->' . "\r\n");
     echo($returns);  
   }
-  
-  
     echo('<!-- -->');  
   }
-  
-  
 }
 ?>

@@ -5,8 +5,10 @@
 <title><?= ($page->title . ' - ' . $site->title); ?></title>
 
 <!-- Arquivos CSS do Template -->
-<link href="<?= $cms->GetFrontStyleSheetUrl(); ?>reset.css" rel="stylesheet" type="text/css" />
-<link href="<?= $cms->GetFrontStyleSheetUrl(); ?>base.css" rel="stylesheet" type="text/css" />
+<?
+$page->addFileStylesheet('reset.css', true);
+$page->addFileStylesheet('base.css', true);
+?>
 
 
 <?

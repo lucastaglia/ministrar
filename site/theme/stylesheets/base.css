@@ -22,7 +22,6 @@ ul#menu{
 	margin: auto;
 	height: 34px;
 }
-
 ul#menu li{
 	float: left;
 	height: 34px;
@@ -44,7 +43,6 @@ ul#menu li a:hover{
 	background-color:#FFF;
 	padding: 20px;
 }
-
 #main h1{
 	font-size: 14px;
 	font-weight: bold;
