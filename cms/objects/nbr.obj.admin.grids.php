@@ -102,10 +102,13 @@ class nbrAdminGrid{
         break;
         
       case 'IMG':
-        $img = new nbrImages($ADMIN_UPLOAD_PATH . $record->$field['fieldName']);
-        $value  = '<a href="' . ($ADMIN_UPLOAD_URL . $record->$field['fieldName']) . '" title="Clique aqui para ampliar a foto"  class="fancybox">';
-        $value .= '<img src="' . $img->GeraThumb($field['length'], $field['height'], 'center', 'middle', false) . '">';
-        $value .= '</a>';
+        if(!empty($record->$field['fieldName'])){
+          $img = new nbrImages($ADMIN_UPLOAD_PATH . $record->$field['fieldName']);
+          $value  = '<a href="' . ($ADMIN_UPLOAD_URL . $record->$field['fieldName']) . '" title="Clique aqui para ampliar a foto"  class="fancybox">';
+          $value .= '<img src="' . $img->GeraThumb($field['length'], $field['height'], 'center', 'middle', false) . '">';
+          $value .= '</a>';
+        } else 
+          $value = '';
         break;
 
       case 'NUM':
@@ -526,14 +529,22 @@ class nbrAdminGrid{
       foreach ($this->filters as $filter) {
         
         //where...
-        if($filter[2])
-          if(empty($this->wheres))
-            $this->wheres = $filter[0];
-          else 
-            $this->wheres .= ' AND (' . $filter[0] . ')';
         
         if(!$hub->ExistParam('filterWhere')){
-          $selected = (($filter[2])?'selected':null);
+          
+          
+          if(($filter[2])){
+           $selected = 'selected'; 
+
+            if(empty($this->wheres))
+              $this->wheres = $filter[0];
+            else 
+              $this->wheres .= ' AND (' . $filter[0] . ')';
+           
+          } else {
+           $selected = null;  
+          }
+
         } else {
           $selected = (($hub->GetParam('filterWhere') == $filter[0])?'selected':null);
         }
