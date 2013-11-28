@@ -266,7 +266,6 @@ class nbrAdminGrid{
     	$this->wheres .= '(Lang = "' . $_SESSION['lang_admin'] . '")';
     }    
     
-
     //Condições..
     if(!empty($this->wheres))
     $wheres = ' WHERE (' . $this->wheres . ')';
@@ -287,7 +286,6 @@ class nbrAdminGrid{
     elseif(!empty($this->orders))
       $orders = ' ORDER BY ' . $this->orders;
 
-    
 
 
     //Pega número total de registro..
@@ -550,12 +548,10 @@ class nbrAdminGrid{
         }
         $html .= '  <option ' . $selected . ' value="' . $filter[0] .'">' . $filter[1] . '</option>' . "\r\n";	
       }
-      
       $html .= '</select>' . "\r\n";
       $html .= '</div>' . "\r\n";
     }
         
-    //$html .= '<a href="#" id="submit"><span></span></a>' . "\r\n";
     $html .= '<button class="btn btn-warning btn-mini" icon="ui-icon-search" text="false">Pesquisar</button>' . "\r\n";
     
     if($hub->ExistParam('filterWhere') || $hub->ExistParam('filterSearch'))
@@ -571,15 +567,9 @@ class nbrAdminGrid{
     if($this->securityNew)
       $toolbar .= '<li class="new"><button class="btn green new" icon="ui-icon-document" onclick="document.location.href=\'' . $linkNew . '\'" title="Novo registro (ctrl + seta acima)" text="false">Novo</button></li>' . "\r\n";
       
-    //Comandos..
-    //if(count($this->commands) > 0)
-      //$toolbar .= '<li class="actions"><a href="javascript:void(0);" onclick="document.location.href=\'' . $linkNew . '\'"></a></li>' . "\r\n";      
-
     $toolbar .= '</ul>' . "\r\n";
     
     $html .= $toolbar;
-
-   
     
     //Comandos..
     if(count($this->commands) > 0){

@@ -61,7 +61,7 @@ class nbrAdminForms {
         $val = $this->getValue($fieldName, $valueDefault);
         $html  = '<div id="' . $fieldName . '" class="field string ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . '></input>' . "\r\n";
+        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . ' />' . "\r\n";
         $html .= '</div>' . "\r\n";   
         $this->fieldsName[] = $fieldName; 		
     		break;
@@ -83,6 +83,12 @@ class nbrAdminForms {
         
         //Confirmar Senha..
         $html .= '<input disabled class="' . ($required?$required_str:null) . ' senha2 disabled" type="password" name="' . $fieldName. ($readOnly?'_disabled':null) . '_confirmacao" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '"></input>' . "\r\n";
+        
+        //Botao gerador
+        $hub->SetParam('_script', $ADMIN_PAGES_PATH . 'form.password.generator.php');
+        $hub->SetParam('fieldName', $fieldName);
+        //
+        $html .= '<a href="' . $hub->GetUrl()  . '" class="geradorSenha iframe"><img title="Clique aqui para abrir o gerador de senha" src="' . $ADMIN_IMAGES_URL . 'form_field_password_generator.gif" width="48" height="31"></a>' . "\r\n";
         
         $html .= '</div>' . "\r\n";
         $this->fieldsName[] = $fieldName; 

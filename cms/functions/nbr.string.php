@@ -1,5 +1,18 @@
 <?
 
+/**
+ * Passa todos os caracteres para maiúsculo (corrigindo problema com acentos)
+ *
+ * @param string $text
+ * @return string
+ */
+function nbrStrToUpper($text){
+  $text = str_replace(explode(',', 'á,é,í,ó,ú,â,ê,ô,ã,õ,à,è,ì,ò,ù,ç'),explode(',', 'Á,É,Í,Ó,Ú,Â,Ê,Ô,Ã,Õ,À,È,Ì,Ò,Ù,Ç'), $text);
+  $text = strtoupper($text);
+  
+  return $text;
+}
+
 function createKey($size  = 8, $uppercase  = true, $numbers = true, $symbols = false){
   
   $lmin = 'abcdefghijklmnopqrstuvwxyz';
@@ -21,6 +34,20 @@ function createKey($size  = 8, $uppercase  = true, $numbers = true, $symbols = f
     $retorno .= $caracteres[$rand-1];
     }
     return $retorno;
- }
+}
+
+/**
+ * Limita o tamanho e um texto sem cortar uma palavra no meio
+ *
+ * @param string $string
+ * @param inteer $length
+ * @param string $replacer
+ * @return string
+ */
+function textLimit($string, $length, $replacer = '...'){
+  if(strlen($string) > $length)
+  return (preg_match('/^(.*)\W.*$/', substr($string, 0, $length+1), $matches) ? $matches[1] : substr($string, 0, $length)) . $replacer;
+  return $string;
+}
 
 ?>

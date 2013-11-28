@@ -647,3 +647,8 @@ div#formToolbar ul>li{
 .cke_inner{
   margin-left: 114px!important;
 }
+
+.geradorSenha img{
+  position: absolute;
+  margin-left: 19px;
+}

@@ -565,3 +565,15 @@ $(document).ready(function(){
   });  
   
 });
+
+
+//Botão que abre o gerador de senha..
+$(document).ready(function(){
+  $('.geradorSenha').fancybox({
+    width: 500,
+    height: 350
+  });
+});
+
+
+
