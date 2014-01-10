@@ -10,15 +10,15 @@ class nbrDate
     
     # VARIÁVEIS PRIVADAS
     
-    private $_mktime = false;
     private $_language;
     
     # VARIÁVEIS PÚBLICAS
+    public $mktime = false;    
     
     # MÉTODOS PRIVADOS
     
     /**
-     * Seta Data a variável privada $_mktime
+     * Seta Data a variável privada $mktime
      *
      * @param integer $ano
      * @param integer $mes
@@ -36,10 +36,10 @@ class nbrDate
         $minuto      = intval($minuto);
         $segundo     = intval($segundo);
         
-        $this->_mktime = mktime($hora, $minuto, $segundo, $mes, $dia, $ano);
+        $this->mktime = mktime($hora, $minuto, $segundo, $mes, $dia, $ano);
         
         //Verifica se foi atribuído valor corretamente ao mktime
-        if($this->_mktime === false)
+        if($this->mktime === false)
             throw new Exception('nbrDate::O valor especificado não pôde ser atribuído corretamente.');
     }
     
@@ -51,7 +51,7 @@ class nbrDate
      */
     private function _checkData()
     {
-        if($this->_mktime === false)
+        if($this->mktime === false)
             throw new Exception('nbrDate::Você não pode executar esta ação sem antes setar uma data ao objeto.');
         
         return true;
@@ -70,6 +70,7 @@ class nbrDate
         switch ($format)
         {
             case ENUM_DATE_FORMAT::YYYY_MM_DD:
+                $date = substr($date, 0, 10);
                 $date = explode('-', $date);
                 $this->_setDate($date[0], $date[1], $date[2], 0, 0, 0);
                 break;
@@ -111,7 +112,7 @@ class nbrDate
         //Verifica se a data foi setada
         $this->_checkData();
         
-        return date($format, $this->_mktime);
+        return date($format, $this->mktime);
     }
     
     /**
