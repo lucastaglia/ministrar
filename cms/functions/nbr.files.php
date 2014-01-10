@@ -49,4 +49,22 @@ function CopiaDir($DirFont, $DirDest){
         closedir($dd);
     }
 }
+
+function TamanhoArquivo($arquivo) {
+    $tamanhoarquivo = filesize($arquivo);
+ 
+    /* Medidas */
+    $medidas = array('kb', 'mb', 'gb', 'tb');
+ 
+    /* Se for menor que 1KB arredonda para 1KB */
+    if($tamanhoarquivo < 999){
+        $tamanhoarquivo = 1000;
+    }
+ 
+    for ($i = 0; $tamanhoarquivo > 999; $i++){
+        $tamanhoarquivo /= 1024;
+    }
+ 
+    return number_format($tamanhoarquivo, 1, ',', '.') . $medidas[$i - 1];
+}
 ?>
