@@ -7,9 +7,7 @@ class nbrPage{
   public $index = true;
   
   private $a_css = array();
-  private $a_cssTemplate = array();
   private $a_js = array();
-  private $a_jsTemplate = array();
   private $a_image_src = array();
   
   function __construct(){
@@ -41,29 +39,12 @@ class nbrPage{
     include($FRONT_PAGES_PATH . $fileHtml);
   }
   
-  public function addFileStylesheet($file, $isTemplate = false){
-    
-    if(!$isTemplate){
-      if(array_search($file, $this->a_css) === false)
+  public function addFileStylesheet($file){
         $this->a_css[] = $file;
-    } else {
-      if(array_search($file, $this->a_cssTemplate) === false)
-        $this->a_cssTemplate[] = $file;
-
-    }
   }
   
-  public function addFileJavascript($file, $isTamplate = false){
-    
-    if(!$isTamplate){
-      if(array_search($file, $this->a_js) === false)
+  public function addFileJavascript($file){
         $this->a_js[] = $file;
-    } else {
-
-      if(array_search($file, $this->a_jsTemplate) === false)
-        $this->a_jsTemplate[] = $file;
-      
-    }
   }
 
 
@@ -72,24 +53,18 @@ class nbrPage{
   }
   
   private function printJS(){
-    global $cms, $LINK_PREFIX, $router;
+    global $cms;
 
-    $files = array_merge($this->a_jsTemplate, $this->a_js);
-    
-    if(count($files) > 0){
-      $html = '<script type="text/javascript" src="' . $router->GetLink('s/js/' . implode('/', $files)) . '"></script>' . "\r\n";
-      echo($html);
+    foreach ($this->a_js as $js) {
+      echo('<script defer src="' . $cms->GetFrontJavaScriptUrl() . $js . '"></script>' . "\r\n");
     }
   }
   
   private function printCSS(){
-    global $cms, $LINK_PREFIX, $router;
+    global $cms;
     
-    $files = array_merge($this->a_cssTemplate, $this->a_css);
-    
-    if(count($files) > 0){
-      $html = '<link rel="stylesheet" type="text/css" href="' . $router->GetLink('s/css/' . implode('/', $files)) . '"/>' . "\r\n";
-      echo($html);
+    foreach ($this->a_css as $css) {
+      echo('<link rel="stylesheet" type="text/css" href="' . $cms->GetFrontStyleSheetUrl() . $css . '"/>' . "\r\n");
     }
   }
   
@@ -109,6 +84,7 @@ class nbrPage{
   echo('<meta name="author" content="Nova Brazil Agência Interativa">'. "\r\n");
   echo('<meta name="description" content="' . $this->description . '">'. "\r\n");
   echo('<meta name="keywords" content="' . $this->keywords . '">'. "\r\n");
+  echo('<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">'. "\r\n");
   echo('<meta name="CMS" content="Nova Brazil Ministrar' . $cms->GetVersion() . '">'. "\r\n");
 
   if(!$this->index)
@@ -134,7 +110,7 @@ class nbrPage{
     echo('<!-- Impresso por Eventos -->' . "\r\n");
     echo($returns);  
   }
-    echo('<!-- -->');  
+    echo('<!-- -->');
   }
 }
 ?>
