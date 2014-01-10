@@ -1,5 +1,6 @@
 <?php
 include('../../../../config.php');
+global $TEMP_PATH;
 
 if (!empty($_FILES)) {
 	$tempFile = $_FILES['Filedata']['tmp_name'];
