@@ -210,6 +210,29 @@ class nbrCMS
     return $ADMIN_UPLOAD_PATH;
   }
   
+  
+  /**
+   * Retorna URL do diretório onde contém os arquivos de upload do CMS.
+   *
+   * @return string
+   */  
+  public function GetFileUploadUrl(){
+    global $ADMIN_UPLOAD_URL;
+    
+    return $ADMIN_UPLOAD_URL;
+  }
+
+  /**
+   * Retorna caminho físico do diretório onde contém os arquivos de upload do CMS.
+   *
+   * @return string
+   */    
+  public function GetFileUploadPath(){
+    global $ADMIN_UPLOAD_PATH;
+    
+    return $ADMIN_UPLOAD_PATH;
+  }  
+  
   /**
    * Retorna caminho (físico) do Diretório Temporário
    *
