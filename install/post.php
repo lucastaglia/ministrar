@@ -1,6 +1,10 @@
 <?
 session_start();
 
+//Aumenta o tempo de resposta do servidor
+//(em servidores mais lentos pode demorar um pouco mais, por isso a necessidade de aumentar para não dar problema no meio da instalação.
+ini_set('max_execution_time', 300); //5min
+
 //includes necessários..
 include('../cms/objects/nbr.obj.cms.php');
 $cms = new nbrCMS();
