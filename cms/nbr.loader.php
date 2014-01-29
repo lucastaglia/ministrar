@@ -33,10 +33,10 @@
   include($FUNCTIONS_PATH . 'nbr.application.php');
   include($FUNCTIONS_PATH . 'nbr.draw.php');
   include($FUNCTIONS_PATH . 'nbr.files.php');
+  include($FUNCTIONS_PATH . 'nbr.string.php');
   
   /** Faz includes das Funções do Admin **/
   include($ADMIN_FUNCTIONS_PATH . 'pages.php');
-  include($ADMIN_FUNCTIONS_PATH . 'string.php');
   
   /** Carrega objetos utilizados no framework... */
   $db       = new nbrDB();
