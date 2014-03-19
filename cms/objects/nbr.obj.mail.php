@@ -120,7 +120,7 @@ class nbrMail
   {
     global $cms;
     
-    $tmp  = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
+    $tmp  = '<html>' . "\n";
     $tmp .= '<head>' . "\n";
     $tmp .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
     $tmp .= '<style type="text/css">' . "\n";
@@ -140,12 +140,12 @@ class nbrMail
     
     $tmp .= '<body>' . "\n";
     $tmp .= '<img src="cid:cabecalho">' . "\n";
+    $tmp .= $html;
+    $tmp .= '<img src="cid:meioambiente">' . "\n";
     $tmp .= '<p>Você está recebendo este e-mail do <strong>Sistema Automático de Envio de E-mail.</strong>.' . "\n";
     $tmp .= '</p>' . "\n";
     $tmp .= '<p>Esta mensagem foi enviada em ' . date('d/m/Y') . ' às ' . date('H:i:s') . 'hrs.<br />' . "\n";
-    $tmp .= 'Foi enviado por uma pessoa com IP: ' . $_SERVER['REMOTE_ADDR'] . '.</p>' . "\n";    
-    $tmp .= $html;
-    $tmp .= '<img src="cid:meioambiente">' . "\n";
+    $tmp .= 'Foi enviado por uma pessoa com IP: ' . $_SERVER['REMOTE_ADDR'] . '.</p>' . "\n";
     $tmp .= '</body>' . "\n";
     $tmp .= '</html>' . "\n";
     
