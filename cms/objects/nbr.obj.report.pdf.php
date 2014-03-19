@@ -9,6 +9,7 @@ class nbrPDF extends FPDF
   public $objImp        = null;
   public $autoBreakLine = false;
   public $title;
+  public $code;
   public $designer = false;
   public $areaW;
   
@@ -108,8 +109,8 @@ class nbrPDF extends FPDF
     $this->SpaceW($param_w + 2);
     $this->RenderText('Doc:',                       40, 'right', 'Arial,8,B,#000000');
     $this->SpaceW(2);
-    $this->RenderText($this->rep->code,             52, 'right');
-    $this->NewLine(0, 0);
+    $this->RenderText($this->code,             52, 'right');
+    $this->NewLine(20, 0);
     
     // Título
     $this->RenderText($this->title,         ($this->w - $this->lMargin - $this->rMargin), 'center', 'Arial,14,B,#000000');
@@ -364,6 +365,10 @@ class nbrPDF extends FPDF
     $res['b'] = hexdec(substr($hexcolor, 5, 2));
   
     return $res;
+  }
+
+  public function SetCode($code){
+    $this->code = $code;
   }
 }
 ?>
