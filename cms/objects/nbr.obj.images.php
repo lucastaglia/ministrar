@@ -12,7 +12,7 @@ class nbrImages
   
   function __construct($file)
   {
-    
+
     $this->extensao = strtolower(substr($file, -3)); //Pega extensão do arquivo..
     
     //Lá a imagem obtém suas dimensões
@@ -183,7 +183,10 @@ class nbrImages
         	case 'jpg': ImageJPEG($img_final, $nameWrite, 100); break;
         }        
       }
+      ImageDestroy($img_final);
     }
+    ImageDestroy($this->_img);
+
     return $nameReturn;
   }
 }
