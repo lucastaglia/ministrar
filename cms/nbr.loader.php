@@ -14,7 +14,8 @@
   include($OBJECTS_PATH . 'nbr.obj.string.php');
   include($OBJECTS_PATH . 'nbr.obj.date.php');  
   include($OBJECTS_PATH . 'nbr.obj.site.php');
-  include($OBJECTS_PATH . 'nbr.obj.images.php');  
+  include($OBJECTS_PATH . 'nbr.obj.images.php'); // Esse objeto será descontinuado 
+  include($OBJECTS_PATH . 'nbr.obj.magicImage.php');
   include($OBJECTS_PATH . 'nbr.obj.mail.php');
   include($OBJECTS_PATH . 'nbr.obj.cms.php');
   include($OBJECTS_PATH . 'nbr.obj.router.php');
