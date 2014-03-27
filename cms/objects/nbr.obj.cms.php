@@ -126,7 +126,16 @@ class nbrCMS
    */
   public function GetFrontImageUrl(){
     return $this->themeURL . 'images/';
-  }  
+  }
+
+  /**
+   * Retorna Caminho físico de Imagens do Front
+   *
+   * @return string
+   */
+  public function GetFrontImagePath(){
+    return $this->themePath . 'images/';
+  }
   
   /**
    * Retorna URL dos StyleSheets (arquivos de css) do Admin
