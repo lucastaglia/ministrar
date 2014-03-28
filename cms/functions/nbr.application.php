@@ -65,13 +65,11 @@ function printWidgets($placeHolders){
 /**
  * Retorna Registro
  */
-function LoadRecord($tableName, $value, $field = 'ID', $idString = false){
+function LoadRecord($tableName, $value, $field = 'ID'){
   global $db;
   
-  if($idString)
-    $value = "'$value'";
-  
-  $sql = 'SELECT * FROM `' . $tableName . '` WHERE `' . $field . '` = ' . $value;
+  $sql = 'SELECT * FROM `' . $tableName . '` WHERE `' . $field . "` = '" . $value . "'";
+  //echo($sql);
   $res = $db->LoadObjects($sql);
   
   return $res[0];
