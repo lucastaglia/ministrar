@@ -25,7 +25,7 @@
   include($OBJECTS_PATH . 'nbr.obj.admin.dataset.php');  
   include($OBJECTS_PATH . 'nbr.obj.report.pdf.php');  
   include($OBJECTS_PATH . 'nbr.obj.msg.php');  
-  include($OBJECTS_PATH . 'nbr.obj.linkThumb.php'); 
+  //include($OBJECTS_PATH . 'nbr.obj.linkThumb.php'); // Esse objeto será excluído do CMS
   include($OBJECTS_PATH . 'nbr.obj.cache.php'); 
   include($OBJECTS_PATH . 'nbr.obj.events.php'); 
   include($OBJECTS_PATH . 'nbr.obj.params.php'); 
