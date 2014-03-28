@@ -170,9 +170,9 @@ class nbrAdminForms {
           
           $imgFile = $ADMIN_UPLOAD_PATH . $img;
           $imgUrl = $ADMIN_UPLOAD_URL . $img;
-          $imgObj = new nbrImages($imgFile);
-          $img = $imgObj->GeraThumb(600, 145, 'center', 'middle', false);
-          $img.= '?' . date('dmYHis');
+
+          $img = nbrMagicImage::CreateThumbBackgroundCenter($imgFile, 600, 145);
+
           $isBlank = false;
           
           //Pega Tamanho do Arquivo..
