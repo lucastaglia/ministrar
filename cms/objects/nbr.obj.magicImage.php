@@ -192,7 +192,9 @@ class nbrMagicImage{
     $this->img_obj = $imgObj;
 
   }
-
+  public function DestroyImg(){
+    imagedestroy($this->img_obj);
+  }
   public function GetImage(){
 
     //imprime cabeçalho..
@@ -248,13 +250,15 @@ class nbrMagicImage{
     return $CACHE_URL . $n_file;
   }
 
-  public static function CreateThumbBackgroundCenter($imgPath, $width, $height, $bgColor = 'transparent'){
+  public static function CreateThumbBackgroundCenter($imgPath, $width, $height, $bgColor = '#FFFFFF'){
     global $CACHE_PATH, $CACHE_URL;
 
     $file_infos =  pathinfo($imgPath);
     $file_lastmod = filemtime($imgPath);
 
-    $n_file = $file_infos['filename'] . '_tbgc_' . $width . 'x' . $height . '_' . date('YmdHis', $file_lastmod) . '.' . $file_infos['extension'];
+
+
+    $n_file = $file_infos['filename'] . '_tbgc_' . str_replace('#', '', $bgColor) . '_' . $width . 'x' . $height . '_' . date('YmdHis', $file_lastmod) . '.' . $file_infos['extension'];
 
     if(!file_exists($CACHE_PATH . $n_file)){
       $img = new nbrMagicImage();
