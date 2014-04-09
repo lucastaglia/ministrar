@@ -2,57 +2,42 @@
 class nbrAdminHub{
   
   public $levels;
-  private $fileCache;
+  private $urlParams;
   
   function __construct(){
-    
-    //Pega chave..
+
     if(isset($_GET['hub'])){
-      $key = $_GET['hub'];
-      $fileCache = $this->getFilePath($key);
-      
-      if(file_exists($fileCache))
-        $this->fileCache = $fileCache;
+      $this->urlParams = $_GET['hub'];
     }
     //Carrega novo nível..
     $this->starts();
+    
   }
 
   private function starts(){
-    //Se estiver tudo ok com arquivo de cache, carrega parâmetros...
-    if(!empty($this->fileCache)){
+
+    if(isset($_GET['hub'])){
       $this->LoadCache();
     }
-        
     //abre novo nível em branco...
     $this->levels[] = array();    
   }  
 
-  private function getFilePath($key){
-    global $CACHE_PATH;
-    
-    return $CACHE_PATH . $key . '.hub';
-  }
-  
   private function crypt($str){
     $str = utf8_decode($str);
-    $str = base64_encode($str);
+    $str = nbrEncode($str);
     return $str;
   }
   
   private function decrypt($str){
-    $str = base64_decode($str);
+    $str = nbrDecode($str);
     $str = utf8_encode($str);
     return $str;
   }
   
   private function LoadCache(){
     //abre arquivo...
-    $fp = fopen($this->fileCache, "r");
-    $str = fread($fp, filesize($this->fileCache));
-    $str = $this->decrypt($str);
-    fclose($fp);
-    
+    $str = $this->decrypt($this->urlParams);
     $this->levels = $this->strToArray($str);
   }
   
@@ -165,14 +150,8 @@ class nbrAdminHub{
 
     $str = $this->arrayToStr($this->levels);
     $str = $this->crypt($str);
-    
-    $key = md5($str);
-    
-    //salva Cache..
-    $file = fopen($this->getFilePath($key), 'w');
-    fwrite($file, $str);
-    fclose($file); 
-    
+    $key = $str;
+
     if($clearLevel){
       //Carrega HUB inicial...
       $this->starts();      
@@ -239,9 +218,7 @@ class nbrAdminHub{
   }
   
   public function GetStackString(){
-    
-    $stack = array();
-    
+
     $levels = $this->levels;
     $stack = array();
     
