@@ -340,15 +340,17 @@ function deleteImage($fileName){
   unlink($ADMIN_UPLOAD_PATH . $fileName);
   
   $fileCru = substr($fileName, 0, strlen($fileName) -4);
-  
-  //Exlue versões no cache
-  $dir = opendir($ADMIN_UPLOAD_PATH . 'cache/');
+
+  /* TIHH - será excluida essa parte...
+  //Exclue versões no cache
+  $dir = opendir($CACHE_PATH);
   while ($nome_itens = readdir($dir)) {
   
     if (ereg($fileCru . '.+(.jpg)', $nome_itens)) {
       unlink($ADMIN_UPLOAD_PATH . 'cache/' . $nome_itens);
     }
   }
+  **/
 }
 
 function executeFiles(){

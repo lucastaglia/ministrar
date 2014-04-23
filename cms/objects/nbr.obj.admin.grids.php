@@ -105,7 +105,7 @@ class nbrAdminGrid{
         if(!empty($record->$field['fieldName'])){
           $imgFile = $ADMIN_UPLOAD_PATH . $record->$field['fieldName'];
           $value  = '<a href="' . ($ADMIN_UPLOAD_URL . $record->$field['fieldName']) . '" title="Clique aqui para ampliar a foto"  class="fancybox">';
-          $value .= '<img src="' . nbrMagicImage::CreateThumbBackgroundCenter($imgFile, $field['length'], $field['height']) . '">';
+          $value .= '<img src="' . nbrMagicImage::CreateThumbBackgroundCenter($imgFile, $field['length'], $field['height'], '#FFFFFF') . '">';
           $value .= '</a>';
         } else 
           $value = '';
