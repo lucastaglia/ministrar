@@ -1,6 +1,10 @@
 <?
 $grid = new nbrAdminGrid('sysTables', 'Tabelas');
 
+//Filtros...
+$grid->AddFilter("A.IsSystem = 'Y'", 'Somente do Sistema');
+$grid->AddFilter("A.IsSystem <> 'Y'", 'Tabelas que não são do Sistema.', true);
+
 //Comandos..
 $hub->SetParam('_script', $moduleObj->path . 'admin.tables.command.constrains.php');
 $grid->AddCommand('Re-criar Constrains', $hub->GetUrl(), 'Excluir e recriar os constrais do Sistema', 'Tem certeza que deseja EXCLUIR TODOS OS CONTRAINS e recriá-los?');
