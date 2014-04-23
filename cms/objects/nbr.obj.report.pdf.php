@@ -137,7 +137,13 @@ class nbrPDF extends FPDF
   public function Footer()
   {
     global $_security;
-  
+
+    if(empty($_security)){
+      $userName = '(anônimo)';
+    } else {
+      $userName = $_security->userName;
+    }
+
     $top = $this->PageBreakTrigger;
     $this->Line($this->lMargin, $top, ($this->w - $this->rMargin), $top);
     $this->SetXY($this->lMargin, $top + 1);
@@ -146,7 +152,7 @@ class nbrPDF extends FPDF
   
     $cols    = array();
     $cols[1] = $this->title;
-    $cols[2] = $_security->userName;
+    $cols[2] = $userName;
   
     $this->RenderText($cols[1],  $col_w, 'left');
     $this->RenderText($cols[2],  $col_w, 'right');
