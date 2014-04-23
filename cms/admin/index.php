@@ -41,7 +41,7 @@ include($ROOT_PATH . 'cms/nbr.loader.php');
 include($ADMIN_PATH . 'nbr.admin.loader.php');
 
 //Carrega objeto de Idioma..
-include($OBJECTS_PATH . 'nbr.obj.langs.php');  
+//include($OBJECTS_PATH . 'nbr.obj.langs.php');
 $langs	= new nbrLangs('ADMIN');
 
 

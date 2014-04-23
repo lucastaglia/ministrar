@@ -20,7 +20,7 @@ class nbrLangs{
 		$this->prefixo = $prefixo;
 		
 		$this->languages = $LANGS['activated'];
-		
+		/*
 		//verifica se já existe um idioma setado na sessão, se não seta a padrão (default)
 		if(!isset($_SESSION['nbr_lang_' . $prefixo])){
 			$this->SetLanguage($this->default);
@@ -29,7 +29,7 @@ class nbrLangs{
 		}
 		//carrega arquivo...
 		$this->LoadFile();
-			
+		*/
 	}
 	
 	function __destruct(){
@@ -113,6 +113,15 @@ class nbrLangs{
 			
 		}
 	}
+
+  public function checkLanguage($language){
+
+    foreach($this->languages as $lang){
+      if($lang == $language)
+        return true;
+    }
+    return false;
+  }
 }
 
 

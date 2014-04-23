@@ -14,7 +14,15 @@ class nbrRouter{
       $params = explode('/', $params);
       
       $lang = array_shift($params);
-      $langs->SetLanguage($lang);
+
+      //verifica se idioma está liberado no config
+      if($langs->checkLanguage($lang)){
+        $langs->SetLanguage($lang);
+      } else {
+        $langs->language = $langs->default;
+        header('Location: ' . $this->GetLink(implode($params, '/')));
+      }
+
       
       $this->params = $params;
       
@@ -40,10 +48,10 @@ class nbrRouter{
    *
    * @param string $page
    */
-   public function GetLink($page){
+   public function GetLink($page, $lang = null){
     global $LINK_PREFIX, $ROOT_URL, $langs;
     
-    $url = $ROOT_URL . $LINK_PREFIX . $langs->language . '/' . $page;
+    $url = $ROOT_URL . $LINK_PREFIX . (empty($lang)?$langs->language:$lang) . '/' . $page;
     return $url;
   }
   
