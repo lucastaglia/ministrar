@@ -197,7 +197,7 @@ CREATE TABLE `sysModuleFolders` (
   `LastUserName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `fk_sysmodulefolders_module` (`Module`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Pastas de determinado Módulo do Sistema' AUTO_INCREMENT=11;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Gerencia Pastas de determinado Módulo do Sistema' AUTO_INCREMENT=12;
 
 INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Grouper`, `Actived`,`MultiLanguages`, `LastUpdate`, `LastUserName`, `Lang`) VALUES
 (1, 1, 'Tabelas', 10, 'admin.tables.grid.php', 'Banco de Dados', 'Y', 'N',  '2010-11-05 14:33:43', 'Instalador CMS', 'pt-br'),
@@ -210,7 +210,9 @@ INSERT INTO `sysModuleFolders` (`ID`, `Module`, `Name`, `Order`, `File`, `Groupe
 (8, 2, 'Grupos', 20, 'admin.grupos.grid.php', 'Geral', 'Y', 'N', '2013-06-17 17:53:18','Instalador CMS', 'pt-br'),
 (9,1,'Parâmetros',20,'admin.params.grid.php','Banco de Dados','Y','N', '2013-09-24 13:26:08','Instalador CMS', 'pt-br'),
 (10,3,'Do CMS',20,'admin.params.cms.grid.php','Geral','Y','N', '2013-09-24 14:26:31','Instalador CMS', 'pt-br'),
-(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','N', '2013-09-24 14:26:31','Instalador CMS', 'pt-br');
+(11,3,'Do Site',10,'admin.params.site.grid.php','Geral','Y','N', '2013-09-24 14:26:31','Instalador CMS', 'pt-br'),
+(12,1,'Gerenciador de Arquivos',60,'app.elfinder.php','Aplicativos','Y','N', '2013-09-24 14:26:31','Instalador CMS', 'pt-br');
+);
 
 -- ------------------------------------------------------------
 
