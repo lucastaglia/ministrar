@@ -29,9 +29,7 @@ $grid->AddColumnCustom('REGISTROS', 'Qtd Reg.', 100, 'center');
 $grid->AddColumnCustom('CAMPOS', 'Qtd Campos', 100, 'center');
 $grid->AddColumnBoolean('IsSystem','Do Sistema?', 70);
 
-
 $grid->PrintHTML();
-
 
 //Macro...
 function macroGridValues($field , $value, $record){
