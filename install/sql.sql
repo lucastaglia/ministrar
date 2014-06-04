@@ -193,6 +193,7 @@ CREATE TABLE `sysModuleFolders` (
   `Grouper` varchar(50) DEFAULT NULL,
   `Actived` char(1) DEFAULT NULL,
   `MultiLanguages` char(1) DEFAULT NULL,
+  `CounterSQL`  text,
   `LastUpdate` datetime DEFAULT NULL,
   `LastUserName` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -365,7 +366,7 @@ CREATE TABLE `sysTableFields` (
   PRIMARY KEY (`ID`),
   KEY `Table` (`Table`),
   KEY `fk_systablefields_tablelink` (`TableLink`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela que gerencia Campos de determinada tabela' AUTO_INCREMENT=704;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Tabela que gerencia Campos de determinada tabela' AUTO_INCREMENT=706;
 
 INSERT INTO `sysTableFields` (`ID`, `Table`, `Name`, `Type`, `Length`, `TableLink`, `ListValues`, `LastUpdate`, `LastUserName`, `Order`, `Lang`) VALUES
 (11, 1, 'Name', 'STR', 50, NULL, NULL, NULL, NULL, 9999, 'pt-br'),
@@ -430,7 +431,8 @@ INSERT INTO `sysTableFields` (`ID`, `Table`, `Name`, `Type`, `Length`, `TableLin
 (701, 45, 'Path', 'STR', 30, NULL, NULL, '2013-10-21 14:22:46', 'Instalador CMS', 9999, 'pt-br'),
 (702, 45, 'Description', 'TXT', NULL, NULL, NULL, '2013-10-21 14:23:01', 'Instalador CMS', 9999, 'pt-br'),
 (703, 45, 'URL', 'STR', 100, NULL, NULL, '2013-10-21 14:23:07', 'Instalador CMS', 9999, 'pt-br'),
-(704, 45, 'Version', 'STR', 10, NULL, NULL, '2013-10-21 14:23:22', 'Instalador CMS', 9999, 'pt-br');
+(704, 45, 'Version', 'STR', 10, NULL, NULL, '2013-10-21 14:23:22', 'Instalador CMS', 9999, 'pt-br'),
+(705, 9, 'CounterSQL', 'TXT', 0, NULL, NULL, NULL, NULL, 9999, 'pt-br');
 
 
 

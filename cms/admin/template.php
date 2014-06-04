@@ -116,6 +116,14 @@ foreach ($modules as $module) {
     <a title="<?= $module->description; ?>" href="<?= $hub->GetUrl(); ?>">
       <div class="name" style="background-image:url(<?= $module->iconPath; ?>); ">
         <span><?= __($module->name); ?></span>
+
+        <?
+        if($module->GetNotifications() > 0){
+        ?>
+        <div id="contador"><?= $module->GetNotifications(); ?></div>
+        <?
+        }
+        ?>
       </div>
     </a>
   </li>
@@ -165,7 +173,27 @@ if($hub->ExistParam('_moduleID')){
     $link = $hub->GetUrl();
     
     echo('<li ' . (($hub->GetParam('_folderID') == $folder->ID)?'class="selected"':null) . '>');
+
+
+    if(!empty($folder->CounterSQL)){
+
+      $total = 'erro';
+      $sql  = $folder->CounterSQL;
+      $resultado = $db->LoadObjects($sql);
+
+      if(count($resultado) > 0){
+        $total = intval($resultado[0]->TOTAL);
+      }
+
+      echo('<span class="contador">' . $total . '</span>');
+    }
+
+
+
     echo('<a href="' . $link . '"><span>' . __(utf8_encode($folder->Name)) . '</span></a>');
+
+
+
     echo('</li>');
     
   }

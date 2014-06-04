@@ -128,5 +128,26 @@ class nbrModule{
     
     return ($res[0]->TOTAL > 0);
   }
+
+  public function GetNotifications(){
+    global $db;
+
+    $sql = 'SELECT * FROM sysModuleFolders';
+    $sql .= " WHERE Module = " . $this->ID . " AND CounterSQL IS NOT NULL AND Actived = 'Y'";
+    $res = $db->LoadObjects($sql);
+
+    $total = 0;
+
+    foreach($res as $reg){
+
+      $counterSQL = $reg->CounterSQL;
+      $subtotal = $db->LoadObjects($counterSQL);
+      $subtotal = $subtotal[0]->TOTAL;
+      $total += $subtotal;
+    }
+
+
+    return  $total;
+  }
 }
 ?>
