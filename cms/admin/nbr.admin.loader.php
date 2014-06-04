@@ -13,7 +13,7 @@
  */
  include($ADMIN_FUNCTIONS_PATH . 'application.php');
  
-  $hub      = new nbrAdminHub();  
+  $hub      = new nbrAdminHub();
 
 
 ?>

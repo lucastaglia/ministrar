@@ -43,7 +43,7 @@ include($ADMIN_PATH . 'nbr.admin.loader.php');
 //Carrega objeto de Idioma..
 //include($OBJECTS_PATH . 'nbr.obj.langs.php');
 $langs	= new nbrLangs('ADMIN');
-
+//$langs->LoadFile();
 
 //Pega os idiomas do Front
 $langs_front = $LANGS_FRONT;
@@ -51,8 +51,9 @@ $langs_front = $LANGS_FRONT;
 if(!isset($_SESSION['lang_admin'])){
 	$_SESSION['lang_admin'] = $langs_front['default'];
 }
+$langs->SetLanguage($_SESSION['lang_admin']);
 
-//Chame administrador de Cookies
+//Chama administrador de Cookies
 include($ADMIN_PAGES_PATH . 'cookies.php');
 
 //Joga parâmetro (do GRID) "Registros por Página" no Cookie do Usuário
