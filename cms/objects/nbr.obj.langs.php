@@ -6,6 +6,7 @@ class nbrLangs{
 	public $languages = array();
 	public $words = array();
 	public $prefixo;
+  	public $opened = false;
 	
 	private $file_contents;
 	private $file_handle;
@@ -33,7 +34,8 @@ class nbrLangs{
 	}
 	
 	function __destruct(){
-		fclose($this->file_handle);
+		if(isset($this->file_handle))
+			fclose($this->file_handle);
 	}
 	
 	public function SetLanguage($lang){
@@ -81,10 +83,16 @@ class nbrLangs{
 			eval($this->file_contents);
 			$this->words = $l;
 		}
+
+    $this->opened = true;
 	}
 	
 	public function getText($id){
-		
+
+    //se o arquivo não foi carregado, ignora...
+    if(!$this->opened)
+      return $id;
+
 		if(!array_key_exists($id, $this->words)){
 			
 			$txt = '$l["'  . $id . '"] = "' . $id .'";' . "\r\n";
