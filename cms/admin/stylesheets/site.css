@@ -166,7 +166,7 @@ div#topo div#usuario {
 div#topo div#usuario span#nome {
 	display: block;
 	font-family: Verdana, Geneva, sans-serif;
-	font-size: 12px;
+	font-size: 10px;
 	color: #FFFFFF;
 	font-weight: bold;
 	padding-bottom: 7px;
@@ -185,9 +185,9 @@ div#topo div.direita {
 	width: 95px;
 	height: 20px;
 	float:right;
-	margin-top: 13px;
 	background-position: right top;
 	background-repeat: no-repeat;
+  margin-right: 10px;
 }
 .bt-salvar, .bt-cancelar{
  float:right;
@@ -313,26 +313,23 @@ div#topo div.direita {
 	cursor: pointer;
 }
 div#topo div.direita a span#btn_site {
-	width: 22px;
-	height: 20px;
+	width: 31px;
+	height: 35px;
 	background-image: url(../images/head_btn_site.png);
+  background-position: center;
 	display: block;
 	float: left;
 	margin-left: 20px;
-}
-div#topo div.direita a:hover span#btn_site {
-	background-position: 0 -21px;
+  margin-top: 4px;
 }
 div#topo div.direita a span#btn_sair {
-	width: 22px;
-	height: 20px;
+	width: 34px;
+	height: 35px;
 	background-image: url(../images/head_btn_sair.png);
 	display: block;
 	float: left;
 	margin-left: 9px;
-}
-div#topo div.direita a:hover span#btn_sair {
-	background-position: 0 -21px;
+  margin-top: 4px;
 }
 div#toolbar {
 	width: 100%;
