@@ -362,6 +362,7 @@ div#toolbar ul li {
 	margin: 5px;
 	float: left;
 	list-style:none outside none;
+        position: relative;
 }
 div#toolbar ul li a{
  display:block !important;
@@ -384,6 +385,20 @@ div#toolbar ul li a .name span{
 	padding: 0 5px;
 	padding-top: 58px;
 	font-size: 9px;
+}
+div#toolbar ul li a .name div#contador{
+	position: absolute;
+	right: 3px;
+	top: 3px;
+	background-color: #C93438;
+	color: #FFF;
+	padding: 0 3px;
+	line-height: 20px;
+	font-size: 10px;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 div#toolbar ul li a:hover .name span{
 	text-decoration: underline;
@@ -458,13 +473,29 @@ div#content div#left ul.menu {
 	margin: 0;
 	padding: 0;
 }
-div#content div#left ul.menu li {
+div#content div#left ul.menu li
+ {
 	width: 197px;
 	height: 20px;
 	list-style:none outside none;
 	margin: 2px;
 	padding: 0;
+  	position: relative;
 }
+div#content div#left ul.menu li .contador{
+	position: absolute;
+	right: 3px;
+	background-color: #C93438;
+	color: #FFF;
+	padding: 0 3px;
+	line-height: 20px;
+	font-size: 10px;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
 div#content div#left ul.menu li.selected span,
 div#content div#left ul.menu li.selected a:hover span  {
   color: #FFFFFF;
