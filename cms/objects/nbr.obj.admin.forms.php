@@ -221,7 +221,7 @@ class nbrAdminForms {
     	  break;
     	  
     	case 'TXT':
-          $html  = '<div class="field ' . $columnsStr . ' textarea ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+          $html  = '<div class="field ' . $columnsStr . ' textarea ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '" id="' . $fieldName. '" >' . "\r\n";
           $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
           $html .= '<textarea class="' . ($required?'required':null) . '" ' . ($readOnly?'disabled':null) . ' id="texto" id="' . $fieldName. '" name="' . $fieldName. ($readOnly?'_disabled':null) . '" style="height:' . $height . 'px">' . $this->getValue($fieldName, $valueDefault) . '</textarea>' . "\r\n";
           $html .= '<div class="clearBoth"></div>';
@@ -368,18 +368,18 @@ class nbrAdminForms {
    *
    * @param string $title
    */
-  public function AddGroup($title, $class = null) {
+  public function AddGroup($title, $class = null, $id = null) {
     
-    $html  = '<div class="separator'. (!empty($class)?' ' . $class:null) . '">' . "\r\n";
+    $html  = '<div class="separator'. (!empty($class)?' ' . $class:null) . '" id="' . (!empty($id)?$id:null) . '">' . "\r\n";
     $html .= $title . "\r\n";
     $html .= '</div>' . "\r\n";
     
     $this->html_fields[] = $html;
   }
     
-  public function AddDescriptionText($text, $class = null){
+  public function AddDescriptionText($text, $class = nulll, $id = null){
     
-    $html  = '<div class="description'. (!empty($class)?' ' . $class:null) . '">' . "\r\n";
+    $html  = '<div class="description'. (!empty($class)?' ' . $class:null) . '" id="' . (!empty($id)?$id:null) . '">' . "\r\n";
     $html .= $text . "\r\n";
     $html .= '</div>' . "\r\n";
     
