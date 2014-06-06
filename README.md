@@ -15,10 +15,10 @@ O autor desde projeto é @tihhgoncalves, desenvolvido pela equipe @novabrazil. A
 Para contatar a equipe deste projeto, escreva para ministrar@novabrazil.art.br
 Aos interessados em fazer parte de nossa equipe de desenvolvimento, encrever também para o e-mail acima.
 
-### Liberações
+## Liberações
 Saiba tudo sobre as novidades e correções que estão chegando e já estão aí para serem utilizadas!
 
-## Liberações
+### Liberações
 **2.0.0.b6 (ainda não liberada)**
 * Controle Multilinguístico tanto para o Administrador como para o Front.
 * Novos ícones para os Módulos do Administrador.
@@ -55,3 +55,9 @@ Saiba tudo sobre as novidades e correções que estão chegando e já estão aí
 
 **2.0.0.b1**
 * Primeira versão (BETA) liberada.
+
+
+## Plugins
+Veja abaixo a relação dos plugins oficiais já disponíveis:
+
+* Conteúdos [ministrar2_plg_conteudos] - Plugin responsável pelo Módulo de Conteúdos, que administra texto das páginas do site.
