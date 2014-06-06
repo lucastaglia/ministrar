@@ -60,4 +60,4 @@ Saiba tudo sobre as novidades e correções que estão chegando e já estão aí
 ## Plugins
 Veja abaixo a relação dos plugins oficiais já disponíveis:
 
-* [Conteúdos]:https://github.com/tihhgoncalves/ministrar2_plg_conteudos [ministrar2_plg_conteudos] - Plugin responsável pelo Módulo de Conteúdos, que administra texto das páginas do site.
+* [Conteúdos](https://github.com/tihhgoncalves/ministrar2_plg_conteudos) [ministrar2_plg_conteudos] - Plugin responsável pelo Módulo de Conteúdos, que administra texto das páginas do site.
