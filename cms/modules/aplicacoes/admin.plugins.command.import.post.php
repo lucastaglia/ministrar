@@ -51,7 +51,6 @@ if(is_resource($zip)){
 
 //carrega configurações do plugin...
 include($TMPfull . $diretorio_nome . '/' . 'config.php');
-$plugin = new nbrPlugin();
 
 
 $dir = $PLUGINS_PATH . $plugin->path;
@@ -79,7 +78,7 @@ $post->AddFieldString('Version', $plugin->version);
 $post->Execute();
 
 //link...
-$dataSet->SetParam('msgSucess',"O plugin '" . $plugin->name . "' foi instalado com sucesso.");
+$dataSet->SetParam('msgSucess',"O plugin '" . $plugin->name . "' foi importado com sucesso.");
 $hub->BackLevel(3);
 header('LOCATION:' . $hub->GetUrl());
 ?>

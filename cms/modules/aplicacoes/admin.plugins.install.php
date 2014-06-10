@@ -6,9 +6,26 @@ $pluginID = $hub->GetParam('pluginID');
 
 $reg = LoadRecord('sysPlugins', $pluginID);
 
+//carrega configurações do plugin...
+include($PLUGINS_PATH . $reg->Path . '/config.php');
+
 if($action == 'install'){
+
+  //instala tabelas...
+  foreach($plg_tables as $plg_table){
+    $plg_table->CreateTable();
+  }
+
+  //chama arquivo de instalação do plugin...
    include($PLUGINS_PATH . $reg->Path . '/install.php');
 } else { //Desintalar...
+
+  //desintala tabelas...
+  foreach($plg_tables as $plg_table){
+    $plg_table->DropTable();
+  }
+
+  //chama arquivo de instalação do plugin...
   include($PLUGINS_PATH . $reg->Path . '/uninstall.php');
 }
 
