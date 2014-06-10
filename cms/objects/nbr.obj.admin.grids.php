@@ -159,8 +159,11 @@ class nbrAdminGrid{
 
       case 'DTA':
         $value = utf8_encode($record->$field['fieldName']);
-        $date = new nbrDate($value, ENUM_DATE_FORMAT::YYYY_MM_DD_HH_II_SS);
-        $value = $date->GetDayOfWeekShorten() . ', ' . $date->GetFullDateForShorten();
+
+        if(!empty($value)){
+          $date = new nbrDate($value, ENUM_DATE_FORMAT::YYYY_MM_DD_HH_II_SS);
+          $value = $date->GetDayOfWeekShorten() . ', ' . $date->GetFullDateForShorten();
+        }
         break;
 
       case 'LST':
