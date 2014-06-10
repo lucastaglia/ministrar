@@ -8,7 +8,7 @@ A licença de uso de nosso sistema é gratuita. Então fique a vontade para util
 Leia toda a documentação do projeto em nosso Wiki:
 https://github.com/tihhgoncalves/ministrar/wiki
 
-### Autores e Coleboradores
+### Autores e Colaboradores
 O autor desde projeto é @tihhgoncalves, desenvolvido pela equipe @novabrazil. Agradecemos  aqui as contribuições informais de @bugotech que solidificam com sua experiência a base conceitual deste projeto. Deste modo, o reconhecemos como co-autor deste projeto.
 
 ### Suporte e Contato
