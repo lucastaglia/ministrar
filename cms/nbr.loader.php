@@ -30,6 +30,7 @@
   include($OBJECTS_PATH . 'nbr.obj.cache.php'); 
   include($OBJECTS_PATH . 'nbr.obj.events.php'); 
   include($OBJECTS_PATH . 'nbr.obj.params.php'); 
+  include($OBJECTS_PATH . 'nbr.obj.tableManager.php');
 
   /** Includes de objetos de terceiros **/
   include($OBJECTS_PATH . 'instagram.php');
