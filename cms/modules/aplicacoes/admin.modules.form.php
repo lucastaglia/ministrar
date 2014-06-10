@@ -24,7 +24,7 @@ $form->AddFieldCustom('Icon', 'Ícone', 3);
 $form->AddDescriptionText('Obs.: Os ícones deverão conter a dimensão de 60x50px e devem estar no diretório ..\cms\icons.');
 
 //Idiomas..
-$form->AddLkpMultselect('IDIOMAS', 'Idiomas', 'O(s) idioma(s) que mostrará(rão) o módulo', 'sysModulesLanguages', 'Modulo', 'sysLanguages', 'Idioma', 'Nome', null, null, 3, true);
+$form->AddLkpMultselect('IDIOMAS', 'Idiomas', 'O(s) idioma(s) que mostrará(rão) o módulo', 'sysModulesLanguages', 'Modulo', 'sysLanguages', 'Idioma', 'Nome', null, null, 3, false);
 
 $form->PrintHTML();
 
