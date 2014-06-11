@@ -541,10 +541,16 @@ class nbrAdminForms {
   }
   
   public function AddFieldDateTime($fieldName, $legend, $columns, $valueDefault = null, $required = true, $readOnly = false, $validateType = 'required'){
+    if($valueDefault == 'NOW'){
+      $valueDefault = date('Y-m-d H:i');
+    }
     $this->addField('DTT', $fieldName, $legend, 16,$columns, $valueDefault, $required, $readOnly, -1, null, $validateType);
   }
   
   public function AddFieldDate($fieldName, $legend, $columns, $valueDefault = null, $required = true, $readOnly = false, $validateType = 'required'){
+    if($valueDefault == 'NOW'){
+      $valueDefault = date('Y-m-d');
+    }
     $this->addField('DAT', $fieldName, $legend, 16,$columns, $valueDefault, $required, $readOnly, -1, null, $validateType);
   }  
   
