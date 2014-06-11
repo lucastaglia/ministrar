@@ -157,7 +157,7 @@ $(document).ready(function(){
     	}
       
     });
-    
+
 });
 
 /** Campos Data **/
@@ -291,8 +291,11 @@ $(document).ready(function(){
 
     $("select.multiselect").each(function(){
 
-      var control_ordem = $(this).attr('sortable');  
-      $(this).multiselect({sortable: (control_ordem == 'true'?true:false)});    
+      var control_ordem = $(this).attr('sortable');
+
+      $(this).multiselect({
+        sortable: (control_ordem == 'true'?true:false)
+      });
 
     });
 
@@ -437,7 +440,8 @@ function backEnabled(){
 
 function formURLSubmit(url){
   $('#formulario').attr('action', url);
-  $('#formulario').submit();
+  $('#formulario button[type=submit]').click();
+  //$('#formulario').submit(); não tava indo na verificação dos campos obrigatórios
 }
 
 // Salvar e Voltar...
@@ -479,25 +483,6 @@ $(document).ready(function(){
   });
   
 });
-
-
-// Calendario...
-/* Está com erro!
-$(document).ready(function(){
-  
-  $('div.date input').datepicker({
-    dateFormat: 'dd/mm/yy',
-    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-    nextText: 'Próximo',
-    prevText: 'Anterior'
-  });
-  
-});
-*/
 
 /**
 * TECLAS DE ATALHOS
