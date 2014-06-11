@@ -14,7 +14,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 
   $('div#boxForm input[mask]').each(function(){
-    
+
     $(this).mask($(this).attr('mask'));
     
   });
@@ -164,8 +164,21 @@ $(document).ready(function(){
 $(document).ready(function(){
   
   $('div#boxForm div.datetime input').mask('99/99/9999 99:99');
-  $('div#boxForm div.date input').mask('99/99/9999');
-  
+  //$('div#boxForm div.date input').mask('99/99/9999');
+
+  var datapickerParams = {
+    dateFormat: 'dd/mm/yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+  }
+
+  $('div#boxForm div.date input').datepicker(datapickerParams);
+
 });
 
 /** Campos Imagem **/

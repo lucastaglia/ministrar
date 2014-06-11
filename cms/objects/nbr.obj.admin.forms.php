@@ -269,7 +269,7 @@ class nbrAdminForms {
     	  } else 
     	    $dateValue = null;
     	    
-        $html  = '<div  id="' . $fieldName . '" class="field datetime ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="dv_' . $fieldName . '" class="field datetime ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";   
@@ -288,7 +288,7 @@ class nbrAdminForms {
     	  } else 
     	    $dateValue = '';
     	    
-        $html  = '<div  id="' . $fieldName . '" class="field date ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
+        $html  = '<div  id="dv_' . $fieldName . '" class="field date ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
         $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";    		
