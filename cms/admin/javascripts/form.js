@@ -164,7 +164,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   
   $('div#boxForm div.datetime input').mask('99/99/9999 99:99');
-  //$('div#boxForm div.date input').mask('99/99/9999');
+  $('div#boxForm div.date input').mask('99/99/9999');
 
   var datapickerParams = {
     dateFormat: 'dd/mm/yy',
