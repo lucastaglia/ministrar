@@ -61,7 +61,7 @@ class nbrAdminForms {
         $val = $this->getValue($fieldName, $valueDefault);
         $html  = '<div id="' . $fieldName . '" class="field string ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . ' />' . "\r\n";
+        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="" ' . ($required?$required_str:null) . ' ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . ' />' . "\r\n";
         $html .= '</div>' . "\r\n";   
         $this->fieldsName[] = $fieldName; 		
     		break;
@@ -271,7 +271,7 @@ class nbrAdminForms {
     	    
         $html  = '<div  id="dv_' . $fieldName . '" class="field datetime ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-        $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
+        $html .= '<input ' . ($readOnly?'disabled':null) . ' class="" ' . ($required?$required_str:null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";   
         
         $this->fieldsDateName[] = $fieldName;
@@ -290,7 +290,7 @@ class nbrAdminForms {
     	    
         $html  = '<div  id="dv_' . $fieldName . '" class="field date ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-        $html .= '<input ' . ($readOnly?'disabled':null) . ' class="' . ($required?$required_str:null) . '" type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
+        $html .= '<input ' . ($readOnly?'disabled':null) . ' class="" ' . ($required?$required_str:null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $dateValue . '" maxlength="' . $length. '"></input>' . "\r\n";
         $html .= '</div>' . "\r\n";    		
         
         $this->fieldsDateName[] = $fieldName;
@@ -583,7 +583,7 @@ class nbrAdminForms {
     
     $html  = '<div class="lkp_multselect">' . "\r\n";
     
-    $html .= '<select sortable="' . (empty($fieldOrder)?'false':'true') . '"  multiple="multiple" name="' . $name . '[]" class="multiselect ' . ($required?'required':null) . '" id="' . $name. '" >' . "\r\n";
+    $html .= '<select sortable="' . (empty($fieldOrder)?'false':'true') . '"  multiple="multiple" name="' . $name . '[]" class="multiselect " ' . ($required?'required':null) . ' id="' . $name. '" >' . "\r\n";
     
     //Seleciona já selecionados..
     
