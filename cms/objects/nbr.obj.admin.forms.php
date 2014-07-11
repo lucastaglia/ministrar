@@ -61,7 +61,7 @@ class nbrAdminForms {
         $val = $this->getValue($fieldName, $valueDefault);
         $html  = '<div id="' . $fieldName . '" class="field string ' . $columnsStr . ' ' . ($required?'required':null) . ' ' . ($readOnly?'disabled':null) . '">' . "\r\n";
         $html .= '<label class="legend">' . $legend . '</label>' . "\r\n";
-        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="" ' . ($required?$required_str:null) . ' ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . $val . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . ' />' . "\r\n";
+        $html .= '<input ' . ($readOnly?'readonly':null) . ' class="' . ($required?$required_str:null) . '" ' . ($readOnly?' title="' . $val . '" ':null) . ' type="text" name="' . $fieldName. ($readOnly?'_disabled':null) . '" id="' . $fieldName. '" value="' . htmlspecialchars($val) . '" maxlength="' . $length. '" ' . (!empty($mask)?'mask="' . $mask . '"':null) . ' />' . "\r\n";
         $html .= '</div>' . "\r\n";   
         $this->fieldsName[] = $fieldName; 		
     		break;

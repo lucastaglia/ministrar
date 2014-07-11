@@ -32,6 +32,15 @@ if(empty($fieldsFile))
 else
   $fieldsFile = explode(',', $fieldsFile);
 
+
+//Faz uma limpa nos caracteres "estranhos" dos campos..
+for($i = 0; $i < count($fields); $i++){
+  $antigos = array('–', '“', '”');
+  $novos = array('-', '"', '"');
+  $_POST[$fields[$i]] = str_replace($antigos, $novos, $_POST[$fields[$i]]);
+}
+
+
 //Verifica se senha não foi informada/alterada e retira o campo da lista..
 //Ou criptografa e salva no banco
 foreach ($fieldsPassword as $fieldPassword) {
