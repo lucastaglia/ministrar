@@ -38,6 +38,10 @@ class nbrRouter{
           header('Location:' . nbrRouter::GetLink('404/' . $page));
       }
     } else {
+
+      if(empty($langs->language))
+        $langs->language = $langs->default;
+
       header('Location:' . nbrRouter::GetLink($SITE_PAGEINDEX));
       exit;
     }
