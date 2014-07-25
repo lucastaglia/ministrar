@@ -20,8 +20,11 @@ class nbrParams{
    * @param string $id
    * @return string
    */
-  public function GetParam($id){
-    return $this->params[$id];
+  public function GetParam($id, $breakLines = false){
+    if($breakLines)
+      return nl2br($this->params[$id]);
+    else
+      return $this->params[$id];
   }
   
   
