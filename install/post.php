@@ -230,6 +230,7 @@ foreach($sql as $v) {
 }
 
 //cria diretórios...
+mkdir('../bkps/', 0777, true);
 mkdir('../cms/plugins/', 0777, true);
 mkdir('../cms/cache/', 0777, true);
 mkdir('../cms/temp', 0777, true);

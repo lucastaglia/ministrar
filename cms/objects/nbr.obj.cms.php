@@ -252,6 +252,27 @@ class nbrCMS
     
     return $TEMP_PATH;
   }
+
+  /**
+   * Retorna caminho (físico) do Diretório bkps
+   *
+   * @return string
+   */
+  public function GetBkpsPath(){
+    global $BKPS_PATH;
+
+    return $BKPS_PATH;
+  }
+  /**
+   * Retorna caminho (virtual) do Diretório bkps
+   *
+   * @return string
+   */
+  public function GetBkpsURL(){
+    global $BKPS_URL;
+
+    return $BKPS_URL;
+  }
   
   /**
    * Retorna Idioma (atual) do Site

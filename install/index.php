@@ -188,6 +188,7 @@ if(!isset($_SESSION['installStatus'])){
 <h2>Diretórios de uso do CMS</h2>
 <p>O instalador verificará e caso ainda não exista, estará criando os seguintes diretórios com as seguintes permissões:  </p>
   <ul>
+  	<li>./<strong>bkps</strong> (permissão 777)</li>
   	<li>./cms/<strong>cache</strong> (permissão 777)</li>
   	<li>./cms/<strong>plugins</strong> (permissão 777)</li>
   	<li>./cms/<strong>temp</strong> (permissão 777)</li>  
