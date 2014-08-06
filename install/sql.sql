@@ -255,8 +255,8 @@ CREATE TABLE `sysModules` (
 
 INSERT INTO `sysModules` (`ID`, `Name`, `Path`, `Actived`, `LastUpdate`, `LastUserName`, `Description`, `Developer`, `Icon`, `Lang`) VALUES
 (1, 'Aplicação', 'aplicacoes', 'Y', '2013-06-11 10:15:15','Instalador CMS', 'Módulo responsável pela configuração do Sistema', 'Y', 'ministrar2.png', 'pt-br'),
-(2, 'Usuários', 'usuarios', 'Y', '2013-06-11 10:15:15','Instalador CMS', 'Módulo responsável pela administração de Usuários', 'Y', 'usuarios.png', 'pt-br'),
-(3,'Parâmetros','parametros','Y','2013-09-24 13:36:18','Instalador CMS','Cadastro de Parâmetros',NULL,'preference.png', 'pt-br');
+(2, 'Usuários', 'usuarios', 'Y', '2013-06-11 10:15:15','Instalador CMS', 'Módulo responsável pela administração de Usuários', 'Y', 'usuarios5.png', 'pt-br'),
+(3,'Parâmetros','parametros','Y','2013-09-24 13:36:18','Instalador CMS','Cadastro de Parâmetros',NULL,'parametros1.png', 'pt-br');
 -- ------------------------------------------------------------
 
 --
